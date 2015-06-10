@@ -1,7 +1,7 @@
 # AReva2
 AReva - A toolset for *AR*chitecture *eva*luation and optimisation
 
-##Orgin and on-going Work
+##Idea, Origin, State and on-going Work
 This EMF-based prototypical tool implements a theoretical framework for architecture evaluation, proposed in the PhD thesis of B. Florentz. The original implementation, AReva 1.0, was developed in course of the diploma thesis of L. Märtin in 2009. 
 AReva enables automated evaluations and analyses of AUTOSAR software/hardware architectures. Architectures (in standardised ARXML format) are imported and validated towards the fulfilment of a finite set of quality attributes. For that, the user describes the hierarchical order of that attributes and define metrics and conversions to qualities (values to %). At least, AReva checks violations of lower bounds for all qualities and aggregates the overall quality of an architectural design.  In addition, the tool supports the analysis of the distance relations between the distribution of computational resources and software components mapped to them.
 
