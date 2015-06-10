@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tubs.ips.areva:Evaluations xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tubs.ips.areva="http:///tubs/ips/areva.ecore">
+  <evaluations rating="69.0" name="Nummer 1">
+    <categories name="Kosten" unit="%" percentage="50.0" rating="67.37225643556704">
+      <elements name="Steuergeräte" percentage="60.0" rating="4.0" quality="50.0" metric="KostenSteuergeräte" qualityRating="KostenSteuergeräte" unit="KE"/>
+      <elements name="Verkabelung" percentage="40.0" rating="36.0" quality="93.43064108891758" metric="KabelKosten" qualityRating="KostenKabel" unit="KE"/>
+    </categories>
+    <categories name="Performanz" unit="%" percentage="20.0" rating="90.34063224463155">
+      <elements name="Kommunikation" percentage="40.0" rating="67.0" quality="77.09155285663087" metric="PerformanzKommunikation" qualityRating="PerformanzKommunikation" unit="bit"/>
+      <elements name="Prozessor" percentage="40.0" rating="3.0" quality="98.760027754948" metric="PerformanzProzessor" qualityRating="PerformanzProzessor" unit="PpS"/>
+      <elements name="Speicher" percentage="20.0" rating="28.25" quality="100.0" metric="PerformanzSpeicher" qualityRating="PerformanzSpeicher" unit="bit"/>
+    </categories>
+    <categories name="Modifizierbarkeit" unit="%" percentage="10.0" rating="55.000000000000014">
+      <elements name="Erweiterbarkeit" percentage="50.0" rating="7.0" quality="48.571428571428584" metric="Erweiterbarkeit" qualityRating="Erweiterbarkeit" unit="KE"/>
+      <elements name="Skalierbarkeit" percentage="50.0" rating="12.0" quality="61.428571428571445" metric="Skalierbarkeit" qualityRating="Skalierbarkeit" unit="KE"/>
+    </categories>
+    <categories name="Verfügbarkeit" unit="%" percentage="20.0" rating="61.5">
+      <elements name="Kommunikation" percentage="50.0" rating="7.24" quality="90.5" metric="VerfügbarkeitKommunikation" qualityRating="VerfügbarkeitSteuergeräte" unit="AzF"/>
+      <elements name="Steuergeräte" percentage="50.0" rating="2.6" quality="32.5" metric="VerfügbarkeitSteuergeräte" qualityRating="VerfügbarkeitSteuergeräte" unit="AzF"/>
+    </categories>
+  </evaluations>
+</tubs.ips.areva:Evaluations>

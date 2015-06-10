@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+gmf_dashboard/domainGenerationModel=platform\:/resource/Areva/model/areva.genmodel
+gmf_dashboard/domainModel=platform\:/resource/Areva/model/areva.ecore
+gmf_dashboard/generationModel=platform\:/resource/Areva/model/areva.gmfgen
+gmf_dashboard/graphicalDefinitionModel=platform\:/resource/Areva/model/areva.gmfgraph
+gmf_dashboard/mappingModel=platform\:/resource/Areva/model/areva.gmfmap
+gmf_dashboard/option_rcp=*
+gmf_dashboard/toolingDefinitionModel=platform\:/resource/Areva/model/areva.gmftool

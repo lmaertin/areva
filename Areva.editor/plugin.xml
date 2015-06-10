@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--auto-generated
+-->
+
+<plugin>
+
+<extension point="org.eclipse.ui.startup">
+     <startup class="areva.StartUpClass"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated areva -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="areva.presentation.ArevaModelWizardID"
+            name="%_UI_ArevaModelWizard_label"
+            class="areva.presentation.ArevaModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ArevaModelFile.gif">
+         <description>%_UI_ArevaModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated areva -->
+      <editor
+            id="areva.presentation.ArevaEditorID"
+            name="%_UI_ArevaEditor_label"
+            icon="icons/full/obj16/ArevaModelFile.gif"
+            extensions="areva"
+            class="areva.presentation.ArevaEditor"
+            contributorClass="areva.presentation.ArevaActionBarContributor">
+      </editor>
+   </extension>
+
+
+
+
+
+<!-- button  -->
+
+
+
+   
+     <extension point = "org.eclipse.ui.actionSets">
+        <actionSet
+            id="areva.views.openArevaDefault"
+            label="openJavaPerspective"
+	    visible="true"
+	    description="The action set for editing the evaluation-settings">
+	    <menu
+		id="areva.views.java"
+		label="Samples">
+		<separator name="samples"/>
+	    </menu>
+	    <action id="areva.views.openArevaDefaultButton"
+		toolbarPath="Normal"			
+		label="edit evaluation-settings"
+		tooltip="Press to show Areva-Default-Perspective"
+		icon="icons/arevaPerspective.gif"
+		class="areva.defaultPerspective.OpenArevaDefault"/>
+        </actionSet>
+   </extension>
+   
+     <extension point = "org.eclipse.ui.actionSets">
+        <actionSet
+            id="areva.views.runMetricCode"
+            label="run"
+	    visible="true"
+	    description="">
+	    <menu
+		id="areva.views.RunMetricCode"
+		label="Samples">
+		<separator name="samples"/>
+	    </menu>
+	    <action id="areva.views.RunMetricCode"
+		toolbarPath="Normal"			
+		label=""
+		tooltip="Press to run metric-code. Only possible in Metric-Perspective with opened MetricEditor"
+		icon="icons/runCode.gif"
+		class="areva.metricsPerspective.RunMetricCode"/>
+        </actionSet>
+   </extension>
+
+     <extension point = "org.eclipse.ui.actionSets">
+        <actionSet
+            id="areva.views.runEvaluation"
+            label="run"
+	    visible="true"
+	    description="">
+	    <menu
+		id="areva.views.RunEvaluation"
+		label="Samples">
+		<separator name="samples"/>
+	    </menu>
+	    <action id="areva.views.RunEvaluation"
+		toolbarPath="Normal"			
+		label=""
+		tooltip="Start Evaluation"
+		icon="icons/evaluation.gif"
+		class="areva.evaluation.startEvaluation"/>
+        </actionSet>
+   </extension>
+  
+  
+  
+  
+  
+  
+  
+  
+
+   
+   
+   
+   
+   
+   <!-- perspectives  -->
+   
+   
+   <!-- arevaDefaultPerspective -->
+   
+          <extension point="org.eclipse.ui.perspectives">
+   		<perspective
+         name="ArevaDefault"
+         class="areva.defaultPerspective.ArevaDefaultPerspective"
+         id="areva.views.ArevaDefaultPerspective">
+	   </perspective>
+</extension>
+
+
+        <extension point = "org.eclipse.ui.views">
+        <view id="areva.views.TabFolderMQR"
+             name="TabFolder"
+          class="areva.defaultPerspective.TabFolderMQR"
+          />
+    </extension>
+   
+   
+   
+   <!--  functionPerspective -->
+   
+   
+   
+   
+       <extension point="org.eclipse.ui.perspectives">
+   <perspective
+         name="QualityRatings"
+         class="areva.qualityRatingsPerspective.QualityRatingsPerspective"
+         id="areva.views.QualityRatingsPerspective">
+   </perspective>
+</extension>
+
+   <extension point = "org.eclipse.ui.views">
+        <view id="areva.views.QualityRatings"
+             name="Quality Ratings"
+          class="areva.qualityRatingsPerspective.QualityRatings"
+          />
+    </extension>
+    
+    <extension point = "org.eclipse.ui.views">
+        <view id="areva.views.FunctionDefinition"
+             name="Function Definition"
+          class="areva.qualityRatingsPerspective.FunctionDefinition"
+          />
+    </extension>
+    
+        <extension point = "org.eclipse.ui.views">
+        <view id="areva.views.GraphView"
+             name="Graph"
+          class="areva.qualityRatingsPerspective.Graph"
+          />
+    </extension>
+    
+    <extension point = "org.eclipse.ui.views">
+        <view id="areva.views.CustomRange"
+             name="CustomRange"
+          class="areva.qualityRatingsPerspective.CustomRange"/>
+    </extension>
+    
+    
+    
+   
+   
+   <!--  metricPerspective -->
+   
+   
+   
+   
+   
+ <extension point="org.eclipse.ui.perspectives">
+   <perspective
+         name="Metrics"
+         class="areva.metricsPerspective.MetricPerspective"
+         id="areva.views.MetricPerspective">
+   </perspective>
+</extension>
+
+   <extension point = "org.eclipse.ui.views">
+        <view id="areva.views.EditingHelp"
+             name="Info for editing metrics"
+          class="areva.metricsPerspective.EditingHelp"
+          />
+    </extension>
+    
+    <extension point = "org.eclipse.ui.views">
+        <view id="areva.views.Metrics"
+             name="Metrics"
+          class="areva.metricsPerspective.Metrics"
+          />
+    </extension>
+    
+        <extension point = "org.eclipse.ui.views">
+        <view id="areva.views.MetricEditor"
+             name="MetricEditor"
+          class="areva.metricsPerspective.MetricEditor"
+          />
+    </extension>
+    
+    
+    
+    
+    
+    <!-- evaluationPerspective -->
+    
+              <extension point="org.eclipse.ui.perspectives">
+   		<perspective
+         name="Evaluation"
+         class="areva.evaluationPerspective.EvaluationPerspective"
+         id="areva.views.EvaluationPerspective">
+	   </perspective>
+</extension>
+
+<extension point = "org.eclipse.ui.views">
+        <view
+              class="attempts.EvaluationText"
+              id="areva.views.EvaluationTextView"
+              name="EvaluationText"/>
+    </extension>
+<extension
+      point="org.eclipse.ui.views">
+   <view
+         class="areva.defaultPerspective.XMLSelection"
+         id="areva.views.XMLSelection"
+         name="XMLSelection">
+   </view>
+</extension>
+<extension
+      point="org.eclipse.ui.views">
+   <view
+         class="areva.evaluationPerspective.EvaluationGraph"
+         id="areva.evaluationGraph"
+         name="EvaluationGraph">
+   </view>
+</extension>
+
+
+
+</plugin>
