@@ -33,10 +33,7 @@ The current alpha version of the AReva toolset supports:
 
 ## Screenshots of the Alpha Release
 
-Evaluation Perspective:
-![ScreenShot](Example/screenshots/EvaluationPersBig.png)
-
-Evaluation Structure Editor
+Evaluation Structure Editor:
 ![ScreenShot](Example/screenshots/DefaultSmall.png)
 
 Evaluation Metric Editor
@@ -44,3 +41,7 @@ Evaluation Metric Editor
 
 Evaluation Quality Rate Editor
 ![ScreenShot](Example/screenshots/QualityRatPersSmall.png)
+
+Evaluation Result and Visusalisation:
+![ScreenShot](Example/screenshots/EvaluationPersBig.png)
+
