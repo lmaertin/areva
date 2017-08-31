@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated mittwochsqadag -->
+      <package
+            uri="http://com/pille/mittwochqadag/"
+            class="MittwochQadag.MittwochQadagPackage"
+            genModel="model/mittwochsqadag.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated arg -->
+      <package
+            uri="http://com/pille/arg/"
+            class="Arg.ArgPackage"
+            genModel="model/arg.genmodel"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="de.tubs.areva.command.OpenARGWizardHandler"
+            id="Mittwochsqadag.OpenARGWizard"
+            name="OpenARGWizard">
+      </command>
+      <command
+            id="Mittwochsqadag.LoadClasses"
+            name="Load Classes">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.main.toolbar">
+         <toolbar
+               id="Mittwochsqadag.toolbar1">
+            <command
+                  commandId="Mittwochsqadag.OpenARGWizard"
+                  label="Create new ARG"
+                  style="push">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="de.tubs.areva.ui.view.DARGZestView"
+            id="Mittwochsqadag.dargzestview"
+            name="DARG Zest View"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.gef4.graph.Node"
+            class="de.tubs.areva.ui.module.PropertySourceAdapterFactory">
+         <adapter
+               type="org.eclipse.ui.views.properties.IPropertySource">
+         </adapter>
+      </factory>
+   </extension>
+
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="de.tubs.areva.launch.PCMSolverLaunchConfigurationDelegate"
+            id="areva.PCMLaunchConfiguration"
+            modes="run, debug"
+            name="PCM Solver (ArEva)">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="areva.PCMLaunchConfiguration"
+            icon="icons/favicon.ico"
+            id="org.eclipse.jdt.debug.ui.launchConfigurationTypeImage.ArEvaPCMSolver">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="de.tubs.areva.launch.PCMSolverTabGroup"
+            id="org.eclipse.jdt.debug.ui.launchConfigurationTabGroup.ArEvaPCMSolver"
+            type="areva.PCMLaunchConfiguration">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated darg -->
+      <package
+            uri="http://com/areva/darg/"
+            class="de.tubs.areva.emf.model.darg.DargPackage"
+            genModel="model/darg.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated darg -->
+      <package
+            uri="http://com/areva/qadag/"
+            class="de.tubs.areva.emf.model.qadag.QadagPackage"
+            genModel="model/darg.genmodel"/>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="de.tubs.areva.EPackage1"
+            uri="http://sdq.ipd.uka.de/DesignDecision/3.0">
+      </package>
+   </extension>
+</plugin>

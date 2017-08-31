@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.tubs.areva/src" modelPluginID="de.tubs.areva"
+    modelName="Darg" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    usedGenPackages="../../de.uka.ipd.sdq.identifier/model/identifier.genmodel#//identifier ../../org.palladiosimulator.pcm/model/pcm.genmodel#//pcm ../../de.uka.ipd.sdq.probfunction/model/ProbabilityFunction.genmodel#//probfunction ../../de.tubs.areva.resourcerelations/model/resources.genmodel#//resourcerelations ../../de.uka.ipd.sdq.stoex/model/stoex.genmodel#//stoex ../../de.uka.ipd.sdq.units/model/Units.genmodel#//units"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>darg.ecore</foreignModel>
+  <genPackages prefix="Darg" basePackage="de.tubs.areva.emf.model" disposableProviderFactory="true"
+      ecorePackage="darg.ecore#/">
+    <genClasses ecoreClass="darg.ecore#//ARG">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute darg.ecore#//ARG/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference darg.ecore#//ARG/architectures"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference darg.ecore#//ARG/qadag"/>
+    </genClasses>
+    <genClasses ecoreClass="darg.ecore#//Architecture">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute darg.ecore#//Architecture/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute darg.ecore#//Architecture/quality"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference darg.ecore#//Architecture/qadag"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference darg.ecore#//Architecture/followingArchitectures"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference darg.ecore#//Architecture/usedResources"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference darg.ecore#//Architecture/usedResourceGroups"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference darg.ecore#//Architecture/qualities"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute darg.ecore#//Architecture/optimal"/>
+    </genClasses>
+    <genClasses ecoreClass="darg.ecore#//QualityAssignment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute darg.ecore#//QualityAssignment/attribute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute darg.ecore#//QualityAssignment/value"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Qadag" basePackage="de.tubs.areva.emf.model" disposableProviderFactory="true"
+      ecorePackage="qadag.ecore#/">
+    <genClasses ecoreClass="qadag.ecore#//QADAG">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qadag.ecore#//QADAG/root"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qadag.ecore#//QADAG/name"/>
+    </genClasses>
+    <genClasses ecoreClass="qadag.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qadag.ecore#//Node/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qadag.ecore#//Node/nodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qadag.ecore#//Node/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qadag.ecore#//Node/weight"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qadag.ecore#//Node/lowerLimit"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute qadag.ecore#//Node/minValue"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute qadag.ecore#//Node/maxValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qadag.ecore#//Node/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

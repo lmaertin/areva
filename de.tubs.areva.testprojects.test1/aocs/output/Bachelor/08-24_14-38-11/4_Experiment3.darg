@@ -1,0 +1,820 @@
+<?xml version="1.0" encoding="ASCII"?>
+<de.tubs.areva.emf.model.darg:ARG xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:de.tubs.areva.emf.model.darg="http://com/areva/darg/" xmlns:de.tubs.areva.emf.model.qadag="http://com/areva/qadag/" name="Experiment3">
+  <architectures quality="0.4894304831362668" id="49" relatedArchitectures="//@architectures.7 //@architectures.9 //@architectures.10 //@architectures.11 //@architectures.12">
+    <qadag name="49">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="49" value="0.4894304831362668">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" value="0.44776119402985076" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" value="0.6857142857142857" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.525" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="0.4" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="0.6" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.41022727272727283" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.1"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.5"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.7"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.10"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime" value="0.44776119402985076"/>
+    <qualityassignments attribute="noise" value="0.6857142857142857"/>
+    <qualityassignments attribute="torque" value="0.525"/>
+    <qualityassignments attribute="accuracy" value="0.4"/>
+    <qualityassignments attribute="pointingtime" value="0.6"/>
+    <qualityassignments attribute="powerconsumption" value="0.41022727272727283"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.0"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.1"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.2"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.3"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.20"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.21"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.22"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.23"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.24"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.25"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_w4H3EAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_7jC7edd3EeaSyox7SHd1jg"/>
+    <boundBasicComponents href="../../../aocs.repository#_C5P6MAYTEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_AAar4AYTEeSQWoRYn1rqHgf"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <architectures quality="0.4593295454545455" id="54" relatedArchitectures="//@architectures.2 //@architectures.3 //@architectures.4 //@architectures.5 //@architectures.6">
+    <qadag name="54">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="54" value="0.4593295454545455">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.3" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="1.0" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="1.0" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.4795454545454547" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.2"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.6"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.8"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.9"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime"/>
+    <qualityassignments attribute="noise"/>
+    <qualityassignments attribute="torque" value="0.3"/>
+    <qualityassignments attribute="accuracy" value="1.0"/>
+    <qualityassignments attribute="pointingtime" value="1.0"/>
+    <qualityassignments attribute="powerconsumption" value="0.4795454545454547"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.18"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.19"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.4"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.5"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.0"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.1"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.6"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.7"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.8"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.9"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.10"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.11"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_c_BDWdd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_sxWToNd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_lirGedd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_71u0oANuEeeh-9D8FLBr9w"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <architectures quality="0.4593295454545455" id="12" relatedArchitectures="//@architectures.1 //@architectures.3 //@architectures.4 //@architectures.5 //@architectures.6">
+    <qadag name="12">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="12" value="0.4593295454545455">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.3" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="1.0" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="1.0" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.4795454545454547" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.1"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.6"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.8"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.9"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime"/>
+    <qualityassignments attribute="noise"/>
+    <qualityassignments attribute="torque" value="0.3"/>
+    <qualityassignments attribute="accuracy" value="1.0"/>
+    <qualityassignments attribute="pointingtime" value="1.0"/>
+    <qualityassignments attribute="powerconsumption" value="0.4795454545454547"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.4"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.5"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.0"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.1"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.6"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.7"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.8"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.9"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.10"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.11"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_w4H3EAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_sxWToNd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_lirGedd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_71u0oANuEeeh-9D8FLBr9w"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <architectures quality="0.3948038961038961" id="58" relatedArchitectures="//@architectures.1 //@architectures.2 //@architectures.6 //@architectures.8">
+    <qadag name="58">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="58" value="0.3948038961038961">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" value="0.3142857142857143" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.3" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="0.3" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="0.4" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.5515151515151516" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.1"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.4"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.8"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.9"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime"/>
+    <qualityassignments attribute="noise" value="0.3142857142857143"/>
+    <qualityassignments attribute="torque" value="0.3"/>
+    <qualityassignments attribute="accuracy" value="0.3"/>
+    <qualityassignments attribute="pointingtime" value="0.4"/>
+    <qualityassignments attribute="powerconsumption" value="0.5515151515151516"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.6"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.7"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.8"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.9"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.10"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.11"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_w4H3EAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_yG_d8AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lirGedd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_71u0oANuEeeh-9D8FLBr9w"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <architectures quality="0.43194610389610394" id="16" relatedArchitectures="//@architectures.1 //@architectures.2 //@architectures.7">
+    <qadag name="16">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="16" value="0.43194610389610394">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" value="0.6857142857142857" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.3" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="0.7" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="0.6" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.49848484848484864" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.1"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.6"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.7"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.9"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime"/>
+    <qualityassignments attribute="noise" value="0.6857142857142857"/>
+    <qualityassignments attribute="torque" value="0.3"/>
+    <qualityassignments attribute="accuracy" value="0.7"/>
+    <qualityassignments attribute="pointingtime" value="0.6"/>
+    <qualityassignments attribute="powerconsumption" value="0.49848484848484864"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.4"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.5"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.0"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.1"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_w4H3EAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_sxWToNd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_C5P6MAYTEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_71u0oANuEeeh-9D8FLBr9w"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <architectures quality="0.5152093792401629" id="5" relatedArchitectures="//@architectures.1 //@architectures.2 //@architectures.8 //@architectures.9 //@architectures.12">
+    <qadag name="5">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="5" value="0.5152093792401629">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" value="0.44776119402985076" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.525" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="1.0" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="1.0" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.353409090909091" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.1"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.6"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.8"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.10"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime" value="0.44776119402985076"/>
+    <qualityassignments attribute="noise"/>
+    <qualityassignments attribute="torque" value="0.525"/>
+    <qualityassignments attribute="accuracy" value="1.0"/>
+    <qualityassignments attribute="pointingtime" value="1.0"/>
+    <qualityassignments attribute="powerconsumption" value="0.353409090909091"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.4"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.5"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.0"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.1"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.6"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.7"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.8"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.9"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.10"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.11"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.20"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.21"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.22"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.23"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.24"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.25"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_w4H3EAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_sxWToNd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_lirGedd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_AAar4AYTEeSQWoRYn1rqHgf"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <architectures quality="0.3948038961038961" id="9" relatedArchitectures="//@architectures.1 //@architectures.2 //@architectures.3 //@architectures.8">
+    <qadag name="9">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="9" value="0.3948038961038961">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" value="0.3142857142857143" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.3" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="0.3" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="0.4" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.5515151515151516" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.2"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.4"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.8"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.9"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime"/>
+    <qualityassignments attribute="noise" value="0.3142857142857143"/>
+    <qualityassignments attribute="torque" value="0.3"/>
+    <qualityassignments attribute="accuracy" value="0.3"/>
+    <qualityassignments attribute="pointingtime" value="0.4"/>
+    <qualityassignments attribute="powerconsumption" value="0.5515151515151516"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.18"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.19"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.6"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.7"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.8"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.9"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.10"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.11"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_c_BDWdd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_yG_d8AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lirGedd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_71u0oANuEeeh-9D8FLBr9w"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <architectures quality="0.43355064935064935" optimal="true" id="60" relatedArchitectures="//@architectures.0 //@architectures.4 //@architectures.10 //@architectures.11">
+    <qadag name="60">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="60" value="0.43355064935064935">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" value="0.6857142857142857" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.3" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="0.4" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="0.6" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.5363636363636365" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.1"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.5"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.7"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.9"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime"/>
+    <qualityassignments attribute="noise" value="0.6857142857142857"/>
+    <qualityassignments attribute="torque" value="0.3"/>
+    <qualityassignments attribute="accuracy" value="0.4"/>
+    <qualityassignments attribute="pointingtime" value="0.6"/>
+    <qualityassignments attribute="powerconsumption" value="0.5363636363636365"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.0"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.1"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.2"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.3"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_w4H3EAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_7jC7edd3EeaSyox7SHd1jg"/>
+    <boundBasicComponents href="../../../aocs.repository#_C5P6MAYTEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_71u0oANuEeeh-9D8FLBr9w"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <architectures quality="0.4506837298895135" id="61" relatedArchitectures="//@architectures.3 //@architectures.5 //@architectures.6 //@architectures.9 //@architectures.12">
+    <qadag name="61">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="61" value="0.4506837298895135">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" value="0.44776119402985076" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" value="0.3142857142857143" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.525" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="0.3" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="0.4" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.4253787878787879" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.1"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.4"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.8"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.10"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime" value="0.44776119402985076"/>
+    <qualityassignments attribute="noise" value="0.3142857142857143"/>
+    <qualityassignments attribute="torque" value="0.525"/>
+    <qualityassignments attribute="accuracy" value="0.3"/>
+    <qualityassignments attribute="pointingtime" value="0.4"/>
+    <qualityassignments attribute="powerconsumption" value="0.4253787878787879"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.6"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.7"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.8"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.9"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.10"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.11"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.20"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.21"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.22"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.23"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.24"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.25"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_w4H3EAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_yG_d8AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lirGedd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_AAar4AYTEeSQWoRYn1rqHgf"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <architectures quality="0.5726937584803256" id="21" relatedArchitectures="//@architectures.0 //@architectures.5 //@architectures.8 //@architectures.11 //@architectures.12">
+    <qadag name="21">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="21" value="0.5726937584803256">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" value="0.8955223880597015" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.75" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="0.7" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="1.0" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.26515151515151514" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.1"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.5"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.8"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.11"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime" value="0.8955223880597015"/>
+    <qualityassignments attribute="noise"/>
+    <qualityassignments attribute="torque" value="0.75"/>
+    <qualityassignments attribute="accuracy" value="0.7"/>
+    <qualityassignments attribute="pointingtime" value="1.0"/>
+    <qualityassignments attribute="powerconsumption" value="0.26515151515151514"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.0"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.1"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.2"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.3"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.6"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.7"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.8"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.9"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.10"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.11"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.20"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.21"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.22"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.23"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.24"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.25"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_w4H3EAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_7jC7edd3EeaSyox7SHd1jg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lirGedd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_AAar4AYTEeSQWoRYn1rqHga"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <architectures quality="0.4894304831362668" optimal="true" id="66" relatedArchitectures="//@architectures.0 //@architectures.7 //@architectures.11 //@architectures.12">
+    <qadag name="66">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="66" value="0.4894304831362668">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" value="0.44776119402985076" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" value="0.6857142857142857" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.525" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="0.4" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="0.6" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.41022727272727283" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.2"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.5"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.7"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.10"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime" value="0.44776119402985076"/>
+    <qualityassignments attribute="noise" value="0.6857142857142857"/>
+    <qualityassignments attribute="torque" value="0.525"/>
+    <qualityassignments attribute="accuracy" value="0.4"/>
+    <qualityassignments attribute="pointingtime" value="0.6"/>
+    <qualityassignments attribute="powerconsumption" value="0.41022727272727283"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.18"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.19"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.0"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.1"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.2"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.3"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.20"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.21"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.22"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.23"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.24"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.25"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_c_BDWdd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_7jC7edd3EeaSyox7SHd1jg"/>
+    <boundBasicComponents href="../../../aocs.repository#_C5P6MAYTEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_AAar4AYTEeSQWoRYn1rqHgf"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <architectures quality="0.5453103169218841" id="26" relatedArchitectures="//@architectures.0 //@architectures.7 //@architectures.9 //@architectures.10 //@architectures.12">
+    <qadag name="26">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="26" value="0.5453103169218841">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" value="0.8955223880597015" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" value="0.6857142857142857" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.75" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="0.4" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="0.6" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.2840909090909091" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.2"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.5"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.7"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.11"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime" value="0.8955223880597015"/>
+    <qualityassignments attribute="noise" value="0.6857142857142857"/>
+    <qualityassignments attribute="torque" value="0.75"/>
+    <qualityassignments attribute="accuracy" value="0.4"/>
+    <qualityassignments attribute="pointingtime" value="0.6"/>
+    <qualityassignments attribute="powerconsumption" value="0.2840909090909091"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.18"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.19"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.0"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.1"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.2"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.3"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.20"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.21"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.22"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.23"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.24"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.25"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_c_BDWdd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_7jC7edd3EeaSyox7SHd1jg"/>
+    <boundBasicComponents href="../../../aocs.repository#_C5P6MAYTEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_AAar4AYTEeSQWoRYn1rqHga"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <architectures quality="0.5168139246947083" id="31" relatedArchitectures="//@architectures.0 //@architectures.5 //@architectures.8 //@architectures.9 //@architectures.10 //@architectures.11">
+    <qadag name="31">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="31" value="0.5168139246947083">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" value="0.44776119402985076" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" weight="0.041"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.525" lowerLimit="0.25" weight="0.375"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="0.7" weight="0.042"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="1.0" lowerLimit="0.1" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.3912878787878789" lowerLimit="0.25" unit="" weight="0.375"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.2"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.5"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.8"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.10"/>
+    <boundResourceOptions href="../../../aocs.resourcerelations#//@options.13"/>
+    <qualityassignments attribute="lifetime" value="0.44776119402985076"/>
+    <qualityassignments attribute="noise"/>
+    <qualityassignments attribute="torque" value="0.525"/>
+    <qualityassignments attribute="accuracy" value="0.7"/>
+    <qualityassignments attribute="pointingtime" value="1.0"/>
+    <qualityassignments attribute="powerconsumption" value="0.3912878787878789"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.16"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.17"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.18"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.19"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.0"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.1"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.2"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.3"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.6"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.7"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.8"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.9"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.10"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.11"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.12"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.13"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.20"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.21"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.22"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.23"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.24"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.25"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="../../../aocs.resourcerelations#//@resources.29"/>
+    <boundBasicComponents href="../../../aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_c_BDWdd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_7jC7edd3EeaSyox7SHd1jg"/>
+    <boundBasicComponents href="../../../aocs.repository#_lirGedd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="../../../aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="../../../aocs.repository#_AAar4AYTEeSQWoRYn1rqHgf"/>
+    <boundBasicComponents href="../../../aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+  </architectures>
+  <qadag href="../experiment3.qadag#/"/>
+</de.tubs.areva.emf.model.darg:ARG>

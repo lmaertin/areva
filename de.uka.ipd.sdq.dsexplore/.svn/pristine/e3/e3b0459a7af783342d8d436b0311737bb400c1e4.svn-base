@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.4
+Created-By: 1.7.0_45-b18 (Oracle Corporation)
+Export-Package: de.uka.ipd.sdq.dsexplore,de.uka.ipd.sdq.dsexplore.anal
+ ysis,de.uka.ipd.sdq.dsexplore.exception,de.uka.ipd.sdq.dsexplore.help
+ er,de.uka.ipd.sdq.dsexplore.launch,de.uka.ipd.sdq.dsexplore.opt4j.rep
+ resentation
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .,log4j/
+Bundle-Name: Design Space Exploration (PerOpteryx)
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: de.uka.ipd.sdq.workflow.mdsd;bundle-version="2.1.0",
+ de.uka.ipd.sdq.workflow;bundle-version="2.1.0",
+ org.opt4j;bundle-version="2.5.0",
+ de.uka.ipd.sdq.dsexplore.qml;bundle-version="1.0.0",
+ de.uka.ipd.sdq.statistics;bundle-version="1.0.0",
+ de.uka.ipd.sdq.pcm.designdecision;bundle-version="1.4.0",
+ de.uka.ipd.sdq.simucomframework;bundle-version="2.0.0",
+ de.uka.ipd.sdq.tcfmoop;bundle-version="1.0.0",
+ de.uka.ipd.sdq.pcm.cost;bundle-version="1.0.0",
+ de.uka.ipd.sdq.dsexplore.bayesnets;bundle-version="1.0.0",
+ org.palladiosimulator.analyzer.workflow;bundle-version="1.0.0",
+ org.palladiosimulator.analyzer.resultdecorator;bundle-version="1.0.0",
+ org.palladiosimulator.solver;bundle-version="3.0.0",
+ org.palladiosimulator.solver.context;bundle-version="2.0.0",
+ de.uka.ipd.sdq.dsexplore.qml.handling;bundle-version="2.0.0"
+Bundle-Vendor: sdq.ipd.uka.de
+Eclipse-LazyStart: true
+Bundle-Version: 1.4.0
+Eclipse-BuddyPolicy: dependent 
+Bundle-ManifestVersion: 2
+Bundle-Activator: de.uka.ipd.sdq.dsexplore.DSEPluginActivator
+Bundle-SymbolicName: de.uka.ipd.sdq.dsexplore;singleton:=true
+

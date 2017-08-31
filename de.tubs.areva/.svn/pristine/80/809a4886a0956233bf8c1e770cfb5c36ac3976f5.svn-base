@@ -1,0 +1,132 @@
+/*******************************************************************************
+ * Copyright (c) 2016 itemis AG and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Alexander Nyßen (itemis AG) - initial API and implementation
+ *******************************************************************************/
+package de.tubs.areva.ui.module;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gef4.geometry.planar.Dimension;
+import org.eclipse.gef4.geometry.planar.Point;
+import org.eclipse.gef4.graph.Edge;
+import org.eclipse.gef4.graph.Node;
+import org.eclipse.gef4.zest.fx.ZestProperties;
+import org.eclipse.ui.views.properties.IPropertyDescriptor;
+import org.eclipse.ui.views.properties.IPropertySource;
+import org.eclipse.ui.views.properties.TextPropertyDescriptor;
+
+import de.tubs.areva.emf.model.darg.Architecture;
+import de.tubs.areva.resourcerelations.Resource;
+
+/**
+ *
+ * @author mwienand
+ *
+ */
+public class EdgePropertySource implements IPropertySource {
+	
+	private static final IPropertyDescriptor RESOURCES_LOST_AMOUNT_PROPERTY_DESCRIPTOR = new TextPropertyDescriptor(
+			"EdgeResourcesLostAmount", "Resources Lost Amount");
+	
+	private static final IPropertyDescriptor RESOURCES_LOST_PROPERTY_DESCRIPTOR = new TextPropertyDescriptor(
+			"EdgeResourcesLost", "Resources Lost");
+	
+	private Edge edge;
+
+	/**
+	 *
+	 * @param node
+	 *            {@link Node}
+	 */
+	public EdgePropertySource(Edge edge) {
+		this.edge = edge;
+	}
+
+	@Override
+	public Object getEditableValue() {
+		return null;
+	}
+
+	@Override
+	public IPropertyDescriptor[] getPropertyDescriptors() {
+		return new IPropertyDescriptor[] {RESOURCES_LOST_PROPERTY_DESCRIPTOR, RESOURCES_LOST_AMOUNT_PROPERTY_DESCRIPTOR};
+	}
+	
+	private List<Resource> getResourcesLost(Architecture source, Architecture target) {
+		
+		List<de.tubs.areva.resourcerelations.Resource> excludes = new ArrayList<>();
+		
+		for(de.tubs.areva.resourcerelations.Resource resource: source.getUsedResources()) {
+			boolean contains = false;
+			for(de.tubs.areva.resourcerelations.Resource resource2: target.getUsedResources()) {
+				if(EcoreUtil.equals(resource, resource2)) {
+					contains = true;
+				}
+			}
+			
+			if(!contains) {
+				excludes.add(resource);
+			}
+		}
+		
+		return excludes;
+	}
+
+	@Override
+	public Object getPropertyValue(Object id) {
+		
+		if (RESOURCES_LOST_PROPERTY_DESCRIPTOR.getId().equals(id)) {
+			
+			DARGZestEdge zestEdge = (DARGZestEdge) edge;
+			
+			List<Resource> resourcesLost = getResourcesLost(zestEdge.getSourceArchitecture(), zestEdge.getTargetArchitecture());
+			
+			String output = "";
+			
+			for(Resource resource: resourcesLost) {
+				output += resource.getName();
+			}
+			
+			output = output.substring(1);
+			
+			return output;
+			
+		} else if (RESOURCES_LOST_AMOUNT_PROPERTY_DESCRIPTOR.getId().equals(id)) {
+			
+			DARGZestEdge zestEdge = (DARGZestEdge) edge;
+			
+			List<Resource> resourcesLost = getResourcesLost(zestEdge.getSourceArchitecture(), zestEdge.getTargetArchitecture());
+			
+			int count = resourcesLost.size();
+			
+			return count;
+		}
+			
+		return null;
+	}
+
+	@Override
+	public boolean isPropertySet(Object id) {
+		
+		return false;
+	}
+
+	@Override
+	public void resetPropertyValue(Object id) {
+		
+	}
+
+	@Override
+	public void setPropertyValue(Object id, Object value) {
+		
+	}
+
+}

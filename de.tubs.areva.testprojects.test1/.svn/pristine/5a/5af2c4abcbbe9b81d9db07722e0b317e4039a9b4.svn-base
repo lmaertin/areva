@@ -1,0 +1,11 @@
+Current Architecture: 49
+Faulty Resource: GPS LNA1+Antenna1
+Architecture Still Valid: true
+Nodes in Path: 1
+Quality-Compared Architectures: 
+Target Architecture: 49
+Sum of necessary  Comparisons: 0
+All Resources: GPS Receiver1, GPS Receiver2, GPS LNA1+Antenna1, GPS LNA2+Antenna2, MC Fluxgate1, MC Fluxgate2, ASC CHU1, ASC CHU2, ASC DPU1 Low Res., ASC DPU2 Low Res., CSS Chipset1, CSS Chipset2, CSS FrontHead1, CSS FrontHead2, CSS RearHead1, CSS RearHead2, IMU1, IMU2, MC1x, MC1y, MC1z, MC2x, MC2y, MC2z, ASC DPU1 High Res., ASC DPU2 High Res., RW1, RW2, RW3, RW4, 
+Available Resources: GPS Receiver1, GPS Receiver2, GPS LNA2+Antenna2, MC Fluxgate2, ASC CHU2, ASC DPU1 Low Res., ASC DPU2 Low Res., CSS Chipset1, CSS Chipset2, CSS FrontHead2, CSS RearHead1, CSS RearHead2, IMU1, IMU2, MC1x, MC1y, MC1z, MC2x, MC2y, MC2z, RW1, RW2, RW3, RW4, 
+Domain Size: 38
+Interconnections: 1044

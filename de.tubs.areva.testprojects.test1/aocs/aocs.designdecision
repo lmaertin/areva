@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ASCII"?>
+<designdecision:DecisionSpace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:designdecision="http://sdq.ipd.uka.de/DesignDecision/2.0" xmlns:specific="http://sdq.ipd.uka.de/DesignDecision/Specific/3.0" id="_6UmcENdbEeaqquGj6YfQKw" name="ACS Design Space">
+  <degreesOfFreedom xsi:type="specific:AssembledComponentDegree" entityName="MCS">
+    <primaryChanged href="aocs.system#_0iOCUNNsEea2uP5tK-XArQ"/>
+    <changeableElements href="aocs.repository#_AAar4AYTEeSQWoRYn1rqHgf"/>
+    <classDesignOptions href="aocs.repository#_AAar4AYTEeSQWoRYn1rqHgf"/>
+    <classDesignOptions href="aocs.repository#_AAar4AYTEeSQWoRYn1rqHga"/>
+    <classDesignOptions href="aocs.repository#_71u0oANuEeeh-9D8FLBr9w"/>
+  </degreesOfFreedom>
+  <degreesOfFreedom xsi:type="specific:AssembledComponentDegree" entityName="RW">
+    <primaryChanged href="aocs.system#_04wT4NdaEeaqquGj6YfQKw"/>
+    <changeableElements href="aocs.repository#_2MxAgAYSEeSQWoRYn1rqHg"/>
+    <classDesignOptions href="aocs.repository#_2MxAgAYSEeSQWoRYn1rqHg"/>
+    <classDesignOptions href="aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+    <classDesignOptions href="aocs.repository#_JAT5Odd1Eean3t21khwmKw"/>
+  </degreesOfFreedom>
+  <degreesOfFreedom xsi:type="specific:AssembledComponentDegree" entityName="MFS">
+    <primaryChanged href="aocs.system#_mqsLAAYYEeSQWoRYn1rqHg"/>
+    <changeableElements href="aocs.repository#_w4H3EAYSEeSQWoRYn1rqHg"/>
+    <classDesignOptions href="aocs.repository#_w4H3EAYSEeSQWoRYn1rqHg"/>
+    <classDesignOptions href="aocs.repository#_c_BDWdd1Eean3t21khwmKw"/>
+  </degreesOfFreedom>
+  <degreesOfFreedom xsi:type="specific:AssembledComponentDegree" entityName="ASC">
+    <primaryChanged href="aocs.system#_ngNdwAYYEeSQWoRYn1rqHg"/>
+    <changeableElements href="aocs.repository#_yG_d8AYSEeSQWoRYn1rqHg"/>
+    <classDesignOptions href="aocs.repository#_yG_d8AYSEeSQWoRYn1rqHg"/>
+    <classDesignOptions href="aocs.repository#_sxWToNd1Eean3t21khwmKw"/>
+    <classDesignOptions href="aocs.repository#_7jC7edd3EeaSyox7SHd1jg"/>
+  </degreesOfFreedom>
+  <degreesOfFreedom xsi:type="specific:AssembledComponentDegree" entityName="CSS">
+    <primaryChanged href="aocs.system#_vdqcgAYYEeSQWoRYn1rqHg"/>
+    <changeableElements href="aocs.repository#_C5P6MAYTEeSQWoRYn1rqHg"/>
+    <classDesignOptions href="aocs.repository#_C5P6MAYTEeSQWoRYn1rqHg"/>
+    <classDesignOptions href="aocs.repository#_lirGedd1Eean3t21khwmKw"/>
+  </degreesOfFreedom>
+</designdecision:DecisionSpace>

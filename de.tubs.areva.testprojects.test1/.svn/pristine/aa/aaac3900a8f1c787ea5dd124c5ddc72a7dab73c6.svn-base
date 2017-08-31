@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emfprofileapplication="http://www.modelversioning.org/emfprofile/application/1.1" xmlns:myprofile="arevapcmextension" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.1" xmlns:seff="http://palladiosimulator.org/PalladioComponentModel/SEFF/5.1">
+  <repository:Repository id="_vA0gIKXWEeaK4YmGKosqJA" entityName="defaultRepository">
+    <components__Repository xsi:type="repository:BasicComponent" id="_44OqIKXWEeaK4YmGKosqJA" entityName="Consumer">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_6aoJoKXZEeaK4YmGKosqJA" entityName="Provided_IUserAccess_Consumer" providedInterface__OperationProvidedRole="_w_hhIKXZEeaK4YmGKosqJA"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_8tr4wKXWEeaK4YmGKosqJA" entityName="Required_IProducer_Consumer" requiredInterface__OperationRequiredRole="_wJfYYKXWEeaK4YmGKosqJA"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:InfrastructureRequiredRole" id="_djHPkK9MEeanxMOZwXoSyg" entityName="Required_Dreher_Consumer" requiredInterface__InfrastructureRequiredRole="_ZUdd0K9MEeanxMOZwXoSyg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:InfrastructureRequiredRole" id="_8EdSAK9MEeanxMOZwXoSyg" entityName="Required_RW2_Consumer" requiredInterface__InfrastructureRequiredRole="_518MAK9MEeanxMOZwXoSyg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_6aoJoaXZEeaK4YmGKosqJA" describedService__SEFF="_2mo6oKXZEeaK4YmGKosqJA">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_6aowsKXZEeaK4YmGKosqJA" entityName="start" successor_AbstractAction="_xIGGsKZ7Eea7iqucbufN1A"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_6aowsaXZEeaK4YmGKosqJA" entityName="stop" predecessor_AbstractAction="_ITjEMKZ9Eea7iqucbufN1A"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_xIGGsKZ7Eea7iqucbufN1A" entityName="action" predecessor_AbstractAction="_6aowsKXZEeaK4YmGKosqJA" successor_AbstractAction="_ITjEMKZ9Eea7iqucbufN1A">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="10"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+        </steps_Behaviour>
+        <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_ITjEMKZ9Eea7iqucbufN1A" predecessor_AbstractAction="_xIGGsKZ7Eea7iqucbufN1A" successor_AbstractAction="_6aowsaXZEeaK4YmGKosqJA" calledService_ExternalService="_A-zIoKXXEeaK4YmGKosqJA" role_ExternalService="_8tr4wKXWEeaK4YmGKosqJA"/>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_-4-roKXWEeaK4YmGKosqJA" entityName="ProducerTest">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_DCzAsKXXEeaK4YmGKosqJA" entityName="Provided_IProducer_Producer" providedInterface__OperationProvidedRole="_wJfYYKXWEeaK4YmGKosqJA"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_DC2EAKXXEeaK4YmGKosqJA" describedService__SEFF="_A-zIoKXXEeaK4YmGKosqJA">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_DC4gQKXXEeaK4YmGKosqJA" entityName="start" successor_AbstractAction="_NScnIKZ9Eea7iqucbufN1A"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_DC5HUKXXEeaK4YmGKosqJA" entityName="stop" predecessor_AbstractAction="_NScnIKZ9Eea7iqucbufN1A"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_NScnIKZ9Eea7iqucbufN1A" entityName="produce" predecessor_AbstractAction="_DC4gQKXXEeaK4YmGKosqJA" successor_AbstractAction="_DC5HUKXXEeaK4YmGKosqJA">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="3"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
+          </resourceDemand_Action>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <interfaces__Repository xsi:type="repository:OperationInterface" id="_wJfYYKXWEeaK4YmGKosqJA" entityName="IProducer">
+      <signatures__OperationInterface id="_A-zIoKXXEeaK4YmGKosqJA" entityName="produce"/>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:OperationInterface" id="_w_hhIKXZEeaK4YmGKosqJA" entityName="IUserAccess">
+      <signatures__OperationInterface id="_2mo6oKXZEeaK4YmGKosqJA" entityName="access"/>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:InfrastructureInterface" id="_ZUdd0K9MEeanxMOZwXoSyg" entityName="RW1"/>
+    <interfaces__Repository xsi:type="repository:InfrastructureInterface" id="_518MAK9MEeanxMOZwXoSyg" entityName="RW2"/>
+  </repository:Repository>
+  <emfprofileapplication:ProfileApplication>
+    <stereotypeApplications xsi:type="myprofile:BasicComponentTag" appliedTo="_44OqIKXWEeaK4YmGKosqJA">
+      <extension href="../../../plugin/areva.profiles/profile.emfprofile_diagram#_9jtGgKXxEearUrvpln-qMw"/>
+      <keyValues>Cost: 40</keyValues>
+      <keyValues>Performance: 30</keyValues>
+    </stereotypeApplications>
+    <stereotypeApplications xsi:type="myprofile:BasicComponentTag" appliedTo="_-4-roKXWEeaK4YmGKosqJA">
+      <extension href="../../../plugin/areva.profiles/profile.emfprofile_diagram#_9jtGgKXxEearUrvpln-qMw"/>
+      <keyValues>Cost: 10</keyValues>
+      <keyValues>Reliability: 22</keyValues>
+    </stereotypeApplications>
+    <importedProfiles nsURI="arevapcmextension" location="platform:/plugin/areva.profiles/profile.emfprofile_diagram"/>
+  </emfprofileapplication:ProfileApplication>
+</xmi:XMI>

@@ -1,0 +1,40 @@
+package de.tubs.areva.ui.wizard;
+
+import org.eclipse.jface.wizard.Wizard;
+
+public class CreateDARGWizard extends Wizard {
+
+	public CreateDARGWizard() {
+		super();
+		setNeedsProgressMonitor(true);
+	}
+	
+	@Override
+	public String getWindowTitle() {
+		return "Create DARG";
+		
+	}
+	
+	@Override public void addPages() {
+		CreateDARGWizardPageOne pageOne = new CreateDARGWizardPageOne();
+		addPage(pageOne);
+		
+		CreateDARGWizardPageTwo pageTwo = new CreateDARGWizardPageTwo();
+		addPage(pageTwo);
+		
+		CreateDARGWizardPageThree pageThree = new CreateDARGWizardPageThree();
+		addPage(pageThree);
+		
+		CreateDARGWizardPageFour pageFour = new CreateDARGWizardPageFour();
+		addPage(pageFour);
+		
+		
+	}
+	
+	@Override
+	public boolean performFinish() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+}

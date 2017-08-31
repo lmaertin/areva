@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="de.tubs.areva.command.OpenARGWizardHandler"
+            id="Mittwochsqadag.OpenARGWizard"
+            name="OpenARGWizard">
+      </command>
+      <command
+            id="Mittwochsqadag.LoadClasses"
+            name="Load Classes">
+      </command>
+      <command
+            defaultHandler="de.tubs.areva.command.SelectOperatingModeWizardHandler"
+            id="de.tubs.areva.SelectOperatingModeCommand"
+            name="Select Operating Mode Command">
+      </command>
+      <command
+            defaultHandler="de.tubs.areva.command.ProcessResourceFailure"
+            description="Processes failed resources for the DARG in order of selection. "
+            id="de.tubs.areva.ProcessResourceFailure"
+            name="Process Resource Failure">
+      </command>
+      <command
+            defaultHandler="de.tubs.areva.command.ProcessResourceFailureDetailed"
+            description="Processes failed resources for the DARG in order of selection and has a more detailed output view. "
+            id="de.tubs.areva.ProcessResourceFailureDetailed"
+            name="Process Resource Failure (detailed)">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
+            <command
+                  commandId="de.tubs.areva.ProcessResourceFailure"
+                  id="de.tubs.areva.menu.ProcessResourceFailure"
+                  mnemonic="S"
+                  tooltip="Processes failed resources for the DARG in order of selection. ">
+ 
+                    <visibleWhen>
+				           <with variable="activeMenuSelection">
+				            <iterate
+				                 ifEmpty="false">
+				             <adapt type="org.eclipse.core.resources.IResource">
+				               <test property="org.eclipse.core.resources.name" value="*.opmode" />
+				             </adapt>
+				            </iterate>
+				           </with>
+         			</visibleWhen>
+            </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
+            <command
+                  commandId="de.tubs.areva.ProcessResourceFailureDetailed"
+                  id="de.tubs.areva.menu.ProcessResourceFailureDetailed"
+                  mnemonic="S"
+                  tooltip="Processes failed resources for the DARG in order of selection and has a more detailed output view. ">
+ 
+                    <visibleWhen>
+				           <with variable="activeMenuSelection">
+				            <iterate
+				                 ifEmpty="false">
+				             <adapt type="org.eclipse.core.resources.IResource">
+				               <test property="org.eclipse.core.resources.name" value="*.opmode" />
+				             </adapt>
+				            </iterate>
+				           </with>
+         			</visibleWhen>
+            </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.main.toolbar">
+         <toolbar
+               id="Mittwochsqadag.toolbar1">
+            <command
+                  commandId="Mittwochsqadag.OpenARGWizard"
+                  label="Create DARG"
+                  style="push"
+                  tooltip="Creates a new DARG and default QADAG from file input.">
+            </command>
+         </toolbar>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.main.toolbar">
+         <toolbar
+               id="de.tubs.areva.toolbar1">
+            <command
+                  commandId="de.tubs.areva.SelectOperatingModeCommand"
+                  label="Minimize DARG"
+                  style="push"
+                  tooltip="Connects a DARG to a QADAG and minimizes it.">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="de.tubs.areva.ui.view.DARGZestView"
+            id="Mittwochsqadag.dargzestview"
+            name="DARG Zest View"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.gef4.graph.Node"
+            class="de.tubs.areva.ui.module.PropertySourceAdapterFactory">
+         <adapter
+               type="org.eclipse.ui.views.properties.IPropertySource">
+         </adapter>
+      </factory>
+   </extension>
+
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="de.tubs.areva.launch.PCMSolverLaunchConfigurationDelegate"
+            id="areva.PCMLaunchConfiguration"
+            modes="run, debug"
+            name="PCM Solver (ArEva)">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="areva.PCMLaunchConfiguration"
+            icon="icons/favicon.ico"
+            id="org.eclipse.jdt.debug.ui.launchConfigurationTypeImage.ArEvaPCMSolver">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="de.tubs.areva.launch.PCMSolverTabGroup"
+            id="org.eclipse.jdt.debug.ui.launchConfigurationTabGroup.ArEvaPCMSolver"
+            type="areva.PCMLaunchConfiguration">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.gef4.graph.Edge"
+            class="de.tubs.areva.ui.module.PropertySourceAdapterFactory">
+         <adapter
+               type="de.tubs.areva.Adapter1">
+         </adapter>
+      </factory>
+   </extension>
+
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://com/areva/opmode/"
+            class="de.tubs.areva.emf.model.opmode.OpmodePackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated darg -->
+      <package
+            uri="http://com/areva/darg/"
+            class="de.tubs.areva.emf.model.darg.DargPackage"
+            genModel="model/opmode.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated darg -->
+      <package
+            uri="http://com/areva/qadag/"
+            class="de.tubs.areva.emf.model.qadag.QadagPackage"
+            genModel="model/opmode.genmodel"/>
+   </extension>
+
+</plugin>

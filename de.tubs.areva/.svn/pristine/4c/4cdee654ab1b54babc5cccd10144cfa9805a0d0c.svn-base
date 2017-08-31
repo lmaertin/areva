@@ -1,0 +1,298 @@
+/**
+ */
+package de.tubs.areva.emf.model.darg.darg.impl;
+
+import de.tubs.areva.emf.model.darg.darg.Architecture;
+import de.tubs.areva.emf.model.darg.darg.DargPackage;
+
+import de.tubs.areva.emf.model.darg.qadag.File;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Architecture</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link de.tubs.areva.emf.model.darg.darg.impl.ArchitectureImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.darg.impl.ArchitectureImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.darg.impl.ArchitectureImpl#getQadag <em>Qadag</em>}</li>
+ * </ul>
+ *
+ * @generated
+ */
+public class ArchitectureImpl extends DARGNodeImpl implements Architecture {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final float VALUE_EDEFAULT = 0.0F;
+
+	/**
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected float value = VALUE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getQadag() <em>Qadag</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQadag()
+	 * @generated
+	 * @ordered
+	 */
+	protected File qadag;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ArchitectureImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return DargPackage.Literals.ARCHITECTURE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public float getValue() {
+		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValue(float newValue) {
+		float oldValue = value;
+		value = newValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__VALUE, oldValue, value));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public File getQadag() {
+		return qadag;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetQadag(File newQadag, NotificationChain msgs) {
+		File oldQadag = qadag;
+		qadag = newQadag;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__QADAG, oldQadag, newQadag);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setQadag(File newQadag) {
+		if (newQadag != qadag) {
+			NotificationChain msgs = null;
+			if (qadag != null)
+				msgs = ((InternalEObject)qadag).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DargPackage.ARCHITECTURE__QADAG, null, msgs);
+			if (newQadag != null)
+				msgs = ((InternalEObject)newQadag).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DargPackage.ARCHITECTURE__QADAG, null, msgs);
+			msgs = basicSetQadag(newQadag, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__QADAG, newQadag, newQadag));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__QADAG:
+				return basicSetQadag(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__NAME:
+				return getName();
+			case DargPackage.ARCHITECTURE__VALUE:
+				return getValue();
+			case DargPackage.ARCHITECTURE__QADAG:
+				return getQadag();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__NAME:
+				setName((String)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__VALUE:
+				setValue((Float)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__QADAG:
+				setQadag((File)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case DargPackage.ARCHITECTURE__VALUE:
+				setValue(VALUE_EDEFAULT);
+				return;
+			case DargPackage.ARCHITECTURE__QADAG:
+				setQadag((File)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case DargPackage.ARCHITECTURE__VALUE:
+				return value != VALUE_EDEFAULT;
+			case DargPackage.ARCHITECTURE__QADAG:
+				return qadag != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", value: ");
+		result.append(value);
+		result.append(')');
+		return result.toString();
+	}
+
+} //ArchitectureImpl

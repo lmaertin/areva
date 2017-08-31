@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<de.tubs.areva.emf.model.qadag:QADAG xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:de.tubs.areva.emf.model.qadag="http://com/areva/qadag/" name="Meta-QADAG">
+  <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="Meta-QADAG">
+    <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" value="0.375" lowerLimit="0.5" weight="0.375"/>
+    <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" lowerLimit="0.5" weight="0.375"/>
+    <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" lowerLimit="0.1" weight="0.042"/>
+    <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" weight="0.042"/>
+    <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" weight="0.041"/>
+    <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" lowerLimit="0.1" weight="0.125"/>
+  </root>
+</de.tubs.areva.emf.model.qadag:QADAG>

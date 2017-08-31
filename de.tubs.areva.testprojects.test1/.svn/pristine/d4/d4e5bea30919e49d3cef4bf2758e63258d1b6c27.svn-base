@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="1">
+		<struct>
+			<and abstract="true" mandatory="true" name="AOCS">
+				<description>
+					economy
+					agility
+					precision
+					performance
+					cost
+				</description>
+				<and abstract="true" mandatory="true" name="Sensing">
+					<and abstract="true" mandatory="true" name="Rotation">
+						<alt abstract="true" mandatory="true" name="IMU">
+							<feature mandatory="true" name="IMU1">
+								<description>
+									economy=0.3
+									precision=0.6
+									performance=0.9
+								</description>
+							</feature>
+							<feature mandatory="true" name="IMU2">
+								<description>
+									economy=0.3
+									precision=0.6
+									performance=0.9
+								</description>
+							</feature>
+						</alt>
+					</and>
+					<and abstract="true" mandatory="true" name="Position">
+						<and abstract="true" name="MFS">
+							<alt abstract="true" mandatory="true" name="Magnetometer">
+								<feature mandatory="true" name="Fluxgate1">
+									<description>
+										economy=0.6
+										precision=0.3
+										performance=0.9
+									</description>
+								</feature>
+								<feature mandatory="true" name="Fluxgate2">
+									<description>
+										economy=0.6
+										precision=0.3
+										performance=0.9
+									</description>
+								</feature>
+							</alt>
+						</and>
+						<and abstract="true" mandatory="true" name="GPS">
+							<alt abstract="true" mandatory="true" name="Receiver">
+								<feature mandatory="true" name="Receiver1">
+									<description>
+										economy=0.3
+										precision=0.9
+										performance=0.6
+									</description>
+								</feature>
+								<feature mandatory="true" name="Receiver2">
+									<description>
+										economy=0.6
+										precision=0.6
+										performance=0.6
+									</description>
+								</feature>
+							</alt>
+							<alt abstract="true" mandatory="true" name="LNAs+Antenna">
+								<feature mandatory="true" name="LNA1+Antenna1">
+									<description>
+										economy=0.3
+										precision=0.9
+										performance=0.6
+									</description>
+								</feature>
+								<feature mandatory="true" name="LNA2+Antenna2">
+									<description>
+										economy=0.6
+										precision=0.6
+										performance=0.3
+									</description>
+								</feature>
+							</alt>
+						</and>
+						<and abstract="true" name="ASC">
+							<alt abstract="true" mandatory="true" name="Data Processing">
+								<feature mandatory="true" name="DPU1">
+									<description>
+										economy=0.3
+										precision=0.9
+										performance=0.6
+									</description>
+								</feature>
+								<feature mandatory="true" name="DPU2">
+									<description>
+										economy=0.3
+										precision=0.9
+										performance=0.6
+									</description>
+								</feature>
+							</alt>
+							<alt abstract="true" mandatory="true" name="Camera Head">
+								<feature mandatory="true" name="CHU1">
+									<description>
+										economy=0.3
+										precision=0.9
+										performance=0.6
+									</description>
+								</feature>
+								<feature mandatory="true" name="CHU2">
+									<description>
+										economy=0.3
+										precision=0.9
+										performance=0.6
+									</description>
+								</feature>
+							</alt>
+							<alt abstract="true" mandatory="true" name="ASC_variation">
+								<feature mandatory="true" name="ASC_simple">
+									<description>
+										economy=0.9
+										precision=0.3
+										performance=0.6
+									</description>
+								</feature>
+								<feature mandatory="true" name="ASC_advanced">
+									<description>
+										economy=0.3
+										precision=0.9
+										performance=0.6
+									</description>
+								</feature>
+							</alt>
+						</and>
+						<and abstract="true" name="CSS">
+							<alt abstract="true" mandatory="true" name="Board">
+								<feature mandatory="true" name="Chipset1">
+									<description>
+										economy=0.3
+										precision=0.6
+										performance=0.9
+									</description>
+								</feature>
+								<feature mandatory="true" name="Chipset2">
+									<description>
+										economy=0.6
+										precision=0.6
+										performance=0.6
+									</description>
+								</feature>
+							</alt>
+							<and abstract="true" mandatory="true" name="Head">
+								<alt abstract="true" mandatory="true" name="Front">
+									<feature mandatory="true" name="Head1">
+										<description>
+											economy=0.3
+											precision=0.6
+											performance=0.6
+										</description>
+									</feature>
+									<feature mandatory="true" name="Head2">
+										<description>
+											economy=0.3
+											precision=0.6
+											performance=0.6
+										</description>
+									</feature>
+								</alt>
+								<alt abstract="true" mandatory="true" name="Rear">
+									<feature mandatory="true" name="Head3">
+										<description>
+											economy=0.3
+											precision=0.9
+											performance=0.3
+										</description>
+									</feature>
+									<feature mandatory="true" name="Head4">
+										<description>
+											economy=0.3
+											precision=0.6
+											performance=0.6
+										</description>
+									</feature>
+								</alt>
+							</and>
+						</and>
+					</and>
+				</and>
+				<and abstract="true" mandatory="true" name="Actuation">
+					<and abstract="true" mandatory="true" name="MCS">
+						<and abstract="true" mandatory="true" name="Coils">
+							<alt abstract="true" mandatory="true" name="X Axis">
+								<feature mandatory="true" name="CoilX1">
+									<description>
+										economy=0.9
+										precision=0.3
+										agility=0.3
+									</description>
+								</feature>
+								<feature mandatory="true" name="CoilX2">
+									<description>
+										economy=0.9
+										precision=0.3
+										agility=0.3
+									</description>
+								</feature>
+							</alt>
+							<alt abstract="true" mandatory="true" name="Y Axis">
+								<feature mandatory="true" name="CoilY1">
+									<description>
+										economy=0.9
+										precision=0.3
+										agility=0.3
+									</description>
+								</feature>
+								<feature mandatory="true" name="CoilY2">
+									<description>
+										economy=0.9
+										precision=0.3
+										agility=0.3
+									</description>
+								</feature>
+							</alt>
+							<alt abstract="true" mandatory="true" name="Z Axis">
+								<feature mandatory="true" name="CoilZ1">
+									<description>
+										economy=0.9
+										precision=0.6
+										agility=0.3
+									</description>
+								</feature>
+								<feature mandatory="true" name="CoilZ2">
+									<description>
+										economy=0.6
+										precision=0.6
+										agility=0.3
+									</description>
+								</feature>
+							</alt>
+						</and>
+						<alt abstract="true" mandatory="true" name="Controller">
+							<feature mandatory="true" name="Ctrl1">
+								<description>
+									economy=0.9
+									precision=0.3
+									agility=0.3
+								</description>
+							</feature>
+							<feature mandatory="true" name="Ctrl2">
+								<description>
+									economy=0.6
+									precision=0.3
+									agility=0.6
+								</description>
+							</feature>
+						</alt>
+						<alt abstract="true" mandatory="true" name="MSC_variation">
+							<feature mandatory="true" name="MCS_advanced">
+								<description>
+									economy=0.3
+									precision=0.9
+									agility=0.6
+									cost=0.6
+								</description>
+							</feature>
+							<feature mandatory="true" name="MCS_simple">
+								<description>
+									economy=0.9
+									precision=0.3
+									agility=0.6
+									cost=0.3
+								</description>
+							</feature>
+						</alt>
+					</and>
+					<or abstract="true" name="RW">
+						<feature mandatory="true" name="RW1">
+							<description>
+								economy=0.3
+								precision=0.9
+								agility=0.9
+								cost=0.9
+							</description>
+						</feature>
+						<feature mandatory="true" name="RW2">
+							<description>
+								economy=0.3
+								precision=0.9
+								agility=0.9
+								cost=0.9
+							</description>
+						</feature>
+						<feature mandatory="true" name="RW3">
+							<description>
+								economy=0.3
+								precision=0.9
+								agility=0.9
+								cost=0.9
+							</description>
+						</feature>
+						<feature mandatory="true" name="RW4">
+							<description>
+								economy=0.3
+								precision=0.9
+								agility=0.9
+								cost=0.9
+							</description>
+						</feature>
+					</or>
+				</and>
+			</and>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>RW</var>
+					<disj>
+						<conj>
+							<var>RW1</var>
+							<conj>
+								<var>RW2</var>
+								<var>RW3</var>
+							</conj>
+						</conj>
+						<disj>
+							<conj>
+								<var>RW1</var>
+								<conj>
+									<var>RW2</var>
+									<var>RW4</var>
+								</conj>
+							</conj>
+							<disj>
+								<conj>
+									<var>RW1</var>
+									<conj>
+										<var>RW3</var>
+										<var>RW4</var>
+									</conj>
+								</conj>
+								<conj>
+									<var>RW2</var>
+									<conj>
+										<var>RW3</var>
+										<var>RW4</var>
+									</conj>
+								</conj>
+							</disj>
+						</disj>
+					</disj>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<not>
+						<var>RW</var>
+					</not>
+					<var>MCS_advanced</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<not>
+						<var>CSS</var>
+					</not>
+					<var>ASC_advanced</var>
+				</imp>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>

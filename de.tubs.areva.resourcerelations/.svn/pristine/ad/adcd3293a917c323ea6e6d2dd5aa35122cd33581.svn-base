@@ -1,0 +1,152 @@
+/**
+ */
+package de.tubs.areva.resourcerelations;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
+
+import org.palladiosimulator.pcm.repository.InfrastructureInterface;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Resource Group</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getResources <em>Resources</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getName <em>Name</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getMinElements <em>Min Elements</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getMaxElements <em>Max Elements</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getAnnotatedInterface <em>Annotated Interface</em>}</li>
+ * </ul>
+ *
+ * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup()
+ * @model
+ * @generated
+ */
+public interface ResourceGroup extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Resources</b></em>' containment reference list.
+	 * The list contents are of type {@link de.tubs.areva.resourcerelations.Resource}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resources</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Resources</em>' containment reference list.
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_Resources()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Resource> getResources();
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_Name()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.resourcerelations.ResourceGroup#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Min Elements</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Min Elements</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Min Elements</em>' attribute.
+	 * @see #setMinElements(String)
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_MinElements()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 * @generated
+	 */
+	String getMinElements();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.resourcerelations.ResourceGroup#getMinElements <em>Min Elements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Min Elements</em>' attribute.
+	 * @see #getMinElements()
+	 * @generated
+	 */
+	void setMinElements(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Max Elements</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Max Elements</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Max Elements</em>' attribute.
+	 * @see #setMaxElements(String)
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_MaxElements()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 * @generated
+	 */
+	String getMaxElements();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.resourcerelations.ResourceGroup#getMaxElements <em>Max Elements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Max Elements</em>' attribute.
+	 * @see #getMaxElements()
+	 * @generated
+	 */
+	void setMaxElements(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Annotated Interface</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Annotated Interface</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Annotated Interface</em>' reference.
+	 * @see #setAnnotatedInterface(InfrastructureInterface)
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_AnnotatedInterface()
+	 * @model
+	 * @generated
+	 */
+	InfrastructureInterface getAnnotatedInterface();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.resourcerelations.ResourceGroup#getAnnotatedInterface <em>Annotated Interface</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Annotated Interface</em>' reference.
+	 * @see #getAnnotatedInterface()
+	 * @generated
+	 */
+	void setAnnotatedInterface(InfrastructureInterface value);
+
+} // ResourceGroup

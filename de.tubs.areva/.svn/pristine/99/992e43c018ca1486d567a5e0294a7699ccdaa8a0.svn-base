@@ -1,0 +1,140 @@
+/**
+ */
+package de.tubs.areva.emf.model.darg;
+
+import de.tubs.areva.emf.model.qadag.File;
+import de.tubs.areva.resourcerelations.Resource;
+import org.eclipse.emf.common.util.EList;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Architecture</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link de.tubs.areva.emf.model.darg.Architecture#getName <em>Name</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.Architecture#getValue <em>Value</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.Architecture#getQadag <em>Qadag</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.Architecture#getOutgoingArchitectures <em>Outgoing Architectures</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.Architecture#getUsedResources <em>Used Resources</em>}</li>
+ * </ul>
+ *
+ * @see de.tubs.areva.emf.model.darg.DargPackage#getArchitecture()
+ * @model
+ * @generated
+ */
+public interface Architecture extends DARGNode {
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see de.tubs.areva.emf.model.darg.DargPackage#getArchitecture_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.emf.model.darg.Architecture#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Value</em>' attribute.
+	 * @see #setValue(float)
+	 * @see de.tubs.areva.emf.model.darg.DargPackage#getArchitecture_Value()
+	 * @model
+	 * @generated
+	 */
+	float getValue();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.emf.model.darg.Architecture#getValue <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value</em>' attribute.
+	 * @see #getValue()
+	 * @generated
+	 */
+	void setValue(float value);
+
+	/**
+	 * Returns the value of the '<em><b>Qadag</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Qadag</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Qadag</em>' containment reference.
+	 * @see #setQadag(File)
+	 * @see de.tubs.areva.emf.model.darg.DargPackage#getArchitecture_Qadag()
+	 * @model containment="true"
+	 * @generated
+	 */
+	File getQadag();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.emf.model.darg.Architecture#getQadag <em>Qadag</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Qadag</em>' containment reference.
+	 * @see #getQadag()
+	 * @generated
+	 */
+	void setQadag(File value);
+
+	/**
+	 * Returns the value of the '<em><b>Outgoing Architectures</b></em>' reference list.
+	 * The list contents are of type {@link de.tubs.areva.emf.model.darg.Architecture}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Outgoing Architectures</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Outgoing Architectures</em>' reference list.
+	 * @see de.tubs.areva.emf.model.darg.DargPackage#getArchitecture_OutgoingArchitectures()
+	 * @model
+	 * @generated
+	 */
+	EList<Architecture> getOutgoingArchitectures();
+
+	/**
+	 * Returns the value of the '<em><b>Used Resources</b></em>' reference list.
+	 * The list contents are of type {@link de.tubs.areva.resourcerelations.Resource}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Used Resources</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Used Resources</em>' reference list.
+	 * @see de.tubs.areva.emf.model.darg.DargPackage#getArchitecture_UsedResources()
+	 * @model
+	 * @generated
+	 */
+	EList<Resource> getUsedResources();
+
+} // Architecture

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceenvironment:ResourceEnvironment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:resourceenvironment="http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.1" entityName="Controllers">
+  <linkingResources__ResourceEnvironment id="_7o5swP9AEeakgvmVKJAkIA" connectedResourceContainers_LinkingResource="_eK_dQP9AEeakgvmVKJAkIA _dREysP9AEeakgvmVKJAkIA _mTPG0AzHEeSFacab0qo-ew">
+    <communicationLinkResourceSpecifications_LinkingResource id="_7o664P9AEeakgvmVKJAkIA">
+      <communicationLinkResourceType_CommunicationLinkResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_o3sScH2AEdyH8uerKnHYug"/>
+      <latency_CommunicationLinkResourceSpecification specification="0.015"/>
+      <throughput_CommunicationLinkResourceSpecification specification="2000000000"/>
+    </communicationLinkResourceSpecifications_LinkingResource>
+  </linkingResources__ResourceEnvironment>
+  <resourceContainer_ResourceEnvironment id="_mTPG0AzHEeSFacab0qo-ew" entityName="MainController">
+    <activeResourceSpecifications_ResourceContainer id="_5sIOIAzHEeSFacab0qo-ew">
+      <schedulingPolicy href="pathmap://PCM_MODELS/Palladio.resourcetype#ProcessorSharing"/>
+      <activeResourceType_ActiveResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+      <processingRate_ProcessingResourceSpecification specification="1"/>
+    </activeResourceSpecifications_ResourceContainer>
+  </resourceContainer_ResourceEnvironment>
+  <resourceContainer_ResourceEnvironment id="_dREysP9AEeakgvmVKJAkIA" entityName="Sensors"/>
+  <resourceContainer_ResourceEnvironment id="_eK_dQP9AEeakgvmVKJAkIA" entityName="Actuator"/>
+</resourceenvironment:ResourceEnvironment>

@@ -1,0 +1,100 @@
+package de.tubs.areva.util;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class CSVReader {
+	
+	private String[][] table = null;
+	private Map<String, List<String>> tableAsMap = null;
+	
+	public CSVReader(String filePath, String coloumnSeperator) {
+		
+		List<String[]> lineArrays = new ArrayList<String[]>();
+		BufferedReader br = null;
+		String line = "";
+		
+		try {
+
+//			filePath = filePath.replaceAll("file:", ""); //FIXME: Hotfix windows / mac os compatible paths
+			br = new BufferedReader(new FileReader(filePath));
+			
+			while ((line = br.readLine()) != null) {
+
+				String[] lineArray = line.split(coloumnSeperator);
+				
+				lineArrays.add(lineArray);
+			}
+			
+			table = new String[lineArrays.size()][];
+			
+			for(int i = 0; i < lineArrays.size(); i++) {
+				table[i] = lineArrays.get(i);
+			}
+			
+			Map<String, List<String>> map = new HashMap<String, List<String>>();
+			
+			for(int i = 0; i < table.length; i++) {
+				
+				for(int j = 0; j < table[i].length; j++) {
+					
+					if(i == 0) {
+						
+						map.put(table[i][j], new ArrayList<String>());
+						
+					} else {
+						
+						map.get(table[0][j]).add(table[i][j]);
+					}
+				}
+			}
+			
+			tableAsMap = map;
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+	
+	public String[][] getTable() {
+		return table;
+	}
+	
+	public Map<String, List<String>> getTableAsMap() {
+		return tableAsMap;
+	}
+	
+	public void printToConsole() {
+		
+		System.out.println("<CSVReader> Printing table:");
+		
+		for(int line = 0; line < table.length; line++) {
+			
+			String coloumnString = "";
+			
+			for(int coloumn = 0; coloumn < table[line].length; coloumn++) {
+				coloumnString = coloumnString + table[line][coloumn] + ";";
+			}
+			
+			System.out.println(coloumnString);
+		}
+	}
+
+}

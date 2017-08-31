@@ -1,0 +1,277 @@
+package de.tubs.areva.command;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.swing.JOptionPane;
+
+import javax.xml.parsers.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.*;
+import javax.xml.transform.stream.*;
+import org.xml.sax.*;
+import org.w3c.dom.*;
+
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gef4.graph.Edge;
+import org.eclipse.gef4.graph.Graph;
+import org.eclipse.gef4.layout.algorithms.SpringLayoutAlgorithm;
+import org.eclipse.gef4.zest.fx.ZestProperties;
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.HandlerUtil;
+import org.javatuples.Pair;
+import org.javatuples.Triplet;
+import org.nfunk.jep.JEP;
+
+import de.tubs.areva.emf.model.darg.ARG;
+import de.tubs.areva.emf.model.darg.Architecture;
+import de.tubs.areva.emf.model.darg.QualityAssignment;
+import de.tubs.areva.emf.model.qadag.CompositeNode;
+import de.tubs.areva.emf.model.qadag.Node;
+import de.tubs.areva.emf.model.qadag.QADAG;
+import de.tubs.areva.resourcerelations.Resource;
+import de.tubs.areva.resourcerelations.ResourceOptions;
+import de.tubs.areva.ui.module.DARGZestEdge;
+import de.tubs.areva.ui.module.DARGZestNode;
+import de.tubs.areva.ui.module.QADAGZestNode;
+import de.tubs.areva.ui.view.DARGZestView;
+import de.tubs.areva.ui.wizard.SelectOperatingModeWizard;
+import de.tubs.areva.util.IntervalUtils;
+import de.tubs.areva.util.ResourceHelper;
+import de.tubs.areva.util.emf.ResourceManager;
+import de.uka.ipd.sdq.pcm.designdecision.DecisionSpace;
+
+public class SelectOperatingModeWizardHandler extends AbstractHandler implements IHandler {
+
+	private static int i;
+	private int id = 0;
+	protected static final String ID = ZestProperties.CSS_ID__NE;
+	protected static final String LABEL = ZestProperties.LABEL__NE;
+	
+	
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		
+		SelectOperatingModeWizard wizard = new SelectOperatingModeWizard();
+		
+		
+		WizardDialog wizardDialog = new WizardDialog(
+				HandlerUtil.getActiveWorkbenchWindow(event).getShell(),
+				wizard);
+		
+		if(wizardDialog.open() == Window.OK) {
+			System.out.println("Ok pressed");
+			
+			//setupExampleDARGZest(wizard);
+			setupOperatingMode(wizard);
+			
+		} else {
+			System.out.println("Cancel pressed");
+		}
+		
+		return null;
+	}
+	
+	private void setupOperatingMode(SelectOperatingModeWizard wizard) {
+		
+		System.out.println("Operating modes selected. Proceeding with DARG creation.");
+		
+		ResourceSet operatingModeRS = new ResourceSetImpl();
+		for(int i = 0; i < wizard.qadagPage.getQadagFiles().size(); i++) {
+			
+
+			System.out.println("Creating DARG #" + i);
+			
+			URI metaQadagURI = wizard.qadagPage.getQadagFiles().get(i);
+			String[] dargNameSplit = metaQadagURI.toString().split("/");
+			String dargNameEnding = dargNameSplit[dargNameSplit.length-1];
+			String[] dargNameSplit2 = dargNameEnding.split("\\.");
+			String dargName = dargNameSplit2[0];
+			
+			ARG argFile = 
+					(ARG) operatingModeRS.getResource(wizard.argPage.getArgFile(), true).getContents().get(0);
+			
+			QADAG metaQadagFile = 
+					(QADAG) operatingModeRS.getResource(metaQadagURI, true).getContents().get(0);
+			
+			
+			ARG dargFile = 
+					EcoreUtil.copy(argFile);
+			
+			dargFile.setQadag(metaQadagFile);
+			
+			for(Architecture dargNode: dargFile.getArchitectures()) {
+				
+				if(dargNode instanceof Architecture) {
+					Architecture architecture = (Architecture) dargNode;
+				
+					generateQadag(dargFile.getQadag(), architecture);
+				}
+			}
+			
+			/* weil der chef es so sagt...
+			// remove invalid architectures (NaN quality) 
+			List<Architecture> toBeRemoved = new ArrayList<Architecture>();
+			
+			for(Architecture dargNode: dargFile.getArchitectures()) {
+				if(dargNode instanceof Architecture) {
+					Architecture architecture = (Architecture) dargNode;
+					if(Double.isNaN(architecture.getQuality())) {
+						toBeRemoved.add(architecture);
+					}
+				}
+			}
+			
+			for(Architecture removed: toBeRemoved) {
+				EcoreUtil.delete(removed);
+			}
+			
+			*/
+			
+			
+			// create valid edges
+			calculateEdges(dargFile, Integer.parseInt(wizard.thresholdPage.getInput()));
+			
+			// process arg
+			//List<org.javatuples.Triplet<Architecture, Architecture, String>> processedPath = new ArrayList<org.javatuples.Triplet<Architecture, Architecture, String>>();
+			//processFaultyResources(dargFile, wizard.faultyResourcesPage.getInput().split(","), wizard.startPage.getInput(), processedPath);
+			
+			// save result darg
+			ResourceSet dargRS = new ResourceSetImpl();
+			org.eclipse.emf.ecore.resource.Resource architectureResource = ResourceManager.createAndAddResource(
+					wizard.outputPage.outputDirectory + "\\" + dargName + ".darg",
+					new String[] {".darg"}, 
+					dargRS);
+			
+			architectureResource.getContents().add(dargFile);
+			
+			ResourceManager.saveResource(architectureResource);
+		}
+		
+		for(IProject project: ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
+			
+			try {
+				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+			} catch (CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void calculateEdges(ARG dargFile, int threshold) {
+		
+		for(Architecture arch1: dargFile.getArchitectures()) {
+			
+			for(Architecture arch2: dargFile.getArchitectures()) {
+				
+				if(arch1 == arch2) 
+					continue;
+				
+				int difference = ResourceHelper.GetArchitectureDifferences(arch1, arch2);
+				
+				if(difference <= threshold) {
+					arch1.getRelatedArchitectures().add(arch2);
+				}
+			}
+		}
+		
+		for(Architecture architecture: dargFile.getArchitectures()) {
+			if(architecture.getRelatedArchitectures().size() == 0) {
+				EcoreUtil.delete(architecture);
+			}
+		}
+		
+	}
+	
+	private int getMinValue(ResourceOptions options) {
+		
+		if(options.getSubGroups().size() > 0) {
+			
+			int minValue = 0;
+			
+			for(ResourceOptions option: options.getSubGroups()) {
+				minValue += getMinValue(option);
+			}
+			
+			return minValue;
+			
+		} else {
+			return Integer.parseInt(options.getMinElements());
+		}
+	}
+
+	private double calculateQadag(Node node) {
+		
+		double result = 0f;
+		if(node.getNodes().size() > 0) {
+		
+			for(Node child: node.getNodes()) {
+				calculateQadag(child);
+				result += child.getValue() * ((CompositeNode) child).getWeight();
+			}
+			
+			if(result < node.getLowerLimit()) {
+				result = Double.NaN;
+			}
+			
+			node.setValue(result);
+			
+			
+		}
+		
+		return result;
+	}
+	
+	private void generateQadag(QADAG metaQadag, Architecture architecture) {
+		
+		
+		QADAG qadag = EcoreUtil.copy(metaQadag);
+		qadag.setName(architecture.getId());
+		qadag.getRoot().setName(architecture.getId());
+		
+		architecture.setQadag(qadag);
+		
+		
+		for(Node node: qadag.getRoot().getNodes()) {
+			
+			for(QualityAssignment quality: architecture.getQualityassignments()) {
+			
+				if(quality.getAttribute().equals(node.getName())) {
+					
+					node.setValue(quality.getValue());
+					
+				}
+			}
+		}
+		
+		
+		architecture.setQuality(calculateQadag(architecture.getQadag().getRoot()));
+	}
+	
+	float normalize(float value, float min, float max) {
+		
+		float normalized = (value - min) / (max - min);
+		
+		return normalized;
+	}
+	
+}

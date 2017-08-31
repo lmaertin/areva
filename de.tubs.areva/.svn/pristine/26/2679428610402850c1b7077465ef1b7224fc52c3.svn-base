@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="darg" nsURI="http://com/areva/darg/" nsPrefix="de.tubs.areva.emf.model.darg">
+  <eClassifiers xsi:type="ecore:EClass" name="ARG">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="architectures" upperBound="-1"
+        eType="#//Architecture" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qadag" eType="ecore:EClass qadag.ecore#//QADAG"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Architecture">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quality" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Double"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qadag" eType="ecore:EClass qadag.ecore#//QADAG"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="followingArchitectures"
+        upperBound="-1" eType="#//Architecture"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usedResources" upperBound="-1"
+        eType="ecore:EClass ../../de.tubs.areva.resourcerelations/model/resources.ecore#//Resource"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usedResourceGroups" upperBound="-1"
+        eType="ecore:EClass ../../de.tubs.areva.resourcerelations/model/resources.ecore#//ResourceGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qualities" upperBound="-1"
+        eType="#//QualityAssignment" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QualityAssignment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attribute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Double"/>
+  </eClassifiers>
+</ecore:EPackage>

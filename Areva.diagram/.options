@@ -1,7 +1,0 @@
-# Tracing options for the Areva.diagram plug-in
-
-# Common issues
-Areva.diagram/debug=false
-
-# Visual IDs
-Areva.diagram/debug/visualID=false

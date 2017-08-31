@@ -1,0 +1,408 @@
+/**
+ */
+package de.tubs.areva.resourcerelations.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.palladiosimulator.pcm.repository.BasicComponent;
+import de.tubs.areva.resourcerelations.Resource;
+import de.tubs.areva.resourcerelations.ResourceGroup;
+import de.tubs.areva.resourcerelations.ResourcerelationsPackage;
+import de.tubs.areva.resourcerelations.Specification;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Resource Group</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link de.tubs.areva.resourcerelations.impl.ResourceGroupImpl#getResources <em>Resources</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.impl.ResourceGroupImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.impl.ResourceGroupImpl#getMinElements <em>Min Elements</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.impl.ResourceGroupImpl#getMaxElements <em>Max Elements</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.impl.ResourceGroupImpl#getAnnotatedComponent <em>Annotated Component</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.impl.ResourceGroupImpl#getSpecifications <em>Specifications</em>}</li>
+ * </ul>
+ *
+ * @generated
+ */
+public class ResourceGroupImpl extends MinimalEObjectImpl.Container implements ResourceGroup {
+	/**
+	 * The cached value of the '{@link #getResources() <em>Resources</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResources()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Resource> resources;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMinElements() <em>Min Elements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMinElements()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MIN_ELEMENTS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMinElements() <em>Min Elements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMinElements()
+	 * @generated
+	 * @ordered
+	 */
+	protected String minElements = MIN_ELEMENTS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMaxElements() <em>Max Elements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaxElements()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MAX_ELEMENTS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMaxElements() <em>Max Elements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaxElements()
+	 * @generated
+	 * @ordered
+	 */
+	protected String maxElements = MAX_ELEMENTS_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getAnnotatedComponent() <em>Annotated Component</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotatedComponent()
+	 * @generated
+	 * @ordered
+	 */
+	protected BasicComponent annotatedComponent;
+
+	/**
+	 * The cached value of the '{@link #getSpecifications() <em>Specifications</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSpecifications()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Specification> specifications;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ResourceGroupImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ResourcerelationsPackage.Literals.RESOURCE_GROUP;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Resource> getResources() {
+		if (resources == null) {
+			resources = new EObjectResolvingEList<Resource>(Resource.class, this, ResourcerelationsPackage.RESOURCE_GROUP__RESOURCES);
+		}
+		return resources;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ResourcerelationsPackage.RESOURCE_GROUP__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getMinElements() {
+		return minElements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMinElements(String newMinElements) {
+		String oldMinElements = minElements;
+		minElements = newMinElements;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ResourcerelationsPackage.RESOURCE_GROUP__MIN_ELEMENTS, oldMinElements, minElements));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getMaxElements() {
+		return maxElements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMaxElements(String newMaxElements) {
+		String oldMaxElements = maxElements;
+		maxElements = newMaxElements;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ResourcerelationsPackage.RESOURCE_GROUP__MAX_ELEMENTS, oldMaxElements, maxElements));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BasicComponent getAnnotatedComponent() {
+		if (annotatedComponent != null && ((EObject)annotatedComponent).eIsProxy()) {
+			InternalEObject oldAnnotatedComponent = (InternalEObject)annotatedComponent;
+			annotatedComponent = (BasicComponent)eResolveProxy(oldAnnotatedComponent);
+			if (annotatedComponent != oldAnnotatedComponent) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ResourcerelationsPackage.RESOURCE_GROUP__ANNOTATED_COMPONENT, oldAnnotatedComponent, annotatedComponent));
+			}
+		}
+		return annotatedComponent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BasicComponent basicGetAnnotatedComponent() {
+		return annotatedComponent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAnnotatedComponent(BasicComponent newAnnotatedComponent) {
+		BasicComponent oldAnnotatedComponent = annotatedComponent;
+		annotatedComponent = newAnnotatedComponent;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ResourcerelationsPackage.RESOURCE_GROUP__ANNOTATED_COMPONENT, oldAnnotatedComponent, annotatedComponent));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Specification> getSpecifications() {
+		if (specifications == null) {
+			specifications = new EObjectResolvingEList<Specification>(Specification.class, this, ResourcerelationsPackage.RESOURCE_GROUP__SPECIFICATIONS);
+		}
+		return specifications;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case ResourcerelationsPackage.RESOURCE_GROUP__RESOURCES:
+				return getResources();
+			case ResourcerelationsPackage.RESOURCE_GROUP__NAME:
+				return getName();
+			case ResourcerelationsPackage.RESOURCE_GROUP__MIN_ELEMENTS:
+				return getMinElements();
+			case ResourcerelationsPackage.RESOURCE_GROUP__MAX_ELEMENTS:
+				return getMaxElements();
+			case ResourcerelationsPackage.RESOURCE_GROUP__ANNOTATED_COMPONENT:
+				if (resolve) return getAnnotatedComponent();
+				return basicGetAnnotatedComponent();
+			case ResourcerelationsPackage.RESOURCE_GROUP__SPECIFICATIONS:
+				return getSpecifications();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case ResourcerelationsPackage.RESOURCE_GROUP__RESOURCES:
+				getResources().clear();
+				getResources().addAll((Collection<? extends Resource>)newValue);
+				return;
+			case ResourcerelationsPackage.RESOURCE_GROUP__NAME:
+				setName((String)newValue);
+				return;
+			case ResourcerelationsPackage.RESOURCE_GROUP__MIN_ELEMENTS:
+				setMinElements((String)newValue);
+				return;
+			case ResourcerelationsPackage.RESOURCE_GROUP__MAX_ELEMENTS:
+				setMaxElements((String)newValue);
+				return;
+			case ResourcerelationsPackage.RESOURCE_GROUP__ANNOTATED_COMPONENT:
+				setAnnotatedComponent((BasicComponent)newValue);
+				return;
+			case ResourcerelationsPackage.RESOURCE_GROUP__SPECIFICATIONS:
+				getSpecifications().clear();
+				getSpecifications().addAll((Collection<? extends Specification>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case ResourcerelationsPackage.RESOURCE_GROUP__RESOURCES:
+				getResources().clear();
+				return;
+			case ResourcerelationsPackage.RESOURCE_GROUP__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case ResourcerelationsPackage.RESOURCE_GROUP__MIN_ELEMENTS:
+				setMinElements(MIN_ELEMENTS_EDEFAULT);
+				return;
+			case ResourcerelationsPackage.RESOURCE_GROUP__MAX_ELEMENTS:
+				setMaxElements(MAX_ELEMENTS_EDEFAULT);
+				return;
+			case ResourcerelationsPackage.RESOURCE_GROUP__ANNOTATED_COMPONENT:
+				setAnnotatedComponent((BasicComponent)null);
+				return;
+			case ResourcerelationsPackage.RESOURCE_GROUP__SPECIFICATIONS:
+				getSpecifications().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case ResourcerelationsPackage.RESOURCE_GROUP__RESOURCES:
+				return resources != null && !resources.isEmpty();
+			case ResourcerelationsPackage.RESOURCE_GROUP__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ResourcerelationsPackage.RESOURCE_GROUP__MIN_ELEMENTS:
+				return MIN_ELEMENTS_EDEFAULT == null ? minElements != null : !MIN_ELEMENTS_EDEFAULT.equals(minElements);
+			case ResourcerelationsPackage.RESOURCE_GROUP__MAX_ELEMENTS:
+				return MAX_ELEMENTS_EDEFAULT == null ? maxElements != null : !MAX_ELEMENTS_EDEFAULT.equals(maxElements);
+			case ResourcerelationsPackage.RESOURCE_GROUP__ANNOTATED_COMPONENT:
+				return annotatedComponent != null;
+			case ResourcerelationsPackage.RESOURCE_GROUP__SPECIFICATIONS:
+				return specifications != null && !specifications.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (Name: ");
+		result.append(name);
+		result.append(", MinElements: ");
+		result.append(minElements);
+		result.append(", MaxElements: ");
+		result.append(maxElements);
+		result.append(')');
+		return result.toString();
+	}
+
+} //ResourceGroupImpl

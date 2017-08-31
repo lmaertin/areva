@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated resources -->
+      <package
+            uri="http://ips.tu-bs.de/ResourceRelationsModel/1.0"
+            class="de.tubs.areva.resourcerelations.ResourcerelationsPackage"
+            genModel="model/resources.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated resources -->
+      <parser
+            type="resourcerelations"
+            class="de.tubs.areva.resourcerelations.util.ResourcerelationsResourceFactoryImpl"/>
+   </extension>
+
+
+<extension  point="org.eclipse.emf.ecp.view.model.provider.xmi.file">
+<file filePath="model/Platform.view"/>
+</extension>
+</plugin>

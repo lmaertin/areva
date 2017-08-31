@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<de.tubs.areva.emf.model.opmode:OperatingModeSelection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:de.tubs.areva.emf.model.opmode="http://com/areva/opmode/">
+  <startArchitecture href="mission1.darg#//@architectures.12"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.8"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.0"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.4"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.5"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.18"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.16"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.19"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.6"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.20"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.26"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.21"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.27"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.12"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.23"/>
+  <failingResources href="../aocs.resourcerelations#//@resources.24"/>
+</de.tubs.areva.emf.model.opmode:OperatingModeSelection>
