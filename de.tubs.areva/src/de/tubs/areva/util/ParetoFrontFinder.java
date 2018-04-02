@@ -1,0 +1,95 @@
+package de.tubs.areva.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ParetoFrontFinder {
+
+	public static void main(String[] args) {
+		CSVReader reader = new CSVReader("C:/Users/cytho/Desktop/ergebnisse/all_od.csv", ",");
+		String[][] candidates = reader.getTable();
+		
+		List<String> paretoArchitectures = new ArrayList<>();
+		
+		float[] A = new float[candidates.length-1];
+		float[] B = new float[candidates.length-1];
+		float[] C = new float[candidates.length-1];
+		float[] D = new float[candidates.length-1];
+		float[] E = new float[candidates.length-1];
+		float[] F = new float[candidates.length-1];
+		
+		for(int i = 1; i < candidates.length; i++) {
+			
+			A[i-1] = Float.parseFloat(candidates[i][0]);
+			B[i-1] = Float.parseFloat(candidates[i][1]);
+			C[i-1] = Float.parseFloat(candidates[i][2]);
+			D[i-1] = Float.parseFloat(candidates[i][3]);
+			E[i-1] = Float.parseFloat(candidates[i][4]);
+			F[i-1] = Float.parseFloat(candidates[i][5]);
+		}
+		
+		String outputTableString = "";
+		int paretoArchitecturesCount = 0;
+		
+		for(int i = 0; i < A.length; i++) {
+			
+			int anzahlArchitekturen = 0;
+			
+			for(int j = 0; j < A.length; j++) {
+				
+				if(i == j)
+					continue;
+				
+				if((A[j] <= A[i]) && (B[j] <= B[i]) && (C[j] <= C[i]) && 
+						(D[j] >= D[i]) && (E[j] >= E[i]) && (F[j] >= F[i])) {
+					
+					int betterObjective = 0;
+					
+					if(A[j] < A[i])
+						betterObjective++;
+					
+					if(B[j] < B[i])
+						betterObjective++;
+					
+					if(C[j] < C[i])
+						betterObjective++;
+					
+					if(D[j] > D[i])
+						betterObjective++;
+					
+					if(E[j] > E[i])
+						betterObjective++;
+					
+					if(F[j] > F[i])
+						betterObjective++;
+					
+					if(betterObjective > 0) {
+						anzahlArchitekturen++;
+					}
+				}
+			}
+			
+			if(anzahlArchitekturen == 0) {
+				
+				paretoArchitecturesCount++;
+				outputTableString += A[i] + "," + B[i] + "," + C[i] + "," + D[i] + "," + E[i] + "," + F[i] + ","; 
+				for(int j = 6; j < candidates[i+1].length; j++) {
+					
+					if(j == (candidates[i+1].length-1)) {
+						
+						outputTableString += candidates[i+1][j];
+					} else {
+						
+						outputTableString += candidates[i+1][j] + ",";
+					}
+				}
+				
+				outputTableString += "\n"; 
+			}
+		}
+		
+		System.out.println(outputTableString);
+		System.out.println(paretoArchitecturesCount);
+	}
+
+}

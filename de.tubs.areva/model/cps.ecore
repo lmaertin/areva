@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cps" nsURI="http://com/forjahn/cps/" nsPrefix="de.tubs.areva.forjahn.bachelor.model.cps">
+  <eClassifiers xsi:type="ecore:EClass" name="CalculationParameterSelection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SelectedDomains" upperBound="-1"
+        eType="ecore:EClass darg.ecore#//ARG"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SelectedResourceFailures"
+        upperBound="-1" eType="ecore:EClass ../../de.tubs.areva.resourcerelations/model/resources.ecore#//Resource"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="QualityWeight" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Double"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="CentralityWeight" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Double"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ResourceWeight" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Double"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="DifferenceThreshold" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"/>
+  </eClassifiers>
+</ecore:EPackage>

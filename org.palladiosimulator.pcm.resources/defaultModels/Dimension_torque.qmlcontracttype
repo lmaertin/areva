@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QMLContractType:Dimension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:QMLContractType="http:///QMLContractType.ecore" id="_r_iViqCrEd-s9uTaURbrTorque" entityName="torque">
+  <type xsi:type="QMLContractType:DimensionTypeNumeric" id="_wbxmsbBWEd-7u-Jl-EfvTorque">
+    <relationSemantics id="_wbxmsrBWEd-7u-Jl-EfvTorque" relSem="increasing"/>
+  </type>
+</QMLContractType:Dimension>

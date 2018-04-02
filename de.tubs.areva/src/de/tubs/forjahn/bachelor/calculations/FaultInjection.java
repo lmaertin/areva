@@ -1,0 +1,86 @@
+package de.tubs.forjahn.bachelor.calculations;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import de.tubs.areva.command.ProcessResourceFailure;
+import de.tubs.areva.emf.model.darg.ARG;
+import de.tubs.areva.emf.model.darg.Architecture;
+import de.tubs.areva.resourcerelations.Platform;
+import de.tubs.areva.resourcerelations.Resource;
+import de.tubs.areva.resourcerelations.ResourceOptions;
+
+public class FaultInjection {
+	
+	// 3.3
+	public static Map<Resource,List<ARG>> injectFaults(List<Resource> faults, List<ARG> domains) {
+		List<Resource> allResources = new ArrayList<>(((Platform)faults.get(0).eContainer()).getResources());
+		
+		Map<Resource,List<ARG>> domainMap = new LinkedHashMap<>();
+		
+		for(ARG domain: domains) {
+			
+			removeInvalidArchitectures(domain);
+		}
+		
+		domainMap.put(null, domains);
+		
+		for(int i = 0; i < faults.size(); i++) {
+			
+			List<ARG> domainsWithFaults = new ArrayList<ARG>();
+			Resource faultyResource = faults.get(i);
+			allResources.remove(faultyResource);
+			
+			for(ARG domain: domains) {
+				
+				//removeInvalidArchitectures(domain);
+				
+				ARG clonedDomain = EcoreUtil.copy(domain);
+				for(Architecture architecture: clonedDomain.getArchitectures()) {
+					boolean conditionsMet = true;
+					for(ResourceOptions options: architecture.getBoundResourceOptions()) {
+						conditionsMet = conditionsMet && ProcessResourceFailure.conditionsMet(options, allResources);
+					}
+					
+					if(!conditionsMet) {
+						architecture.setQuality(Double.NaN);
+					}
+				}
+				
+				removeInvalidArchitectures(clonedDomain);
+				
+				domainsWithFaults.add(clonedDomain);
+			}
+			
+			domainMap.put(faultyResource, domainsWithFaults);
+			
+			domains = domainsWithFaults;
+		}
+		
+		return domainMap;
+	}
+	
+	private static void removeInvalidArchitectures(ARG domain) {
+		
+		List<Architecture> invalids = new ArrayList<>();
+		
+		for(Architecture architecture: domain.getArchitectures()) {
+			if(Double.isNaN(architecture.getQuality()) || Double.isInfinite(architecture.getQuality())) {
+				invalids.add(architecture);
+			}
+		}
+		
+		for(Architecture invalid: invalids) {
+			for(Architecture target: invalid.getRelatedArchitectures()) {
+				target.getRelatedArchitectures().remove(invalid);
+			}
+			
+			EcoreUtil.delete(invalid);
+		}
+	}
+}

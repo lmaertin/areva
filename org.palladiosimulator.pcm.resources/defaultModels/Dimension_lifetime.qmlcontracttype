@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QMLContractType:Dimension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:QMLContractType="http:///QMLContractType.ecore" id="_r_iViqCrEd-s9uTaURbrLMlifetime" entityName="lifetime">
+  <type xsi:type="QMLContractType:DimensionTypeNumeric" id="_wbxmsbBWEd-7u-Jl-EfvLMlifetime">
+    <relationSemantics id="_wbxmsrBWEd-7u-Jl-EfvLMlifetime" relSem="increasing"/>
+  </type>
+</QMLContractType:Dimension>

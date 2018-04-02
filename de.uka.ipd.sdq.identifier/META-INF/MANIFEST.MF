@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.4
+Created-By: 1.7.0_45-b18 (Oracle Corporation)
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.10.0",org.e
+ clipse.emf.ecore;visibility:="reexport";bundle-version="2.10.0",org.e
+ clipse.emf.cdo;visibility:="reexport";bundle-version="4.3.0",org.ecli
+ pse.emf.ecore.xmi;visibility:="reexport";bundle-version="2.10.0"
+Export-Package: de.uka.ipd.sdq.identifier,de.uka.ipd.sdq.identifier.im
+ pl,de.uka.ipd.sdq.identifier.util
+Bundle-Vendor: %providerName
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Bundle-Version: 2.1.0.201511050934
+Bundle-Localization: plugin
+Bundle-Name: %pluginName
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: de.uka.ipd.sdq.identifier;singleton:=true
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+
