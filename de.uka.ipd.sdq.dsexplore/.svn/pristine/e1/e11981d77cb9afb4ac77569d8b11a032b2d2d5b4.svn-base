@@ -1,6 +1,0 @@
-source.. = src/
-bin.includes = META-INF/,\
-               icons/,\
-               log4j/,\
-               plugin.xml,\
-               .
