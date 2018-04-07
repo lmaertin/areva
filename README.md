@@ -45,3 +45,8 @@ The current version of the AReva toolset supports:
   - Install core features wrt. https://sdqweb.ipd.kit.edu/wiki/PCM_4.1#Release_Update_Site
   
 In addition to Palladio Bench and Palladio DSE/PerOpteryx, AREva makes use of several libraries: GEF4/Zest, Opt4J, Google Guice, jep (Java Expression Parser), ... (list to be completed).
+
+## Validation Data
+- Folder: validation_data
+- Contents: All validation data for the single and multi mode analyses 
+- Includes a short How-To for re-doing the validation
