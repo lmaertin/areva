@@ -43,6 +43,7 @@ The current version of the AReva toolset supports:
   - Palladio Bench
   - Palladio Design Space Exporation (PerOpteryx)
   - Install core features wrt. https://sdqweb.ipd.kit.edu/wiki/PCM_4.1#Release_Update_Site
+- Use changed Palladio Plugins from this repo. to integrate AREva functions; some extensions must be hardcoded in the current release of DSE
   
 In addition to Palladio Bench and Palladio DSE/PerOpteryx, AREva makes use of several libraries: GEF4/Zest, Opt4J, Google Guice, jep (Java Expression Parser), ... (list to be completed).
 
