@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<de.tubs.areva.emf.model.qadag:QADAG xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:de.tubs.areva.emf.model.qadag="http://com/areva/qadag/" name="Experiment N15">
+  <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="N15 utility">
+    <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" unit="precent" weight="0.075"/>
+    <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" lowerLimit="0.35" unit="years" weight="0.2"/>
+    <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" unit="s" weight="0.175"/>
+    <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" lowerLimit="0.35" unit="percent" weight="0.175"/>
+    <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" lowerLimit="0.3" unit="nM" weight="0.2"/>
+    <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" lowerLimit="0.15" unit="W" weight="0.175"/>
+  </root>
+</de.tubs.areva.emf.model.qadag:QADAG>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<de.tubs.areva.emf.model.opmode:OperatingModeSelection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:de.tubs.areva.emf.model.opmode="http://com/areva/opmode/" name="Experiment N1 8 default">
+  <startArchitecture href="experiment_n1/minimized_8.darg#//@architectures.30"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.18"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.16"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.19"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.20"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.13"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.4"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.3"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.8"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.12"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.11"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.7"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.2"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.22"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.29"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.26"/>
+  <failingResources href="../1_design_pcm/aocs.resourcerelations#//@resources.25"/>
+</de.tubs.areva.emf.model.opmode:OperatingModeSelection>
