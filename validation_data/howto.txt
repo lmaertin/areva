@@ -1,0 +1,77 @@
+Validation HowTo for AReva toolset
+
+##########
+Single Mode
+###########
+
+Create ARG Wizard; or use file in /3_analyses_areva/
+
+Paths:
+/1_design_pcm/aocs.system
+/1_design_pcm/aocs.designdecision
+/1_design_pcm/aocs.resourcerelations
+/2_sampling_dse/allCandidates999_2018-03-14-162323.csv
+/2_sampling_dse/archiveCandidates999_2018-03-14-162323.csv
+[Output path]/3_analyses_areva/singlemode
+
+---
+Create DARG Wizard (context menu on recently created ARG); or use files in /3_analyses_areva/experiment_n1 / n7 / n15
+
+[Output path]/3_analyses_areva/architectures.darg
+/1_design_pcm/experiment_n1.qadag
+/1_design_pcm/experiment_n7.qadag
+/1_design_pcm/experiment_n15.qadag
+8 [reconf. cost threshold]
+[Output path]/3_analyses_areva/singlemode
+	
+Hint: Due to issues with the Eclipse URI resolver you have to replace platform paths in .darg files to relative paths (../) on some platforms/OS.
+---
+
+Process Operation Mode 
+
+Create opmode-Model; or use files in /3_analyses_areva/
+- drag'n'drop DARG file (new opmode file for each!)
+	-/3_analyses_areva/experiment_n1/minimized_8.darg
+	-/3_analyses_areva/experiment_n7/minimized_8.darg
+	-/3_analyses_areva/experiment_n15/minimized_8.darg
+- Edit Property start architecture
+	-N1: 4701
+	-N7: 4567
+	-N15: 4726
+- Edit Property Resource Faults:
+	-GPS LNA1+Antenna1;
+	-GPS Receiver1;
+	-GPS LNA2+Antenna2;
+	-MFS Fluxgate1;
+	-CSS RearHead2;
+	-ASC DPU1 High Res.;
+	-ASC DPU2 Low Res.;
+	-CSS Chipset1 High Res.;
+	-CSS RearHead1;
+	-CSS FrontHead2;
+	-CSS Chipset2 Low Res.;
+	-ASC DPU1 Low Res.;
+	-MC1x;
+	-RW2;
+	-MC2y;
+	-MC2x;
+- context menu of opmode: process failures
+---
+
+Inspect results for each mode in:
+-[Output path]/3_analyses_areva/singlemode/experiment_n1_8c_16f
+-[Output path]/3_analyses_areva/singlemode/experiment_n7_8c_16f
+-[Output path]/3_analyses_areva/singlemode/experiment_n15_8c_16f
+
+##########
+Multi Mode
+##########
+Create CPS (Calculation Parameter Selection) file with Wizard; or use file in CalculationParameterSelection /3_analyses_areva/multimode/
+- drag'n'drop DARG file (all); see above
+- Edit Property Resource Faults; see above
+---
+
+Start analysis by context menu of cps file
+---
+
+Inspect results in /3_analyses_areva/multimode/
