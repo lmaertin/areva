@@ -1,0 +1,50 @@
+package de.tubs.areva.ui.wizard;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.jface.wizard.Wizard;
+
+public class SelectOperatingModeWizard extends Wizard {
+
+	public SelectArgPage argPage = null;
+	public SelectQadagPage qadagPage = null;
+	public SelectNamePage namePage = null;
+	public CreateDARGWizardPageThree outputPage = null;
+	
+	public boolean finished = false;
+	
+	public SelectOperatingModeWizard() {
+		super();
+		setNeedsProgressMonitor(true);
+	}
+	
+	@Override
+	public String getWindowTitle() {
+		return "Select Operating Mode";
+		
+	}
+	
+	@Override public void addPages() {
+		
+		argPage = new SelectArgPage();
+		addPage(argPage);
+		
+		qadagPage = new SelectQadagPage();
+		addPage(qadagPage);
+		
+		namePage = new SelectNamePage();
+		addPage(namePage);
+		
+		outputPage = new CreateDARGWizardPageThree();
+		addPage(outputPage);
+		
+		
+	}
+	
+	@Override
+	public boolean performFinish() {
+		
+		finished = true;
+		return true;
+	}
+
+}

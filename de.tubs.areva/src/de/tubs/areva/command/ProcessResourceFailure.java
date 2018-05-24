@@ -132,7 +132,6 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 					try {
 						project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 					} catch (CoreException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -352,7 +351,7 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 			int faultyResourceCount, 
 			Architecture current, 
 			boolean conditionsMet, 
-			int pathNodes, 
+			int pathNodes,
 			int qualityComparisons, 
 			List<Architecture> qualityComparedArchitectures,
 			int unguidedComparisons, 
@@ -807,7 +806,7 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 			table[i] = new String[3];
 		}
 		
-		for(int i = 0; i < size; i++) {
+		for(int i = 0, ix = 0; i < dargFile.getArchitectures().size(); i++) {
 			
 			Architecture architecture = dargFile.getArchitectures().get(i);
 			
@@ -815,9 +814,11 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 				continue;
 			} 
 			
-			table[i][0] = architecture.getId();
-			table[i][1] = "" + architecture.getBoundResources().size();
-			table[i][2] = String.format(java.util.Locale.US,"%.5f", architecture.getQuality());
+			table[ix][0] = architecture.getId();
+			table[ix][1] = "" + architecture.getBoundResources().size();
+			table[ix][2] = String.format(java.util.Locale.US,"%.5f", architecture.getQuality());
+			
+			ix++;
 		}
 		
 		output += "id;#resources;quality";
@@ -852,7 +853,7 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 			table[i] = new String[qualityCount];
 		}
 		
-		for(int i = 0; i < size; i++) {
+		for(int i = 0, ix = 0; i < dargFile.getArchitectures().size(); i++) {
 			
 			Architecture architecture = dargFile.getArchitectures().get(i);
 			
@@ -861,8 +862,10 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 			} 
 			for(int j = 0; j < qualityCount; j++) {
 				QualityAssignment qualityAssignment = architecture.getQualityassignments().get(j);
-				table[i][j] = String.format(java.util.Locale.US,"%.5f", qualityAssignment.getValue());
+				table[ix][j] = String.format(java.util.Locale.US,"%.5f", qualityAssignment.getValue());
 			}
+			
+			ix++;
 		}
 		
 		output += "id";
@@ -906,7 +909,7 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 			table[i] = new String[qualityCount];
 		}
 		
-		for(int i = 0; i < size; i++) {
+		for(int i = 0, ix = 0; i < dargFile.getArchitectures().size(); i++) {
 			
 			Architecture architecture = dargFile.getArchitectures().get(i);
 			
@@ -915,8 +918,10 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 			} 
 			for(int j = 0; j < qualityCount; j++) {
 				QualityAssignment qualityAssignment = architecture.getRawQualityAssignments().get(j);
-				table[i][j] = String.format(java.util.Locale.US,"%.5f", qualityAssignment.getValue());
+				table[ix][j] = String.format(java.util.Locale.US,"%.5f", qualityAssignment.getValue());
 			}
+			
+			ix++;
 		}
 		
 		output += "id";
@@ -967,7 +972,7 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 			table[i] = new String[resourceCount];
 		}
 		
-		for(int i = 0; i < size; i++) {
+		for(int i = 0, ix = 0; i < dargFile.getArchitectures().size(); i++) {
 			
 			Architecture architecture = dargFile.getArchitectures().get(i);
 			
@@ -979,11 +984,13 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 				Resource resource = allResources.get(j);
 				
 				if(architecture.getBoundResources().contains(resource)) {
-					table[i][j] = "1";
+					table[ix][j] = "1";
 				} else {
-					table[i][j] = "0";
+					table[ix][j] = "0";
 				}
 			}
+			
+			ix++;;
 		}
 		
 		output += "id";
@@ -1264,7 +1271,6 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 			    try {
 					Files.createDirectories(filePath);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -1281,7 +1287,6 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 				try {
 					db = dbf.newDocumentBuilder();
 				} catch (ParserConfigurationException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			    // create instance of DOM
@@ -1440,7 +1445,6 @@ public class ProcessResourceFailure extends AbstractHandler implements IHandler 
 						try {
 							stream.close();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}

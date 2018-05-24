@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QMLDeclarations:QMLDeclarations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:QMLContractType="http:///QMLContractType.ecore" xmlns:QMLDeclarations="http:///QMLDeclarations.ecore" id="_r_iVh6CrEd-s9uTaURbrKA">
+  <qmlDeclarations xsi:type="QMLContractType:QMLContractType" id="_r_iViKCrEd-s9uTaURbrKA" entityName="PCMContractType">
+    <dimensions href="Dimension_responsetime.qmlcontracttype#_r_iVkKCrEd-s9uTaURbrKA"/>
+    <dimensions href="Dimension_pofod.qmlcontracttype#_r_iVjaCrEd-s9uTaURbrKA"/>
+    <dimensions href="Dimension_cost.qmlcontracttype#_r_iViqCrEd-s9uTaURbrKA"/>
+    <dimensions href="Dimension_throughput.qmlcontracttype#_r_iVkKCrEd-s9uTaURbrKA2"/>
+    <dimensions href="Dimension_initialcost.qmlcontracttype#_r_iViqCrEd-s9uTaURinicost"/>
+    <dimensions href="Dimension_maxCPUUtilization.qmlcontracttype#_YhNVUMioEeCp_vzD4x7GMA"/>
+    <dimensions href="Dimension_operatingcost.qmlcontracttype#_r_iViqCrEd-s9uTaURopcost"/>
+    <dimensions href="Dimension_torque.qmlcontracttype#_r_iViqCrEd-s9uTaURbrLM"/>
+  </qmlDeclarations>
+</QMLDeclarations:QMLDeclarations>

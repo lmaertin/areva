@@ -1,0 +1,444 @@
+/**
+ */
+package de.tubs.areva.emf.model.darg.impl;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import de.tubs.areva.emf.model.darg.Architecture;
+import de.tubs.areva.emf.model.darg.ArchitectureQuality;
+import de.tubs.areva.emf.model.darg.DargPackage;
+import de.tubs.areva.emf.model.qadag.File;
+import de.tubs.areva.resourcerelations.Resource;
+import de.tubs.areva.resourcerelations.ResourceGroup;
+import java.util.Collection;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Architecture</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getQadag <em>Qadag</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getOutgoingArchitectures <em>Outgoing Architectures</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getUsedResources <em>Used Resources</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getUsedResourceGroups <em>Used Resource Groups</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getQualities <em>Qualities</em>}</li>
+ * </ul>
+ *
+ * @generated
+ */
+public class ArchitectureImpl extends DARGNodeImpl implements Architecture {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final float VALUE_EDEFAULT = 0.0F;
+
+	/**
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected float value = VALUE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getQadag() <em>Qadag</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQadag()
+	 * @generated
+	 * @ordered
+	 */
+	protected File qadag;
+
+	/**
+	 * The cached value of the '{@link #getOutgoingArchitectures() <em>Outgoing Architectures</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutgoingArchitectures()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Architecture> outgoingArchitectures;
+
+	/**
+	 * The cached value of the '{@link #getUsedResources() <em>Used Resources</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUsedResources()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Resource> usedResources;
+
+	/**
+	 * The cached value of the '{@link #getUsedResourceGroups() <em>Used Resource Groups</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUsedResourceGroups()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ResourceGroup> usedResourceGroups;
+
+	/**
+	 * The cached value of the '{@link #getQualities() <em>Qualities</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQualities()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ArchitectureQuality> qualities;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ArchitectureImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return DargPackage.Literals.ARCHITECTURE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public float getValue() {
+		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValue(float newValue) {
+		float oldValue = value;
+		value = newValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__VALUE, oldValue, value));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public File getQadag() {
+		return qadag;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetQadag(File newQadag, NotificationChain msgs) {
+		File oldQadag = qadag;
+		qadag = newQadag;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__QADAG, oldQadag, newQadag);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setQadag(File newQadag) {
+		if (newQadag != qadag) {
+			NotificationChain msgs = null;
+			if (qadag != null)
+				msgs = ((InternalEObject)qadag).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DargPackage.ARCHITECTURE__QADAG, null, msgs);
+			if (newQadag != null)
+				msgs = ((InternalEObject)newQadag).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DargPackage.ARCHITECTURE__QADAG, null, msgs);
+			msgs = basicSetQadag(newQadag, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__QADAG, newQadag, newQadag));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Architecture> getOutgoingArchitectures() {
+		if (outgoingArchitectures == null) {
+			outgoingArchitectures = new EObjectResolvingEList<Architecture>(Architecture.class, this, DargPackage.ARCHITECTURE__OUTGOING_ARCHITECTURES);
+		}
+		return outgoingArchitectures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Resource> getUsedResources() {
+		if (usedResources == null) {
+			usedResources = new EObjectResolvingEList<Resource>(Resource.class, this, DargPackage.ARCHITECTURE__USED_RESOURCES);
+		}
+		return usedResources;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ResourceGroup> getUsedResourceGroups() {
+		if (usedResourceGroups == null) {
+			usedResourceGroups = new EObjectResolvingEList<ResourceGroup>(ResourceGroup.class, this, DargPackage.ARCHITECTURE__USED_RESOURCE_GROUPS);
+		}
+		return usedResourceGroups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ArchitectureQuality> getQualities() {
+		if (qualities == null) {
+			qualities = new EObjectContainmentEList<ArchitectureQuality>(ArchitectureQuality.class, this, DargPackage.ARCHITECTURE__QUALITIES);
+		}
+		return qualities;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__QADAG:
+				return basicSetQadag(null, msgs);
+			case DargPackage.ARCHITECTURE__QUALITIES:
+				return ((InternalEList<?>)getQualities()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__NAME:
+				return getName();
+			case DargPackage.ARCHITECTURE__VALUE:
+				return getValue();
+			case DargPackage.ARCHITECTURE__QADAG:
+				return getQadag();
+			case DargPackage.ARCHITECTURE__OUTGOING_ARCHITECTURES:
+				return getOutgoingArchitectures();
+			case DargPackage.ARCHITECTURE__USED_RESOURCES:
+				return getUsedResources();
+			case DargPackage.ARCHITECTURE__USED_RESOURCE_GROUPS:
+				return getUsedResourceGroups();
+			case DargPackage.ARCHITECTURE__QUALITIES:
+				return getQualities();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__NAME:
+				setName((String)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__VALUE:
+				setValue((Float)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__QADAG:
+				setQadag((File)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__OUTGOING_ARCHITECTURES:
+				getOutgoingArchitectures().clear();
+				getOutgoingArchitectures().addAll((Collection<? extends Architecture>)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__USED_RESOURCES:
+				getUsedResources().clear();
+				getUsedResources().addAll((Collection<? extends Resource>)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__USED_RESOURCE_GROUPS:
+				getUsedResourceGroups().clear();
+				getUsedResourceGroups().addAll((Collection<? extends ResourceGroup>)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__QUALITIES:
+				getQualities().clear();
+				getQualities().addAll((Collection<? extends ArchitectureQuality>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case DargPackage.ARCHITECTURE__VALUE:
+				setValue(VALUE_EDEFAULT);
+				return;
+			case DargPackage.ARCHITECTURE__QADAG:
+				setQadag((File)null);
+				return;
+			case DargPackage.ARCHITECTURE__OUTGOING_ARCHITECTURES:
+				getOutgoingArchitectures().clear();
+				return;
+			case DargPackage.ARCHITECTURE__USED_RESOURCES:
+				getUsedResources().clear();
+				return;
+			case DargPackage.ARCHITECTURE__USED_RESOURCE_GROUPS:
+				getUsedResourceGroups().clear();
+				return;
+			case DargPackage.ARCHITECTURE__QUALITIES:
+				getQualities().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case DargPackage.ARCHITECTURE__VALUE:
+				return value != VALUE_EDEFAULT;
+			case DargPackage.ARCHITECTURE__QADAG:
+				return qadag != null;
+			case DargPackage.ARCHITECTURE__OUTGOING_ARCHITECTURES:
+				return outgoingArchitectures != null && !outgoingArchitectures.isEmpty();
+			case DargPackage.ARCHITECTURE__USED_RESOURCES:
+				return usedResources != null && !usedResources.isEmpty();
+			case DargPackage.ARCHITECTURE__USED_RESOURCE_GROUPS:
+				return usedResourceGroups != null && !usedResourceGroups.isEmpty();
+			case DargPackage.ARCHITECTURE__QUALITIES:
+				return qualities != null && !qualities.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", value: ");
+		result.append(value);
+		result.append(')');
+		return result.toString();
+	}
+
+} //ArchitectureImpl

@@ -63,17 +63,14 @@ public class JavaExecutor implements IScriptExecutor {
 			try {
 				clazz = Class.forName(objectClassName, true, currentClassLoader);
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 			try {
 				instance = clazz.newInstance();
 			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -87,29 +84,6 @@ public class JavaExecutor implements IScriptExecutor {
 		
 		// Load models into Document list for script methods
 		List<Document> models = new ArrayList<Document>();
-		/*
-		File modelsFolder = new File(modelsFolderPath);
-		
-		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = null;
-		
-		try {
-		    builder = builderFactory.newDocumentBuilder();
-		} catch (ParserConfigurationException e) {
-		    e.printStackTrace();  
-		}
-		
-		for(File model: modelsFolder.listFiles()) {
-			
-			try {
-				models.add(builder.parse(model));
-			} catch (SAXException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		*/
 		
 		
 		// Check for appropriate method and execute it (TODO: Exact check for name)
@@ -134,13 +108,10 @@ public class JavaExecutor implements IScriptExecutor {
 						returnObject = scriptMethod.invoke(instance);
 					}
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -170,7 +141,6 @@ public class JavaExecutor implements IScriptExecutor {
 		try {
 			binFolderPath = file.getProject().getLocationURI().toURL().getPath() + "/bin/";
 		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -179,7 +149,6 @@ public class JavaExecutor implements IScriptExecutor {
 		try {
 			currentClassLoader = URLClassLoader.newInstance(new URL[] {(new File(binFolderPath)).toURI().toURL()}, this.getClass().getClassLoader());
 		} catch (MalformedURLException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		
@@ -195,7 +164,6 @@ public class JavaExecutor implements IScriptExecutor {
 			exportedMethodsFilePath = "" + file.getProject().getLocationURI().toURL().getPath() + "/.apt_generated";
 			
 		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

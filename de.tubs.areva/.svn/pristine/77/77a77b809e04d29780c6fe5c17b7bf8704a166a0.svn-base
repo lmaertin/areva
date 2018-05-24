@@ -1,0 +1,117 @@
+package de.tubs.areva.ui.wizard;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.jface.wizard.WizardPage;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DirectoryDialog;
+import org.eclipse.swt.widgets.Label;
+
+import de.tubs.areva.ui.dialog.ResourceFileSelectionDialog;
+
+public class CreateDARGWizardPageThree extends WizardPage {
+
+	private Composite container;
+	
+	private CreateDARGWizard wizard = null;
+	private IFile initialDarg;
+	
+	public String outputDirectory = "";
+	
+	public CreateDARGWizardPageThree(IFile file) {
+		super("Choose output directory");
+		setTitle("Choose output directory");
+		setDescription("Choose an output directory for generated DARGs and QADAGs.");
+		this.initialDarg = file;
+	}
+	
+	public CreateDARGWizardPageThree() {
+		super("Choose output directory");
+		setTitle("Choose output directory");
+		setDescription("Choose an output directory for generated DARGs and QADAGs.");
+	}
+	
+	@Override
+	public void createControl(Composite parent) {
+		container = new Composite(parent, SWT.NONE);
+		GridLayout layout = new GridLayout();
+		container.setLayout(layout);
+		layout.numColumns = 2;
+		
+		Label label = new Label(container, SWT.NORMAL);
+	    label.setText("Output Directory:");
+	    
+	    GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true,
+		        false);
+	    
+	    Label labelResource = new Label(container, SWT.BORDER);
+	    labelResource.setText("");
+	    labelResource.setLayoutData(gridData);
+	    
+	    gridData = new GridData(SWT.END, SWT.CENTER, false,
+		        false);
+	    gridData.horizontalSpan = 2;
+	    
+	    Button button = new Button(container, SWT.PUSH);
+	    button.setLayoutData(gridData);
+	    /*
+	    button.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false,
+	        false));
+	        */
+	    button.setText("Browse workspace...");
+	    button.addSelectionListener(new SelectionAdapter() {
+	    	@Override
+		    public void widgetSelected(SelectionEvent e) {
+	    		DirectoryDialog dialog = new DirectoryDialog(container.getShell());
+		        dialog.setMessage("Choose output directory:");
+		        if(initialDarg != null) {
+			        outputDirectory = initialDarg.getFullPath().toString();
+					outputDirectory = outputDirectory.substring(1, outputDirectory.lastIndexOf('/') + 1);
+					String projectDirectory = ResourcesPlugin.getWorkspace().getRoot().getLocation().toFile().getPath().toString();
+			        dialog.setFilterPath(projectDirectory + "/" +  outputDirectory);
+		        } else {
+		        	String projectDirectory = ResourcesPlugin.getWorkspace().getRoot().getLocation().toFile().getPath().toString();
+			        dialog.setFilterPath(projectDirectory);
+		        }
+		        
+		        outputDirectory = dialog.open();
+		        
+		        System.out.println(outputDirectory);
+		        
+		        if(outputDirectory.equals("")) {
+		        	setPageComplete(false);
+		        } else {
+		        	labelResource.setText("" + outputDirectory);
+			        container.layout();
+			        setPageComplete(true);
+			        if(wizard != null) {
+				        String boxText = "" 
+					    		+ wizard.pageOneOne.resourceRelationsFile.toString().substring(18) + System.lineSeparator()
+					    		+ wizard.pageOneTwo.designdecisionsFile.toString().substring(18) + System.lineSeparator()
+					    		+ wizard.pageOneThree.systemFile.toString().substring(18) + System.lineSeparator()
+					    		+ wizard.pageTwo.candidatesFile.toString().substring(18) + System.lineSeparator()
+					    		+ wizard.pageTwoTwo.candidatesFile.toString().substring(18) + System.lineSeparator()
+					    		+ wizard.pageThree.outputDirectory;
+					    wizard.pageFive.textBox.setText(boxText);
+			        }
+		        }
+		      }
+	    });
+	    setControl(container);
+	    
+	    if(!outputDirectory.isEmpty()) {
+	    	setPageComplete(true);
+	    } else {
+	    	setPageComplete(false);
+	    }
+
+	}
+
+}

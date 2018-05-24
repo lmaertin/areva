@@ -1,0 +1,665 @@
+package de.tubs.areva.command;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.gef4.graph.Edge;
+import org.eclipse.gef4.graph.Graph;
+import org.eclipse.gef4.layout.algorithms.SpringLayoutAlgorithm;
+import org.eclipse.gef4.zest.fx.ZestProperties;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.HandlerUtil;
+import org.javatuples.Triplet;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import de.tubs.areva.emf.model.darg.ARG;
+import de.tubs.areva.emf.model.darg.Architecture;
+import de.tubs.areva.emf.model.opmode.OperatingModeSelection;
+import de.tubs.areva.emf.model.qadag.Node;
+import de.tubs.areva.resourcerelations.Resource;
+import de.tubs.areva.resourcerelations.ResourceOptions;
+import de.tubs.areva.ui.view.DARGZestView;
+import de.tubs.areva.util.ResourceHelper;
+import de.tubs.areva.util.ZestViewCounter;
+import de.tubs.areva.util.emf.ResourceManager;
+
+public class ProcessResourceFailureDetailed extends AbstractHandler implements IHandler {
+
+	protected static final String ID = ZestProperties.CSS_ID__NE;
+	protected static final String LABEL = ZestProperties.LABEL__NE;
+
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		
+		ResourceSet operatingModeRS = new ResourceSetImpl();
+		
+		org.eclipse.emf.ecore.resource.Resource selectedOpMode = null;
+		IFile file = null;
+		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event)
+                .getActivePage().getSelection();
+        if (selection != null & selection instanceof IStructuredSelection) {
+            IStructuredSelection strucSelection = (IStructuredSelection) selection;
+            for (@SuppressWarnings("unchecked")
+			Iterator<Object> iterator = strucSelection.iterator(); iterator.hasNext();) {
+            	file = (IFile)iterator.next();
+            	
+            	selectedOpMode = operatingModeRS.getResource(org.eclipse.emf.common.util.URI.createURI(file.getLocationURI().toString()), true);
+                System.out.println("" + file.getLocationURI());
+                
+                break;
+            }
+        }
+        
+        if(selectedOpMode == null) {
+        	System.out.println("ERROR: No selection found");
+        }
+		
+        OperatingModeSelection opModeSelection = (OperatingModeSelection)selectedOpMode.getContents().get(0);
+        
+        ARG arg = (ARG) opModeSelection.getStartArchitecture().eContainer();
+		
+		// process arg
+		
+		List<org.javatuples.Triplet<Architecture, List<Architecture>, String>> processedPath = new ArrayList<org.javatuples.Triplet<Architecture, List<Architecture>, String>>();
+		processFaultyResources(arg, opModeSelection.getFailingResources(), opModeSelection.getStartArchitecture(), processedPath, selectedOpMode);
+		
+		ResourceManager.saveResource(arg.eResource());
+		
+		
+		// generate zest tree
+		
+		Graph dargZestTree = generateTreeFromModel(arg, processedPath);
+		
+		DARGZestView view = null;
+		
+		try {
+			view = (DARGZestView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("Mittwochsqadag.dargzestview", ZestViewCounter.get(), IWorkbenchPage.VIEW_ACTIVATE);
+			int index = file.getLocationURI().toString().lastIndexOf('/');
+			String fileName = file.getLocationURI().toString().substring(index + 1) + " (full)";
+			view.changeTitle(fileName);
+			
+		} catch (PartInitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(view != null) {
+			view.setGraph(dargZestTree);
+		}
+		
+		for(IProject project: ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
+			
+			try {
+				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+			} catch (CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return null;
+	}
+	
+
+	private void processFaultyResources(ARG dargFile, List<Resource> faultyResources, Architecture startingArchitecture, List<org.javatuples.Triplet<Architecture, List<Architecture>, String>> processedPath, org.eclipse.emf.ecore.resource.Resource selectedOpMode) {
+	
+		String timeStamp = new SimpleDateFormat("dd-MM_HH-mm-ss").format(new Date());
+		
+		
+		String outputDirectory = selectedOpMode.getURI().toFileString();
+		outputDirectory = outputDirectory.substring(0, outputDirectory.lastIndexOf('\\') + 1) + timeStamp + '\\';
+		
+		List<Resource> faultyResourcesOrder = new ArrayList<Resource>();
+		
+		Path filePath = Paths.get(outputDirectory);
+
+	    // make sure the directories exist
+	    try {
+			Files.createDirectories(filePath);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		int nodeCount = ProcessResourceFailure.getNodeCount(dargFile);
+		int edgeCount = ProcessResourceFailure.getEdgeCount(dargFile);
+		
+		Document dom;
+
+	    // instance of a DocumentBuilderFactory
+	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	    
+	    // use factory to get an instance of document builder
+	    DocumentBuilder db = null;
+		try {
+			db = dbf.newDocumentBuilder();
+		} catch (ParserConfigurationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    // create instance of DOM
+	    dom = db.newDocument();
+	    Element rootEle = dom.createElement("results");
+	    dom.appendChild(rootEle);
+	    
+	    Element pathEle = dom.createElement("path");
+		rootEle.appendChild(pathEle);
+	    
+		// QADAG
+		Element qadagEle = dom.createElement("mode");
+		rootEle.appendChild(qadagEle);
+		
+		Attr attr = dom.createAttribute("name");
+		attr.setValue("" + dargFile.getQadag().getName());
+		qadagEle.setAttributeNode(attr);
+		
+		for(Node qadagNode: dargFile.getQadag().getRoot().getNodes()) {
+			
+			Element qadagNodeEle = dom.createElement("qa");
+			qadagEle.appendChild(qadagNodeEle);
+			qadagNodeEle.appendChild(dom.createTextNode("" + qadagNode.getName()));
+			
+			attr = dom.createAttribute("weigth");
+			attr.setValue("" + qadagNode.getWeight());
+			qadagNodeEle.setAttributeNode(attr);
+			
+			attr = dom.createAttribute("min");
+			attr.setValue("" + qadagNode.getLowerLimit());
+			qadagNodeEle.setAttributeNode(attr);
+		}
+		
+		// domain density
+		String structuralDomainDensityOutput = ProcessResourceFailure.getStructuralDomainDensityCSV(dargFile);
+		String qualityDomainDensityOutput = ProcessResourceFailure.getQualityDomainDensityCSV(dargFile);
+		String architecturesOutput = ProcessResourceFailure.getArchitecturesCSV(dargFile);
+		String architectureQualityOutput = ProcessResourceFailure.getArchitectureQualitiesCSV(dargFile);
+		String architectureRawQualityOutput = ProcessResourceFailure.getRawArchitectureQualitiesCSV(dargFile);
+		String domainResourcesOutput = ProcessResourceFailure.getDomainResourcesCSV(dargFile);
+		
+		try {
+		    Files.write(Paths.get(outputDirectory + "domaindensity_structural.csv"), structuralDomainDensityOutput.getBytes(StandardCharsets.UTF_8),
+		            StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+		try {
+		    Files.write(Paths.get(outputDirectory + "domaindensity_quality.csv"), qualityDomainDensityOutput.getBytes(StandardCharsets.UTF_8),
+		            StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+		try {
+		    Files.write(Paths.get(outputDirectory + "domain_absolutes.csv"), architecturesOutput.getBytes(StandardCharsets.UTF_8),
+		            StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+		try {
+		    Files.write(Paths.get(outputDirectory + "domain_individual_qualities.csv"), architectureQualityOutput.getBytes(StandardCharsets.UTF_8),
+		            StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+		try {
+		    Files.write(Paths.get(outputDirectory + "domain_individual_qualities_raw.csv"), architectureRawQualityOutput.getBytes(StandardCharsets.UTF_8),
+		            StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+		try {
+		    Files.write(Paths.get(outputDirectory + "domain_resources.csv"), domainResourcesOutput.getBytes(StandardCharsets.UTF_8),
+		            StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+		// efficiency
+		int pathNodes = 1;
+		int qualityComparisons = 0;
+		int comparisons = 0;
+		int unguidedComparisons = 0;
+		int totalCosts = 0;
+		
+		Architecture start = startingArchitecture;
+		List<Resource> activeResources = new ArrayList<Resource>();
+		List<Resource> allResources = new ArrayList<Resource>();
+		
+		for(Architecture architecture: dargFile.getArchitectures()) {
+			
+			for(ResourceOptions option: architecture.getBoundResourceOptions()) {
+				ProcessResourceFailure.getAllResources(option, activeResources);
+			}
+			
+			architecture.setHidden(true);
+		}
+		
+		for(Architecture architecture: dargFile.getArchitectures()) {
+			
+			for(ResourceOptions option: architecture.getBoundResourceOptions()) {
+				ProcessResourceFailure.getAllResources(option, allResources);
+			}
+		}
+		
+		ProcessResourceFailure.setupGeneralNumbers(dom, rootEle, allResources, nodeCount, edgeCount);
+		
+		Architecture current = start;
+		Architecture oldCurrent = null;
+		int faultyResourceCount = 0;
+		
+		for(Resource faultyResource: faultyResources) {
+			
+			int addedCosts = 0;
+			faultyResourceCount++;
+			faultyResourcesOrder.add(faultyResource);
+			if(current == null) {
+				if(oldCurrent != null) {
+					oldCurrent.setMarked(-1f);
+					//processedPath.add(new org.javatuples.Triplet<Architecture, Architecture, String>(oldCurrent, oldCurrent, "-" + faulty));
+					
+				}
+				continue;
+			}
+			
+			Element segmentsEle = dom.createElement("segments");
+			pathEle.appendChild(segmentsEle);
+			
+			current.setHidden(false);
+			
+			Architecture nextNode = null;
+			if(faultyResource != null) {
+				System.out.println("Processing fault: " + faultyResource.getName());
+			} else {
+				System.out.println("Resource not found!");
+			}
+			
+			activeResources = ResourceHelper.minus(allResources, faultyResourcesOrder);
+			
+			boolean conditionsMet = true;
+			
+			for(ResourceOptions options: current.getBoundResourceOptions()) {
+				conditionsMet = conditionsMet && ProcessResourceFailure.conditionsMet(options, activeResources);
+			}
+			
+			List<Architecture> qualityComparedArchitectures = new ArrayList<Architecture>();
+			List<Architecture> unguidedComparedArchitectures = new ArrayList<Architecture>();
+			List<Architecture> comparedArchitectures = new ArrayList<Architecture>();
+			Architecture target = null;
+			
+			boolean jumped = false;
+			
+			if(conditionsMet) {
+				List<Architecture> archList = new ArrayList<>();
+				archList.add(current);
+				processedPath.add(new org.javatuples.Triplet<Architecture, List<Architecture>, String>(current, archList, "-" + faultyResource.getName()));
+				ProcessResourceFailure.addGeneralNumbers(dom, segmentsEle, faultyResource, faultyResourcesOrder, allResources, activeResources, faultyResourceCount, current, true, pathNodes, qualityComparisons, qualityComparedArchitectures, unguidedComparisons, unguidedComparedArchitectures, comparisons, comparedArchitectures, current, totalCosts, true);
+				jumped = false;
+			} else {
+				
+				List<Architecture> archList = new ArrayList<Architecture>();
+				
+				List<Architecture> relatedArchitectures = new ArrayList<Architecture>(current.getRelatedArchitectures());
+				Collections.sort(relatedArchitectures, new Comparator<Architecture>() {
+				    @Override
+				    public int compare(Architecture o1, Architecture o2) {
+				    	if(Double.isNaN(o1.getQuality()) && Double.isNaN(o2.getQuality()) ) {
+				    		return 0;
+				    	}
+				    	if(Double.isNaN(o1.getQuality()) && !Double.isNaN(o2.getQuality()) ) {
+				    		return -1;
+				    	}
+				    	if(!Double.isNaN(o1.getQuality()) && Double.isNaN(o2.getQuality()) ) {
+				    		return 1;
+				    	}
+				    	if(o1.getQuality() < o2.getQuality()) {
+				    		return 1;
+				    	} 
+				    	if(o1.getQuality() > o2.getQuality()) {
+				    		return -1;
+				    	} 
+				    	else {
+				    		return 0;
+				    	}
+				    }
+				});
+				
+				for(Architecture following: relatedArchitectures) {
+					
+					comparisons++;
+					
+					comparedArchitectures.add(following);
+					
+					conditionsMet = true;
+					
+					for(ResourceOptions options: following.getBoundResourceOptions()) {
+						conditionsMet = conditionsMet && ProcessResourceFailure.conditionsMet(options, activeResources);
+					}
+					
+					if(conditionsMet) {
+						
+						unguidedComparisons++;
+						
+						unguidedComparedArchitectures.add(following);
+						
+						if(!Double.isNaN(following.getQuality())) {
+						
+							qualityComparedArchitectures.add(following);
+							
+							qualityComparisons++;
+							
+							archList.add(following);
+							following.setMarked(1f);
+							following.setHidden(false);
+							
+							if(nextNode == null) {
+								nextNode = following;
+							} else {
+								if(nextNode.getQuality() < following.getQuality()) {
+									nextNode = following;
+								}
+							}
+						}
+					}
+				}
+				
+				if(nextNode != null) {
+					processedPath.add(new org.javatuples.Triplet<Architecture, List<Architecture>, String>(current, archList, "-" + faultyResource.getName()));
+					pathNodes++;
+					
+					target = nextNode;
+				} else {
+					processedPath.add(new org.javatuples.Triplet<Architecture, List<Architecture>, String>(current, archList, "-" + faultyResource.getName()));
+					
+					target = null;
+				}
+				
+				if(target != null) {
+					addedCosts = ResourceHelper.GetArchitectureDifferences(current, target);
+					totalCosts += addedCosts;
+				}
+				
+				ProcessResourceFailure.addGeneralNumbers(dom, segmentsEle, faultyResource, faultyResourcesOrder, allResources, activeResources, faultyResourceCount, current, false, pathNodes, qualityComparisons, qualityComparedArchitectures, unguidedComparisons, unguidedComparedArchitectures, comparisons, comparedArchitectures, target, totalCosts, true);
+
+				oldCurrent = current;
+				current = nextNode;
+				
+				jumped = true;
+			}
+			
+			// alternative resource failures
+			for(Resource altFaultyResource: activeResources) {
+				
+				int altPathNodes = pathNodes;
+				int altQualityComparisons = qualityComparisons;
+				int altComparisons = comparisons;
+				int altUnguidedComparisons = unguidedComparisons;
+				int altTotalCosts = totalCosts - addedCosts;
+				
+				Architecture altCurrent = null;
+				
+				if(jumped) {
+					altCurrent = oldCurrent;
+				} else {
+					if(current == null) {
+						altCurrent = oldCurrent;
+					} else {
+						altCurrent = current;
+					}
+				}
+				
+				faultyResourcesOrder.remove(faultyResourceCount-1);
+				faultyResourcesOrder.add(altFaultyResource);
+				if(altCurrent == null) {
+					
+					continue;
+				}
+				
+				Architecture altNextNode = null;
+				if(altFaultyResource != null) {
+					System.out.println("Processing fault: " + faultyResource.getName());
+				} else {
+					System.out.println("Resource not found!");
+				}
+				
+				List<Resource> altActiveResources = ResourceHelper.minus(allResources, faultyResourcesOrder);
+				
+				boolean altConditionsMet = true;
+				
+				for(ResourceOptions options: altCurrent.getBoundResourceOptions()) {
+					altConditionsMet = altConditionsMet && ProcessResourceFailure.conditionsMet(options, altActiveResources);
+				}
+				
+				List<Architecture> altQualityComparedArchitectures = new ArrayList<Architecture>();
+				List<Architecture> altUnguidedComparedArchitectures = new ArrayList<Architecture>();
+				List<Architecture> altComparedArchitectures = new ArrayList<Architecture>();
+				Architecture altTarget = null;
+				
+				if(altConditionsMet) {
+					//processedPath.add(new org.javatuples.Triplet<Architecture, Architecture, String>(current, current, "-" + faultyResource.getName()));
+					ProcessResourceFailure.addGeneralNumbers(dom, segmentsEle, altFaultyResource, faultyResourcesOrder, allResources, altActiveResources, faultyResourceCount, altCurrent, true, altPathNodes, altQualityComparisons, altQualityComparedArchitectures, altUnguidedComparisons, altUnguidedComparedArchitectures, altComparisons, altComparedArchitectures, altCurrent, altTotalCosts, false);
+				} else {
+				
+					for(Architecture following: altCurrent.getRelatedArchitectures()) {
+						
+						altComparisons++;
+						
+						altComparedArchitectures.add(following);
+						
+						altConditionsMet = true;
+						
+						for(ResourceOptions options: following.getBoundResourceOptions()) {
+							altConditionsMet = altConditionsMet && ProcessResourceFailure.conditionsMet(options, altActiveResources);
+						}
+						
+						if(altConditionsMet) {
+							
+							altUnguidedComparisons++;
+							
+							altUnguidedComparedArchitectures.add(following);
+							
+							if(!Double.isNaN(following.getQuality())) {
+							
+								altQualityComparedArchitectures.add(following);
+								
+								altQualityComparisons++;
+								
+								if(altNextNode == null) {
+									altNextNode = following;
+								} else {
+									if(altNextNode.getQuality() < following.getQuality()) {
+										altNextNode = following;
+									}
+								}
+							}
+						}
+					}
+					
+					if(altNextNode != null) {
+						altTarget = nextNode;
+					} else {
+						altTarget = null;
+					}
+					
+					if(altTarget != null) {
+						altTotalCosts += ResourceHelper.GetArchitectureDifferences(altCurrent, altTarget);
+					}
+					
+					
+					ProcessResourceFailure.addGeneralNumbers(dom, segmentsEle, altFaultyResource, faultyResourcesOrder, allResources, altActiveResources, faultyResourceCount, altCurrent, false, altPathNodes, altQualityComparisons, altQualityComparedArchitectures, altUnguidedComparisons, altUnguidedComparedArchitectures, altComparisons, altComparedArchitectures, altTarget, altTotalCosts, false);
+				}
+			}
+			
+			// cleanup for next iteration
+			faultyResourcesOrder.remove(faultyResourceCount-1);
+			faultyResourcesOrder.add(faultyResource);
+		}
+		
+		try {
+            Transformer tr = TransformerFactory.newInstance().newTransformer();
+            tr.setOutputProperty(OutputKeys.INDENT, "yes");
+            tr.setOutputProperty(OutputKeys.METHOD, "xml");
+            tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+
+            // send DOM to file
+            tr.transform(new DOMSource(dom), 
+                                 new StreamResult(new FileOutputStream(outputDirectory + "result.xml")));
+
+        } catch (TransformerException te) {
+            System.out.println(te.getMessage());
+        } catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
+        }
+		
+		if(current != null) {
+			current.setHidden(false);
+		}
+	}
+	
+	private Graph generateTreeFromModel(ARG archNodes, List<Triplet<Architecture, List<Architecture>, String>> processedPath) {
+		List<org.eclipse.gef4.graph.Node> nodes = new ArrayList<>();
+		List<org.eclipse.gef4.graph.Edge> edges = new ArrayList<>();
+		HashMap<Architecture, org.eclipse.gef4.graph.Node> archToNode = new HashMap<>();
+		
+		// draw nodes
+		for(Architecture architecture: archNodes.getArchitectures()) {
+			
+			if(!architecture.isHidden()) {
+				
+				org.eclipse.gef4.graph.Node newNode = null;
+				
+				if(architecture.getMarked() == 0f) {
+					if(architecture.isOptimal()) {
+						newNode = ProcessResourceFailure.n(architecture, ZestProperties.LABEL__NE, "Optimal Architecture " + architecture.getId() + ": " + architecture.getQuality(), ZestProperties.TOOLTIP__N, "Architecture " + architecture.getId(), ZestProperties.SHAPE_CSS_STYLE__N, "-fx-border-color: green; -fx-border-width: 200;", ZestProperties.LABEL_CSS_STYLE__NE, "-fx-font-color: green;");
+						ZestProperties.setShapeCssStyle(newNode, "-fx-background-color: green; -fx-border-width: 200; -fx-fill: green;");
+						ZestProperties.setLabelCssStyle(newNode, "-fx-font-color: green;");
+					} else {
+						newNode = ProcessResourceFailure.n(architecture, ZestProperties.LABEL__NE, "Architecture " + architecture.getId() + ": " + architecture.getQuality(), ZestProperties.TOOLTIP__N, "Architecture " + architecture.getId());
+					}
+				} else if(architecture.getMarked() == 1f) {
+					if(architecture.isOptimal()) {
+						newNode = ProcessResourceFailure.n(architecture, ZestProperties.LABEL__NE, "Inferior Optimal Architecture " + architecture.getId() + ": " + architecture.getQuality(), ZestProperties.TOOLTIP__N, "Inferior Optimal Architecture " + architecture.getId(), ZestProperties.SHAPE_CSS_STYLE__N, "-fx-border-color: darkgreen; -fx-border-width: 200;", ZestProperties.LABEL_CSS_STYLE__NE, "-fx-font-color: darkgreen;");
+						ZestProperties.setShapeCssStyle(newNode, "-fx-background-color: darkgreen; -fx-border-width: 200; -fx-fill: darkgreen;");
+						ZestProperties.setLabelCssStyle(newNode, "-fx-font-color: darkgreen;");
+					} else {
+						newNode = ProcessResourceFailure.n(architecture, ZestProperties.LABEL__NE, "Inferior Architecture " + architecture.getId() + ": " + architecture.getQuality(), ZestProperties.TOOLTIP__N, "Inferior Architecture " + architecture.getId(), ZestProperties.SHAPE_CSS_STYLE__N, "-fx-border-color: grey; -fx-border-width: 200;", ZestProperties.LABEL_CSS_STYLE__NE, "-fx-font-color: grey;");
+						ZestProperties.setShapeCssStyle(newNode, "-fx-background-color: grey; -fx-border-width: 200; -fx-fill: grey;");
+						ZestProperties.setLabelCssStyle(newNode, "-fx-font-color: grey;");
+					}
+				} else {
+					newNode = ProcessResourceFailure.n(architecture, ZestProperties.LABEL__NE, "Failed Architecture " + architecture.getId() + ": " + architecture.getQuality(), ZestProperties.TOOLTIP__N, "Architecture " + architecture.getId(), ZestProperties.SHAPE_CSS_STYLE__N, "-fx-border-color: red; -fx-border-width: 200;", ZestProperties.LABEL_CSS_STYLE__NE, "-fx-font-color: red;");
+					ZestProperties.setShapeCssStyle(newNode, "-fx-background-color: red; -fx-border-width: 200; -fx-fill: red;");
+					ZestProperties.setLabelCssStyle(newNode, "-fx-font-color: red;");
+				}
+				
+				Graph qadag = ProcessResourceFailure.createSimpleQadagGraphFromModel(architecture.getQadag());
+				newNode.setNestedGraph(qadag);
+				
+				nodes.add(newNode);
+				
+				archToNode.put(architecture, newNode);
+			}
+		}
+		
+		//draw edges
+		for(Architecture architecture: archNodes.getArchitectures()) {
+			
+			if(!architecture.isHidden()) {
+				
+				for(Architecture hiddenArchitecture: architecture.getRelatedArchitectures()) {
+					
+					if(hiddenArchitecture.isHidden()) {
+						
+						org.eclipse.gef4.graph.Node hiddenNode = null;
+						
+						if(!archToNode.containsKey(hiddenArchitecture)) {
+							
+							Graph hiddenQadag = ProcessResourceFailure.createSimpleQadagGraphFromModel(hiddenArchitecture.getQadag());
+							
+							if(hiddenArchitecture.isOptimal()) {
+								hiddenNode = ProcessResourceFailure.n(hiddenArchitecture, ZestProperties.LABEL__NE, "Optimal Architecture " + hiddenArchitecture.getId() + ": " + hiddenArchitecture.getQuality(), ZestProperties.TOOLTIP__N, "Architecture " + hiddenArchitecture.getId(), ZestProperties.SHAPE_CSS_STYLE__N, "-fx-border-color: green; -fx-border-width: 200;", ZestProperties.LABEL_CSS_STYLE__NE, "-fx-font-color: green;");
+								ZestProperties.setShapeCssStyle(hiddenNode, "-fx-background-color: green; -fx-border-width: 200; -fx-fill: green;");
+								ZestProperties.setLabelCssStyle(hiddenNode, "-fx-font-color: green;");
+							} else {
+								hiddenNode = ProcessResourceFailure.n(hiddenArchitecture, ZestProperties.LABEL__NE, "Architecture " + hiddenArchitecture.getId() + ": " + hiddenArchitecture.getQuality(), ZestProperties.TOOLTIP__N, "Architecture " + hiddenArchitecture.getId());
+							}
+							
+							hiddenNode.setNestedGraph(hiddenQadag);
+							
+							archToNode.put(hiddenArchitecture, hiddenNode);
+							
+							//nodes.add(hiddenNode);
+							
+							ZestProperties.setInvisible(hiddenNode, true);
+						
+						}
+					}
+				}
+			}
+		}
+		String output = "Path: \n";
+		for(org.javatuples.Triplet<Architecture, List<Architecture>, String> step: processedPath) {
+			for(Architecture other: step.getValue1()) {
+				Edge edge = ProcessResourceFailure.e(archToNode.get(step.getValue0()), archToNode.get(other), "" + step.getValue2(), ZestProperties.LABEL__NE, "" + step.getValue2(), ZestProperties.TARGET_DECORATION__E, new javafx.scene.shape.Polygon(0, 0, 10, 3, 10, -3),
+					ZestProperties.TARGET_DECORATION_CSS_STYLE__E, "-fx-fill: green;");
+			
+				output += step.getValue0().getId() + " ->(-" + step.getValue2() + ") " + other.getId() + "\n";
+				edges.add(edge);
+			}
+		}
+		
+		System.out.println(output);
+		
+		//JOptionPane.showConfirmDialog(null, output, "alert", JOptionPane.OK_CANCEL_OPTION);
+		
+		HashMap<String, Object> attrs = new HashMap<>();
+		attrs.put(ZestProperties.LAYOUT_ALGORITHM__G, new SpringLayoutAlgorithm());
+		
+		return new Graph(attrs, nodes, edges);
+	}
+
+}

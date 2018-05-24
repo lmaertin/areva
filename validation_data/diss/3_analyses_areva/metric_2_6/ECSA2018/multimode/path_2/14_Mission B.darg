@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<de.tubs.areva.emf.model.darg:ARG xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:de.tubs.areva.emf.model.darg="http://com/areva/darg/" name="Mission B" threshold="8">
+  <qadag href="../../../../mission_b.qadag#/"/>
+</de.tubs.areva.emf.model.darg:ARG>

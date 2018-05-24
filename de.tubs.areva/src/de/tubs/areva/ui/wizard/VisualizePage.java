@@ -91,7 +91,7 @@ public class VisualizePage extends WizardPage {
 
 			@Override
 			public void modifyText(ModifyEvent e) {
-				// TODO Auto-generated method stub
+				
 				architectureSelection = architectureCombo.getText();
 			}});
 		combo.select(0);
@@ -134,7 +134,7 @@ public class VisualizePage extends WizardPage {
 
 				@Override
 				public void modifyText(ModifyEvent e) {
-					// TODO Auto-generated method stub
+					
 					pathSelection = new ArrayList<String>();
 					String pathSelectionString = "";
 					for(Combo combo: pathCombos) {
@@ -153,7 +153,7 @@ public class VisualizePage extends WizardPage {
 		pathSelectionText.addModifyListener(new ModifyListener(){
 			@Override
 			public void modifyText(ModifyEvent e) {
-				// TODO Auto-generated method stub
+				
 				pathSelection = new ArrayList<String>();
 				String[] resources = pathSelectionText.getText().split(";");
 				for(String resource: resources) {

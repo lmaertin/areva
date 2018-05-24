@@ -30,7 +30,7 @@ public abstract class AbstractPerformanceAnalysisResult implements
 	 * @param model
 	 */
 	public static void solveDependencies(PCMInstance model) {
-		// XXX: Dependency solver replaces IntPMFs and DoublePMFs by
+		// Dependency solver replaces IntPMFs and DoublePMFs by
 		// DoublePDFs.
 		
 		model.resetComputedContexts();

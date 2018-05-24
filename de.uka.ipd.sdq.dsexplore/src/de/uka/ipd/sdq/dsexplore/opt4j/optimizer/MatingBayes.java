@@ -49,7 +49,7 @@ public class MatingBayes extends MatingCrossoverMutate{
 	/*
 	// Testing here ...
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		int[][] array = new int[3][9];
 		System.out.println(array.length);
 		
@@ -126,7 +126,7 @@ public class MatingBayes extends MatingCrossoverMutate{
 
 
 	private Collection<Individual> mate(List<Individual> parentslist) {
-		// TODO Auto-generated method stub
+		
 		// Convert parentslist to a list of Genotypes
 		List<Genotype> parentgenotypelist = new ArrayList<Genotype>();
 		for(int i = 0 ; i < parentslist.size() ; i++){

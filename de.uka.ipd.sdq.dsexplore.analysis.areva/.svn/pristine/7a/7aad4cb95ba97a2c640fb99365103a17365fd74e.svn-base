@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.4
+Created-By: 1.7.0_45-b18 (Oracle Corporation)
+Require-Bundle: de.uka.ipd.sdq.dsexplore;bundle-version="1.4.0",
+ org.eclipse.core.runtime;bundle-version="3.5.0",
+ org.eclipse.debug.core;bundle-version="3.5.0",
+ de.uka.ipd.sdq.workflow;bundle-version="1.1.0",
+ de.uka.ipd.sdq.workflow.mdsd;bundle-version="1.0.0",
+ de.uka.ipd.sdq.pcm.cost;bundle-version="1.0.0",
+ de.uka.ipd.sdq.workflow.launchconfig;bundle-version="1.1.0",
+ org.palladiosimulator.pcm;bundle-version="4.0.0",
+ org.palladiosimulator.analyzer.workflow;bundle-version="1.0.0",
+ org.palladiosimulator.analyzer.resultdecorator;bundle-version="1.0.0",
+ org.palladiosimulator.solver;bundle-version="3.0.0",
+ org.eclipse.debug.ui;bundle-version="3.5.1",
+ org.eclipse.swt;bundle-version="3.5.1",
+ org.opt4j;bundle-version="1.0.0",
+ de.uka.ipd.sdq.dsexplore.qml,
+ de.uka.ipd.sdq.dsexplore.qml.handling;bundle-version="2.0.0",
+ de.tubs.areva.resourcerelations;bundle-version="0.1.0",
+ de.tubs.areva;bundle-version="0.1.0",
+ de.tubs.areva.edit;bundle-version="1.0.0",
+ de.tubs.areva.editor;bundle-version="1.0.0",
+ de.tubs.areva.resourcerelations.edit;bundle-version="1.0.0",
+ de.tubs.areva.resourcerelations.editor;bundle-version="1.0.0",
+ org.junit
+Bundle-Vendor: sdq.ipd.uka.de
+Bundle-Version: 1.0.0
+Bundle-Name: Areva Analysis Plugin
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: de.uka.ipd.sdq.dsexplore.analysis.areva;singleton:=true
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+

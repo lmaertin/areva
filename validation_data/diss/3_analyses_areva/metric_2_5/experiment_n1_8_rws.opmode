@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<de.tubs.areva.emf.model.opmode:OperatingModeSelection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:de.tubs.areva.emf.model.opmode="http://com/areva/opmode/" name="Experiment N1 8 RWS">
+  <startArchitecture href="../experiment_n1/minimized_8.darg#//@architectures.30"/>
+  <failingResources href="../../aocs.resourcerelations#//@resources.30"/>
+  <failingResources href="../../aocs.resourcerelations#//@resources.31"/>
+</de.tubs.areva.emf.model.opmode:OperatingModeSelection>

@@ -43,18 +43,6 @@ public class PCMTestJob implements IBlackboardInteractingJob<MDSDBlackboard> {
 		{
 			BasicComponent component = (BasicComponent) assembly.getEncapsulatedComponent__AssemblyContext();
 			System.out.println("Component found: " + component.getEntityName());
-			/*
-			StereotypeApplication application = StereotypeAPI.getStereotypeApplication(
-					component, 
-					StereotypeAPI.getAppliedStereotypes(component).get(0)
-					);
-			*/
-			/*
-			for(Stereotype stereotype: StereotypeAPI.getAppliedStereotypes(component)) {
-				//System.out.println("Applied Stereotype: " + stereotype.getName());
-				stereotype.getTaggedValue(
-			}
-			*/
 			
 			EList<String> strings = StereotypeAPI.getTaggedValue(component, "keyValues", "BasicComponentTag");
 			
@@ -68,7 +56,6 @@ public class PCMTestJob implements IBlackboardInteractingJob<MDSDBlackboard> {
 
 	@Override
 	public void cleanup(IProgressMonitor monitor) throws CleanupFailedException {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -53,7 +53,7 @@ public class BinaryBayesOperator implements BayesianCrossover<DesignDecisionGeno
 	@Override
 	public Pair<DesignDecisionGenotype> crossover(DesignDecisionGenotype arg0,
 			DesignDecisionGenotype arg1) {
-		// TODO Auto-generated method stub
+		
 		
 		return null;
 	}
@@ -63,7 +63,7 @@ public class BinaryBayesOperator implements BayesianCrossover<DesignDecisionGeno
 	@Override
 	public List<DesignDecisionGenotype> crossover(List<DesignDecisionGenotype> parents) {
 		logger.info("BinaryBayesOperator.crossover: Entering ...");
-		// TODO Auto-generated method stub
+		
 		Adapter adapter = new Adapter();
 		// Some trial method
 		DesignDecisionGenotype DDGTemplate = parents.get(0);

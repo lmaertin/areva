@@ -38,29 +38,22 @@ public class IdealJumpArchitectures {
 		return intersectedArchitectures;
 	}
 	
-	public static double getArchitectureJumpValue(ARG domain, Architecture source, Architecture target, double distanceWeight, double qualityWeight, double centralityWeight, double resourceWeight, Centrality centralityMethod) {		
+	public static double getArchitectureJumpValue(ARG domain, Architecture source, Architecture target, double distanceWeight, double qualityWeight, double centralityWeight, double resourceWeight, Centrality centralityMethod, int allResourcesCount, int highestCentrality) {		
 		ArchitectureGraph graph = ArchitectureGraph.createGraphFromDomain(domain);
 		DijkstraAlgorithm shortestPathAlg = new DijkstraAlgorithm(graph);
 		shortestPathAlg.execute(source);
 		double distanceValue = distanceWeight * shortestPathAlg.getPath(target).size();
-		double staticValue = getStaticArchitectureJumpValue(domain, target, qualityWeight, centralityWeight, resourceWeight, centralityMethod);
+		double staticValue = getStaticArchitectureJumpValue(domain, target, qualityWeight, centralityWeight, resourceWeight, centralityMethod, allResourcesCount, highestCentrality);
 		return distanceValue + staticValue;
 	}
 	
-	public static double getStaticArchitectureJumpValue(ARG domain, Architecture architecture, double qualityWeight, double centralityWeight, double resourceWeight, Centrality centralityMethod) {		
+	public static double getStaticArchitectureJumpValue(ARG domain, Architecture architecture, double qualityWeight, double centralityWeight, double resourceWeight, Centrality centralityMethod, int allResourcesCount, double highestCentrality) {		
+		
 		double qualityValue = qualityWeight * architecture.getQuality();
 		
-		double centralityValue;
+		double centralityValue = centralityWeight * (Numbers.getCentrality(domain, architecture, centralityMethod) / highestCentrality);
 		
-		if(centralityMethod == Centrality.DEGREE) {
-			centralityValue = centralityWeight * Numbers.getDegreeCentrality(architecture);
-		} else if(centralityMethod == Centrality.BETWEEN) {
-			centralityValue = centralityWeight * Numbers.getBetweenCentrality(domain, architecture);
-		} else {
-			centralityValue = centralityWeight * Numbers.getClosenessCentrality(domain, architecture);
-		}
-		
-		double resourceValue = resourceWeight * architecture.getBoundResources().size();
+		double resourceValue = resourceWeight * (architecture.getBoundResources().size() / allResourcesCount);
 		
 		return qualityValue + centralityValue + resourceValue;
 	}

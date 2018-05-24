@@ -22,13 +22,7 @@ public class AnalysisQualityAttributes {
 	 * @return a list of all considered {@code Dimension}s in PerOpteryx.
 	 */
 	public List<QualityAttribute> getAllQualityAttributes(){
-//		List<Dimension> dimensions = new ArrayList<Dimension>();
-//		QMLDimensionReader reader = new QMLDimensionReader();
-//		//The definitions are in .contracttype files 
-//		for(String dimensionDefinition : QMLConstantsContainer.QUALITY_ATTRIBUTE_DIMENSION_DEFINITION_PATHS) {
-//			dimensions.add(reader.getDimension(dimensionDefinition));
-//		}
-//		return dimensions;
+//		
 		List<QualityAttribute> attributes = new ArrayList<QualityAttribute>(5);
 		attributes.add(QualityAttribute.PERFORMANCE_QUALITY);
 		attributes.add(QualityAttribute.RELIABILITY_QUALITY);

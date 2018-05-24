@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.1" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.1" xmlns:system="http://palladiosimulator.org/PalladioComponentModel/System/5.1" id="_WeR84AYPEeSQWoRYn1rqHg" entityName="AOCS">
+  <assemblyContexts__ComposedStructure id="_2G37QAYPEeSQWoRYn1rqHg" entityName="Testing">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_4C14sAYPEeSQWoRYn1rqHg" entityName="AOCS">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_sq_n8AYVEeSQWoRYn1rqHg" entityName="Surveillance Monitor">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_ws8acAYVEeSQWoRYn1rqHg" entityName="EPC">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_xmt7EAYVEeSQWoRYn1rqHg" entityName="Mode Processor">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_dHJDEAYWEeSQWoRYn1rqHg" entityName="Assembly_CommandInterpreter &lt;CommandInterpreter>">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_qug3sAYWEeSQWoRYn1rqHg" entityName="House Keeper">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_HHVHYAYXEeSQWoRYn1rqHg" entityName="Estimator">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_LMQ8cAYXEeSQWoRYn1rqHg" entityName="Predictor">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_N8fBUAYXEeSQWoRYn1rqHg" entityName="Controller">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_ky6xEAYYEeSQWoRYn1rqHg" entityName="ONS">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_mqsLAAYYEeSQWoRYn1rqHg" entityName="MFS">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_w4H3EAYSEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_ngNdwAYYEeSQWoRYn1rqHg" entityName="ASC">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_yG_d8AYSEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_vdqcgAYYEeSQWoRYn1rqHg" entityName="CSS">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_C5P6MAYTEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_w-ZPcAYYEeSQWoRYn1rqHg" entityName="IMU">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_0iOCUNNsEea2uP5tK-XArQ" entityName="MCS">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_AAar4AYTEeSQWoRYn1rqHgf"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_04wT4NdaEeaqquGj6YfQKw" entityName="RW">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_2MxAgAYSEeSQWoRYn1rqHg"/>
+  </assemblyContexts__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:ProvidedDelegationConnector" id="_QtGxQP8_EeakgvmVKJAkIA" entityName="ProvDelegation Provided_IF_Telecommand -> Provided_aName_AOCS" outerProvidedRole_ProvidedDelegationConnector="_2yFZsP8-EeakgvmVKJAkIA" assemblyContext_ProvidedDelegationConnector="_4C14sAYPEeSQWoRYn1rqHg">
+    <innerProvidedRole_ProvidedDelegationConnector href="aocs.repository#_bYZJoAYTEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_n_4mIP89EeakgvmVKJAkIA" entityName="Connector Controller -> EPC" requiringAssemblyContext_AssemblyConnector="_N8fBUAYXEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_ws8acAYVEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_OP5XcAYVEeSQWoRYn1rqHg"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_OvL7gAYVEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_oQsxcAYWEeSQWoRYn1rqHg" entityName="Connector EPC -> AOCS" requiringAssemblyContext_AssemblyConnector="_ws8acAYVEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_4C14sAYPEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_bYZJoAYTEeSQWoRYn1rqHg"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_zs4BMAYTEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_oo7jIP89EeakgvmVKJAkIA" entityName="Connector Controller -> Mode Processor" requiringAssemblyContext_AssemblyConnector="_N8fBUAYXEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_xmt7EAYVEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_FqfgIEybEeSbR8VXyv2mGQ"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_FC2RUEybEeSbR8VXyv2mGQ"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_TqASIP89EeakgvmVKJAkIA" entityName="Connector Estimator -> MFS" requiringAssemblyContext_AssemblyConnector="_HHVHYAYXEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_mqsLAAYYEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_iqcJAAYVEeSQWoRYn1rqHg2"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_nGHDEAYVEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_S67RQAYXEeSQWoRYn1rqHg" entityName="Connector Predictor -> EPC" requiringAssemblyContext_AssemblyConnector="_LMQ8cAYXEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_ws8acAYVEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_NyY8EAYVEeSQWoRYn1rqHg"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_PQn0oAYVEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_z4TloP89EeakgvmVKJAkIA" entityName="Connector AOCS -> Assembly_CommandInterpreter &lt;CommandInterpreter>" requiringAssemblyContext_AssemblyConnector="_4C14sAYPEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_dHJDEAYWEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_7ceKIAYTEeSQWoRYn1rqHg"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_8W4j8AYTEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_yhyeoP89EeakgvmVKJAkIA" entityName="Connector AOCS -> Surveillance Monitor" requiringAssemblyContext_AssemblyConnector="_4C14sAYPEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_sq_n8AYVEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_30Mb4AYTEeSQWoRYn1rqHg"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_4oAecAYTEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_WwN1IP89EeakgvmVKJAkIA" entityName="Connector ASC -> Estimator" requiringAssemblyContext_AssemblyConnector="_ngNdwAYYEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_HHVHYAYXEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_norkoAYVEeSQWoRYn1rqHg"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_jRVJ4AYVEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_xG2xsP89EeakgvmVKJAkIA" entityName="Connector AOCS -> House Keeper" requiringAssemblyContext_AssemblyConnector="_4C14sAYPEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_qug3sAYWEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_-5zzsAYTEeSQWoRYn1rqHg"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_AQMX0AYUEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_vs-0sP89EeakgvmVKJAkIA" entityName="Connector AOCS -> Testing" requiringAssemblyContext_AssemblyConnector="_4C14sAYPEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_2G37QAYPEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_yECX8AYPEeSQWoRYn1rqHg"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_xUlUIAYTEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_RStqoP89EeakgvmVKJAkIA" entityName="Connector Estimator -> CSS" requiringAssemblyContext_AssemblyConnector="_HHVHYAYXEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_vdqcgAYYEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_jwekAAYVEeSQWoRYn1rqHg"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_oK9LQAYVEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_VwNJoP89EeakgvmVKJAkIA" entityName="Connector Estimator -> IMU" requiringAssemblyContext_AssemblyConnector="_HHVHYAYXEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_w-ZPcAYYEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_kdxu4AYVEeSQWoRYn1rqHg"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_osfLAAYVEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_Z1I0IP88EeakgvmVKJAkIA" entityName="Connector RW -> Controller" requiringAssemblyContext_AssemblyConnector="_04wT4NdaEeaqquGj6YfQKw" providingAssemblyContext_AssemblyConnector="_N8fBUAYXEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_SbZAIAYYEeSQWoRYn1rqHg4"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_QQUPsAYYEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_4X4FQNNsEea2uP5tK-XArQ" entityName="Connector Assembly_MCS control simple &lt;MCS control simple> -> Controller" requiringAssemblyContext_AssemblyConnector="_0iOCUNNsEea2uP5tK-XArQ" providingAssemblyContext_AssemblyConnector="_N8fBUAYXEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_TAyzQAYYEeSQWoRYn1rqHg"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_Qz76IAYYEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_PcnrsP89EeakgvmVKJAkIA" entityName="Connector Estimator -> EPC" requiringAssemblyContext_AssemblyConnector="_HHVHYAYXEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_ws8acAYVEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_NJ0gMAYVEeSQWoRYn1rqHg"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_P3BGQAYVEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_yCS_sAueEei02YnmFy3NtQ" entityName="Connector Estimator -> ONS" requiringAssemblyContext_AssemblyConnector="_HHVHYAYXEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_ky6xEAYYEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_iCf_QAYVEeSQWoRYn1rqHg3"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_mnaU4AYVEeSQWoRYn1rqHg"/>
+  </connectors__ComposedStructure>
+  <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_2yFZsP8-EeakgvmVKJAkIA" entityName="Provided_IF_Telecommand">
+    <providedInterface__OperationProvidedRole href="aocs.repository#_ZGNroAYTEeSQWoRYn1rqHg"/>
+  </providedRoles_InterfaceProvidingEntity>
+</system:System>

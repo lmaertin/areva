@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QMLDeclarations:QMLDeclarations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:QMLContract="http:///QMLContract.ecore" xmlns:QMLDeclarations="http:///QMLDeclarations.ecore" id="_FqNZYKCrEd-s9uTaURbrKA">
+  <qmlDeclarations xsi:type="QMLContract:SimpleQMLContract" id="_FqNZYaCrEd-s9uTaURbrKA" entityName="PCMStandardQMLContract">
+    <criteria xsi:type="QMLContract:Objective" id="_FqNZY6CrEd-s9uTaURbrKA">
+      <dimension href="Dimension_cost.qmlcontracttype#_r_iViqCrEd-s9uTaURbrKA"/>
+      <aspects xsi:type="QMLContract:Value" id="_FqNZZaCrEd-s9uTaURbrKA"/>
+    </criteria>
+    <criteria xsi:type="QMLContract:Objective" id="_FqNZZqCrEd-s9uTaURbrKA">
+      <dimension href="Dimension_responsetime.qmlcontracttype#_r_iVkKCrEd-s9uTaURbrKA"/>
+      <aspects xsi:type="QMLContract:Mean" id="_FqNZa6CrEd-s9uTaURbrKA"/>
+    </criteria>
+    <criteria xsi:type="QMLContract:Objective" id="_FqNZaaCrEd-s9uTaURbrKA">
+      <dimension href="Dimension_pofod.qmlcontracttype#_r_iVjaCrEd-s9uTaURbrKA"/>
+      <aspects xsi:type="QMLContract:Value" id="_FqNZaKCrEd-s9uTaURbrKA"/>
+    </criteria>
+    <criteria xsi:type="QMLContract:Objective" id="_dfgDcKzyEeagQaT_OlzOLM">
+      <dimension href="Dimension_torque.qmlcontracttype#_r_iViqCrEd-s9uTaURbrTorque"/>
+      <aspects xsi:type="QMLContract:Value" id="_gEr9BKzyEeagQaT_OlzOsg"/>
+    </criteria>
+    <criteria xsi:type="QMLContract:Objective" id="_uAmNcNdTEeaphfAIVUWBQQ">
+      <dimension href="Dimension_accuracy.qmlcontracttype#_r_iViqCrEd-s9uTaURbrLMaccuracy"/>
+      <aspects xsi:type="QMLContract:Value" id="_v8BYVNdTEeaphfAIVUWBQQ"/>
+    </criteria>
+    <criteria xsi:type="QMLContract:Objective" id="_xF_4INdTEeaphfAIVUWBQQ">
+      <dimension href="pathmap://PCM_MODELS/Dimension_initialcost.qmlcontracttype#_r_iViqCrEd-s9uTaURinicost"/>
+      <aspects xsi:type="QMLContract:Value" id="_yyUQBNdTEeaphfAIVUWBQQ"/>
+    </criteria>
+    <criteria xsi:type="QMLContract:Objective" id="_z4rbINdTEeaphfAIVUWBQQ">
+      <dimension href="Dimension_noise.qmlcontracttype#_r_iViqCrEd-s9uTaURbrLMnoise"/>
+      <aspects xsi:type="QMLContract:Value" id="_1V5ABNdTEeaphfAIVUWBQQ"/>
+    </criteria>
+    <criteria xsi:type="QMLContract:Objective" id="_2He1BddTEeaphfAIVUWBQQ">
+      <dimension href="Dimension_pointingtime.qmlcontracttype#_r_iViqCrEd-s9uTaURbrLMpointingtime"/>
+      <aspects xsi:type="QMLContract:Value" id="_3_dqVNdTEeaphfAIVUWBQQ"/>
+    </criteria>
+    <criteria xsi:type="QMLContract:Objective" id="_4o4awNdTEeaphfAIVUWBQQ">
+      <dimension href="Dimension_powerconsumption.qmlcontracttype#_r_iViqCrEd-s9uTaURbrLMpowercons"/>
+      <aspects xsi:type="QMLContract:Value" id="_6HWj5NdTEeaphfAIVUWBQQ"/>
+    </criteria>
+    <criteria xsi:type="QMLContract:Objective" id="_6uI3FddTEeaphfAIVUWBQQ">
+      <dimension href="Dimension_lifetime.qmlcontracttype#_r_iViqCrEd-s9uTaURbrLMlifetime"/>
+      <aspects xsi:type="QMLContract:Value" id="_9bWrRNdTEeaphfAIVUWBQQ"/>
+    </criteria>
+    <contractType href="PCMStandardQMLContractType.qmldeclarations#_r_iViKCrEd-s9uTaURbrKA"/>
+  </qmlDeclarations>
+</QMLDeclarations:QMLDeclarations>

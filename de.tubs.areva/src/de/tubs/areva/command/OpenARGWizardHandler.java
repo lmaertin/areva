@@ -187,7 +187,6 @@ public class OpenARGWizardHandler extends AbstractHandler implements IHandler {
 					
 					double value = Double.parseDouble(candidatesFile[j][i]);
 					
-					//if(Double.isInfinite(value)) {
 					if(value == initQualityValue) { 
 						continue; //skip invalid candidate
 					}
@@ -202,9 +201,9 @@ public class OpenARGWizardHandler extends AbstractHandler implements IHandler {
 				
 				if(inverse) { //invert value for unification of optimization strategy; maximize all values
 					minMax[0] = max;
-					minMax[1] = min;
+					minMax[1] = 0;
 				} else {
-					minMax[0] = min;
+					minMax[0] = 0;
 					minMax[1] = max;
 				}
 			
@@ -233,7 +232,6 @@ public class OpenARGWizardHandler extends AbstractHandler implements IHandler {
 	    try {
 			Files.createDirectories(filePath);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -385,7 +383,6 @@ public class OpenARGWizardHandler extends AbstractHandler implements IHandler {
 			ResourceManager.saveResource(metaqadagResource);
 		}
 		
-		// Generate DARG from Architecture->UsedResources HashMap
 		ARG dargFile = de.tubs.areva.emf.model.darg.DargFactory.eINSTANCE.createARG();
 		
 		generateDARGFromResourceHashMap(architectures, architectureResources, architectureResourceGroups, optimalCandidates,dargFile, csvQualities, csvQualityMinMax);
@@ -406,7 +403,6 @@ public class OpenARGWizardHandler extends AbstractHandler implements IHandler {
 			try {
 				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 			} catch (CoreException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

@@ -286,7 +286,6 @@ public class SelectOperatingModeWizardHandler extends AbstractHandler implements
 			try {
 				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 			} catch (CoreException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

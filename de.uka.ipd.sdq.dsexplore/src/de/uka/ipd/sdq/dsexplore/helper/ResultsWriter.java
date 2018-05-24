@@ -230,7 +230,6 @@ public class ResultsWriter {
 
 
 	public void writeTacticCandidateInfo(ITactic heuristic, Collection<TacticsResultCandidate> candidatesFromCurrentHeuristic){
-		 //writeToLogFile(heuristic.getClass() + ";" + candidatesFromCurrentHeuristic.size() + "; candidate(s)");
 		for (TacticsResultCandidate tacticsResultCandidate : candidatesFromCurrentHeuristic) {
 			StringBuilder builder = new StringBuilder(30);
 			builder.append(heuristic.getClass().getSimpleName()+";"+tacticsResultCandidate.getNumericID()+";"+tacticsResultCandidate.getParent().getNumericID()+";"+tacticsResultCandidate.getID()+";"+tacticsResultCandidate.getParent().getID()+";");
@@ -256,7 +255,7 @@ public class ResultsWriter {
 		    out.append(sdf.format(cal.getTime()) + ";" + entry);
 		    
 		    this.write(out);
-		}catch (Exception e){//Catch exception if any
+		}catch (Exception e){
 		      System.err.println("Error: " + e.getMessage());
 		}
 	}

@@ -135,11 +135,6 @@ public class DSELaunch extends AbstractPCMLaunchConfigurationDelegate<DSEWorkflo
 	 * @throws CoreException
 	 */
 	public void resetLoggers() throws CoreException{
-		//Logger.getRootLogger().removeAllAppenders();
-		//Logger.getLogger(loggerName);
-//		for (LoggerAppenderStruct logger : this.myLoggerList) {
-//			this.myWorkflowProcess.addAppender(logger.getAppender());
-//		}
 	}
 
 	public ILaunch getOriginalLaunch() {

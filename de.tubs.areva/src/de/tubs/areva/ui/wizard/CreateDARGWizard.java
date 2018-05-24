@@ -78,7 +78,7 @@ public class CreateDARGWizard extends Wizard {
 	
 	@Override
 	public boolean performFinish() {
-		// TODO Auto-generated method stub
+		
 		
 		if(!pageFastSetup.getInput().isEmpty()) {
 			System.out.println(pageFastSetup.getInput());

@@ -1,0 +1,125 @@
+package de.tubs.areva.ui.wizard;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.jface.wizard.WizardPage;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+
+import de.tubs.areva.ui.dialog.ResourceFileSelectionDialog;
+
+public class CreateDARGWizardPageFour extends WizardPage {
+
+	private Composite container;
+	
+	public URI qadagFile = null;
+	
+	public CreateDARGWizardPageFour() {
+		super("Choose QADAG");
+		setTitle("Choose QADAG");
+		setDescription("Choose your custom QADAG if you do not want to use the default one.");
+	}
+	
+	@Override
+	public void createControl(Composite parent) {
+		container = new Composite(parent, SWT.NONE);
+		GridLayout layout = new GridLayout();
+		container.setLayout(layout);
+		layout.numColumns = 2;
+		
+		Button button = new Button(container, SWT.CHECK);
+		
+		Label label = new Label(container, SWT.NORMAL);
+	    label.setText("QADAG file:");
+	    
+	    GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true,
+		        false);
+	    
+	    Label labelResource = new Label(container, SWT.BORDER);
+	    labelResource.setText("");
+	    labelResource.setLayoutData(gridData);
+	    
+	    gridData = new GridData(SWT.END, SWT.CENTER, false,
+		        false);
+	    gridData.horizontalSpan = 2;
+	    
+	    Button buttonQadag = new Button(container, SWT.PUSH);
+	    buttonQadag.setLayoutData(gridData);
+		
+	    gridData = new GridData(SWT.BEGINNING, SWT.CENTER, false,
+		        false);
+	    gridData.horizontalSpan = 2;
+	    
+	    button.setLayoutData(gridData);
+	    button.setText("Use custom QADAG");
+	    button.addSelectionListener(new SelectionAdapter() {
+	      @Override
+	      public void widgetSelected(SelectionEvent e) {
+	        
+	        if(button.getSelection()) {
+	        	
+	        	label.setEnabled(true);
+	        	labelResource.setEnabled(true);
+	        	buttonQadag.setEnabled(true);
+	        	
+	        	if(qadagFile == null) {
+	        		setPageComplete(false);
+	        	} else {
+	        		setPageComplete(true);
+	        	}
+	        	
+	        	
+	        } else {
+	        	
+	        	label.setEnabled(false);
+	        	labelResource.setEnabled(false);
+	        	buttonQadag.setEnabled(false);
+	        	
+	        	setPageComplete(true);
+	        }
+	        container.layout();
+	      }
+	    });
+		
+	    label.setEnabled(false);
+    	labelResource.setEnabled(false);
+    	buttonQadag.setEnabled(false);
+		
+    	/*
+	    buttonQadag.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false,
+	        false));
+	    */
+	    buttonQadag.setText("Browse workspace...");
+	    buttonQadag.addSelectionListener(new SelectionAdapter() {
+	      @Override
+	      public void widgetSelected(SelectionEvent e) {
+	        ResourceFileSelectionDialog resourceDialog = new ResourceFileSelectionDialog("QADAG Model", "Choose .qadag QADAG model:", new String[] {"qadag"}, container.getShell());
+	        resourceDialog.open();
+	        
+	        if(resourceDialog.getFirstResult() != null) {
+		        
+		        qadagFile = URI.createPlatformResourceURI(((IFile)resourceDialog.getFirstResult()).getFullPath().toString(), true);
+		        
+		        System.out.println("" + ((IFile)resourceDialog.getFirstResult()).getFullPath().toString());
+		        labelResource.setText("" + URI.createPlatformResourceURI(((IFile)resourceDialog.getFirstResult()).getFullPath().toString(), true));
+	        	
+	        	setPageComplete(true);
+	        } else {
+	        	setPageComplete(false);
+	        }
+	        container.layout();
+	      }
+	    });
+	    
+	    setControl(container);
+	    setPageComplete(true);
+	}
+
+	
+}

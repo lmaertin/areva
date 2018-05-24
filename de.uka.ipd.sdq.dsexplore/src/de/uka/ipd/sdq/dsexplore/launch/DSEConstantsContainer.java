@@ -75,13 +75,6 @@ public class DSEConstantsContainer {
 	public static final String[] DESIGNDECISION_EXTENSION = new String[] { "*.designdecision" };
 	
 	public static final String QML_DEFINITION_EXTENSION = new String ("*.qmldeclarations");
-
-	//TODO: delete
-	//XXX: use 'new QMLDimensionReader().getDimension(QMLConstantsContainer.QUALITY_ATTRIBUTE_DIMENSION_RESPONSETIME_DEFINITION_PATH).getEntityName()' instead
-//	public static final String MEAN_RESPONSE_TIME_QUALITY = "mean response time";
-//	public static final String COST_QUALITY = "cost";
-//	public static final String POFOD_QUALITY = "POFOD"; 
-	
 	
 	/**
 	 * TODO: Move this to {@link AnalysisQualityAttributes}?
@@ -145,11 +138,6 @@ public class DSEConstantsContainer {
 	public static final String LOWER_BOUND_CONFIDENCE = "lower bound confidence";
 	
 	public static final String DSE_ITERATIONS = "number of DSE iterations";
-	
-//	public static final String COST_COMBINE_COST_TYPES = "DSE combine cost types";
-//	public static final String COST_CONSIDER_INITIAL = "DSE consider initial costs";
-//	public static final String COST_CONSIDER_OPERATING = "DSE consider opearting costs";
-	
 
 	/*
 	 * Configuration of heuristics

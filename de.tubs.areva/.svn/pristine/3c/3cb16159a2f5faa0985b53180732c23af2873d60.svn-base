@@ -1,0 +1,160 @@
+package de.tubs.areva.command;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.gef4.graph.Edge;
+import org.eclipse.gef4.graph.Graph;
+import org.eclipse.gef4.layout.algorithms.SpringLayoutAlgorithm;
+import org.eclipse.gef4.zest.fx.ZestProperties;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.HandlerUtil;
+import org.javatuples.Triplet;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import de.tubs.areva.emf.model.darg.ARG;
+import de.tubs.areva.emf.model.darg.Architecture;
+import de.tubs.areva.emf.model.opmode.OperatingModeSelection;
+import de.tubs.areva.emf.model.qadag.Node;
+import de.tubs.areva.resourcerelations.Resource;
+import de.tubs.areva.resourcerelations.ResourceOptions;
+import de.tubs.areva.ui.view.DARGZestView;
+import de.tubs.areva.ui.wizard.SelectOperatingModeWizard;
+import de.tubs.areva.ui.wizard.VisualizeWizard;
+import de.tubs.areva.util.ResourceHelper;
+import de.tubs.areva.util.ZestViewCounter;
+import de.tubs.areva.util.emf.ResourceManager;
+import de.tubs.areva.xml.XMLStaticCache;
+
+public class ProcessResourceFailureDetailed extends AbstractHandler implements IHandler {
+
+	protected static final String ID = ZestProperties.CSS_ID__NE;
+	protected static final String LABEL = ZestProperties.LABEL__NE;
+
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		
+		ResourceSet operatingModeRS = new ResourceSetImpl();
+		
+		org.eclipse.emf.ecore.resource.Resource selectedOpMode = null;
+		IFile file = null;
+		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event)
+                .getActivePage().getSelection();
+        if (selection != null & selection instanceof IStructuredSelection) {
+            IStructuredSelection strucSelection = (IStructuredSelection) selection;
+            for (@SuppressWarnings("unchecked")
+			Iterator<Object> iterator = strucSelection.iterator(); iterator.hasNext();) {
+            	file = (IFile)iterator.next();
+            	
+                System.out.println("" + file.getLocationURI().toString().substring(6));
+                
+                break;
+            }
+        }
+        
+        XMLStaticCache.load(file.getLocationURI().toString().substring(6));
+        Document resultXml = XMLStaticCache.getDocument();
+        
+        List<String> allResources = new ArrayList<String>();
+        allResources.add("test1");
+        allResources.add("test2");
+        allResources.add("test3");
+        
+        List<String> defaultPath = new ArrayList<String>();
+        defaultPath.add("test1");
+        defaultPath.add("test3");
+        
+        VisualizeWizard wizard = new VisualizeWizard(allResources, defaultPath);
+		
+		WizardDialog wizardDialog = new WizardDialog(
+				HandlerUtil.getActiveWorkbenchWindow(event).getShell(),
+				wizard);
+		
+		if(wizardDialog.open() == Window.OK) {
+			System.out.println("Ok pressed");
+			
+			//setupExampleDARGZest(wizard);
+			
+		} else {
+			System.out.println("Cancel pressed");
+		}
+        
+		
+		
+		// generate zest tree
+		/*
+		Graph dargZestTree = generateTreeFromModel(arg, processedPath);
+		
+		DARGZestView view = null;
+		
+		try {
+			view = (DARGZestView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("Mittwochsqadag.dargzestview", ZestViewCounter.get(), IWorkbenchPage.VIEW_ACTIVATE);
+			int index = file.getLocationURI().toString().lastIndexOf('/');
+			String fileName = file.getLocationURI().toString().substring(index + 1) + " (full)";
+			view.changeTitle(fileName);
+			
+		} catch (PartInitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(view != null) {
+			view.setGraph(dargZestTree);
+		}
+		
+		for(IProject project: ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
+			
+			try {
+				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+			} catch (CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		*/
+		return null;
+	}
+
+}

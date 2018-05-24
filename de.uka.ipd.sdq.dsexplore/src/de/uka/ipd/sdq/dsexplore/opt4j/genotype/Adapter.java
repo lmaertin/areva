@@ -423,7 +423,7 @@ public class Adapter {
 		((List<Double>) this.ContinuousProcessingRateArchiveStorage.get(key).get(1)).toArray(Server_Intervals);
 		boolean FOUNDINTERVAL = false;
 		List<Integer> Result = new ArrayList<Integer>();
-		// TODO Auto-generated method stub
+		
 		for(int i=0;i<Server_Intervals.length;i++){
 			if(serverSpeed< Server_Intervals[i] & !FOUNDINTERVAL){
 				Result.add(1);
@@ -445,7 +445,7 @@ public class Adapter {
 	 * @return
 	 */
 	private List<Integer> getWebServerBinaryRep(EObject webServer) {
-		// TODO Auto-generated method stub
+		
 		
 		List<Integer> Result = new ArrayList<Integer>(); // For returning the final result
 		
@@ -468,7 +468,7 @@ public class Adapter {
 	 * @return
 	 */
 	private List<Integer> getAllocatedServerBinaryRep(EObject allocatedServer) {
-		// TODO Auto-generated method stub
+		
 		
 		List<Integer> Result = new ArrayList<Integer>(); // For returning the final result
 		
@@ -483,7 +483,7 @@ public class Adapter {
 	}
 	
 	private List<Integer> getAllocatedComponentBinaryRep(EObject allocatedComponent) {
-		// TODO Auto-generated method stub
+		
 		List<Integer> Result = new ArrayList<Integer>(); // For returning the final result
 		
 		for(int i=0;i<COMPONENTS.size();i++){
@@ -497,10 +497,10 @@ public class Adapter {
 	}
 	
 	private List<Integer> getCapacityBinaryRep(double capacityDegreeValue) {
-		// TODO Auto-generated method stub
+		
 		boolean FOUNDINTERVAL = false;
 		List<Integer> Result = new ArrayList<Integer>();
-		// TODO Auto-generated method stub
+		
 		for(int i=0;i<CAPACITYDEGREE_INTERVALS.length;i++){
 			if(capacityDegreeValue< SERVER_INTERVALS[i] & !FOUNDINTERVAL){
 				Result.add(1);

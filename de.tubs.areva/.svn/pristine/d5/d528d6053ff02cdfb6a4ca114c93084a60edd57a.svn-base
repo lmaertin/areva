@@ -1,0 +1,733 @@
+/**
+ */
+package de.tubs.areva.emf.model.darg;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+/**
+ * <!-- begin-user-doc -->
+ * The <b>Package</b> for the model.
+ * It contains accessors for the meta objects to represent
+ * <ul>
+ *   <li>each class,</li>
+ *   <li>each feature of each class,</li>
+ *   <li>each operation of each class,</li>
+ *   <li>each enum,</li>
+ *   <li>and each data type</li>
+ * </ul>
+ * <!-- end-user-doc -->
+ * @see de.tubs.areva.emf.model.darg.DargFactory
+ * @model kind="package"
+ * @generated
+ */
+public interface DargPackage extends EPackage {
+	/**
+	 * The package name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNAME = "darg";
+
+	/**
+	 * The package namespace URI.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNS_URI = "http://com/areva/darg/";
+
+	/**
+	 * The package namespace name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNS_PREFIX = "de.tubs.areva.emf.model.darg";
+
+	/**
+	 * The singleton instance of the package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	DargPackage eINSTANCE = de.tubs.areva.emf.model.darg.impl.DargPackageImpl.init();
+
+	/**
+	 * The meta object id for the '{@link de.tubs.areva.emf.model.darg.impl.ARGImpl <em>ARG</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.tubs.areva.emf.model.darg.impl.ARGImpl
+	 * @see de.tubs.areva.emf.model.darg.impl.DargPackageImpl#getARG()
+	 * @generated
+	 */
+	int ARG = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARG__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Architectures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARG__ARCHITECTURES = 1;
+
+	/**
+	 * The feature id for the '<em><b>Qadag</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARG__QADAG = 2;
+
+	/**
+	 * The number of structural features of the '<em>ARG</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARG_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>ARG</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARG_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl <em>Architecture</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.tubs.areva.emf.model.darg.impl.ArchitectureImpl
+	 * @see de.tubs.areva.emf.model.darg.impl.DargPackageImpl#getArchitecture()
+	 * @generated
+	 */
+	int ARCHITECTURE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Quality</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__QUALITY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Qadag</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__QADAG = 1;
+
+	/**
+	 * The feature id for the '<em><b>Bound Resource Options</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__BOUND_RESOURCE_OPTIONS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Qualityassignments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__QUALITYASSIGNMENTS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Optimal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__OPTIMAL = 4;
+
+	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__HIDDEN = 5;
+
+	/**
+	 * The feature id for the '<em><b>Marked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__MARKED = 6;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__ID = 7;
+
+	/**
+	 * The feature id for the '<em><b>Related Architectures</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__RELATED_ARCHITECTURES = 8;
+
+	/**
+	 * The feature id for the '<em><b>Bound Resources</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__BOUND_RESOURCES = 9;
+
+	/**
+	 * The feature id for the '<em><b>Bound Basic Components</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__BOUND_BASIC_COMPONENTS = 10;
+
+	/**
+	 * The feature id for the '<em><b>Bound Resources Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__BOUND_RESOURCES_COUNT = 11;
+
+	/**
+	 * The feature id for the '<em><b>Raw Quality Assignments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE__RAW_QUALITY_ASSIGNMENTS = 12;
+
+	/**
+	 * The number of structural features of the '<em>Architecture</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE_FEATURE_COUNT = 13;
+
+	/**
+	 * The number of operations of the '<em>Architecture</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE_OPERATION_COUNT = 0;
+
+
+	/**
+	 * The meta object id for the '{@link de.tubs.areva.emf.model.darg.impl.QualityAssignmentImpl <em>Quality Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.tubs.areva.emf.model.darg.impl.QualityAssignmentImpl
+	 * @see de.tubs.areva.emf.model.darg.impl.DargPackageImpl#getQualityAssignment()
+	 * @generated
+	 */
+	int QUALITY_ASSIGNMENT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Attribute</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUALITY_ASSIGNMENT__ATTRIBUTE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUALITY_ASSIGNMENT__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Quality Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUALITY_ASSIGNMENT_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Quality Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUALITY_ASSIGNMENT_OPERATION_COUNT = 0;
+
+	/**
+	 * Returns the meta object for class '{@link de.tubs.areva.emf.model.darg.ARG <em>ARG</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>ARG</em>'.
+	 * @see de.tubs.areva.emf.model.darg.ARG
+	 * @generated
+	 */
+	EClass getARG();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tubs.areva.emf.model.darg.ARG#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.tubs.areva.emf.model.darg.ARG#getName()
+	 * @see #getARG()
+	 * @generated
+	 */
+	EAttribute getARG_Name();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.tubs.areva.emf.model.darg.ARG#getArchitectures <em>Architectures</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Architectures</em>'.
+	 * @see de.tubs.areva.emf.model.darg.ARG#getArchitectures()
+	 * @see #getARG()
+	 * @generated
+	 */
+	EReference getARG_Architectures();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.tubs.areva.emf.model.darg.ARG#getQadag <em>Qadag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Qadag</em>'.
+	 * @see de.tubs.areva.emf.model.darg.ARG#getQadag()
+	 * @see #getARG()
+	 * @generated
+	 */
+	EReference getARG_Qadag();
+
+	/**
+	 * Returns the meta object for class '{@link de.tubs.areva.emf.model.darg.Architecture <em>Architecture</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Architecture</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture
+	 * @generated
+	 */
+	EClass getArchitecture();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tubs.areva.emf.model.darg.Architecture#getQuality <em>Quality</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Quality</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#getQuality()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EAttribute getArchitecture_Quality();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.tubs.areva.emf.model.darg.Architecture#getQadag <em>Qadag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Qadag</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#getQadag()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EReference getArchitecture_Qadag();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.tubs.areva.emf.model.darg.Architecture#getBoundResourceOptions <em>Bound Resource Options</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Bound Resource Options</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#getBoundResourceOptions()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EReference getArchitecture_BoundResourceOptions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.tubs.areva.emf.model.darg.Architecture#getQualityassignments <em>Qualityassignments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Qualityassignments</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#getQualityassignments()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EReference getArchitecture_Qualityassignments();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tubs.areva.emf.model.darg.Architecture#isOptimal <em>Optimal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Optimal</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#isOptimal()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EAttribute getArchitecture_Optimal();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tubs.areva.emf.model.darg.Architecture#isHidden <em>Hidden</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Hidden</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#isHidden()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EAttribute getArchitecture_Hidden();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tubs.areva.emf.model.darg.Architecture#getMarked <em>Marked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Marked</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#getMarked()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EAttribute getArchitecture_Marked();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tubs.areva.emf.model.darg.Architecture#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#getId()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EAttribute getArchitecture_Id();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.tubs.areva.emf.model.darg.Architecture#getRelatedArchitectures <em>Related Architectures</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Related Architectures</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#getRelatedArchitectures()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EReference getArchitecture_RelatedArchitectures();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.tubs.areva.emf.model.darg.Architecture#getBoundResources <em>Bound Resources</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Bound Resources</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#getBoundResources()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EReference getArchitecture_BoundResources();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.tubs.areva.emf.model.darg.Architecture#getBoundBasicComponents <em>Bound Basic Components</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Bound Basic Components</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#getBoundBasicComponents()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EReference getArchitecture_BoundBasicComponents();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tubs.areva.emf.model.darg.Architecture#getBoundResourcesCount <em>Bound Resources Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bound Resources Count</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#getBoundResourcesCount()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EAttribute getArchitecture_BoundResourcesCount();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.tubs.areva.emf.model.darg.Architecture#getRawQualityAssignments <em>Raw Quality Assignments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Raw Quality Assignments</em>'.
+	 * @see de.tubs.areva.emf.model.darg.Architecture#getRawQualityAssignments()
+	 * @see #getArchitecture()
+	 * @generated
+	 */
+	EReference getArchitecture_RawQualityAssignments();
+
+	/**
+	 * Returns the meta object for class '{@link de.tubs.areva.emf.model.darg.QualityAssignment <em>Quality Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Quality Assignment</em>'.
+	 * @see de.tubs.areva.emf.model.darg.QualityAssignment
+	 * @generated
+	 */
+	EClass getQualityAssignment();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tubs.areva.emf.model.darg.QualityAssignment#getAttribute <em>Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Attribute</em>'.
+	 * @see de.tubs.areva.emf.model.darg.QualityAssignment#getAttribute()
+	 * @see #getQualityAssignment()
+	 * @generated
+	 */
+	EAttribute getQualityAssignment_Attribute();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.tubs.areva.emf.model.darg.QualityAssignment#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see de.tubs.areva.emf.model.darg.QualityAssignment#getValue()
+	 * @see #getQualityAssignment()
+	 * @generated
+	 */
+	EAttribute getQualityAssignment_Value();
+
+	/**
+	 * Returns the factory that creates the instances of the model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the factory that creates the instances of the model.
+	 * @generated
+	 */
+	DargFactory getDargFactory();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Defines literals for the meta objects that represent
+	 * <ul>
+	 *   <li>each class,</li>
+	 *   <li>each feature of each class,</li>
+	 *   <li>each operation of each class,</li>
+	 *   <li>each enum,</li>
+	 *   <li>and each data type</li>
+	 * </ul>
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	interface Literals {
+		/**
+		 * The meta object literal for the '{@link de.tubs.areva.emf.model.darg.impl.ARGImpl <em>ARG</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.tubs.areva.emf.model.darg.impl.ARGImpl
+		 * @see de.tubs.areva.emf.model.darg.impl.DargPackageImpl#getARG()
+		 * @generated
+		 */
+		EClass ARG = eINSTANCE.getARG();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARG__NAME = eINSTANCE.getARG_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Architectures</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARG__ARCHITECTURES = eINSTANCE.getARG_Architectures();
+
+		/**
+		 * The meta object literal for the '<em><b>Qadag</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARG__QADAG = eINSTANCE.getARG_Qadag();
+
+		/**
+		 * The meta object literal for the '{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl <em>Architecture</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.tubs.areva.emf.model.darg.impl.ArchitectureImpl
+		 * @see de.tubs.areva.emf.model.darg.impl.DargPackageImpl#getArchitecture()
+		 * @generated
+		 */
+		EClass ARCHITECTURE = eINSTANCE.getArchitecture();
+
+		/**
+		 * The meta object literal for the '<em><b>Quality</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARCHITECTURE__QUALITY = eINSTANCE.getArchitecture_Quality();
+
+		/**
+		 * The meta object literal for the '<em><b>Qadag</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARCHITECTURE__QADAG = eINSTANCE.getArchitecture_Qadag();
+
+		/**
+		 * The meta object literal for the '<em><b>Bound Resource Options</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARCHITECTURE__BOUND_RESOURCE_OPTIONS = eINSTANCE.getArchitecture_BoundResourceOptions();
+
+		/**
+		 * The meta object literal for the '<em><b>Qualityassignments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARCHITECTURE__QUALITYASSIGNMENTS = eINSTANCE.getArchitecture_Qualityassignments();
+
+		/**
+		 * The meta object literal for the '<em><b>Optimal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARCHITECTURE__OPTIMAL = eINSTANCE.getArchitecture_Optimal();
+
+		/**
+		 * The meta object literal for the '<em><b>Hidden</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARCHITECTURE__HIDDEN = eINSTANCE.getArchitecture_Hidden();
+
+		/**
+		 * The meta object literal for the '<em><b>Marked</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARCHITECTURE__MARKED = eINSTANCE.getArchitecture_Marked();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARCHITECTURE__ID = eINSTANCE.getArchitecture_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Related Architectures</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARCHITECTURE__RELATED_ARCHITECTURES = eINSTANCE.getArchitecture_RelatedArchitectures();
+
+		/**
+		 * The meta object literal for the '<em><b>Bound Resources</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARCHITECTURE__BOUND_RESOURCES = eINSTANCE.getArchitecture_BoundResources();
+
+		/**
+		 * The meta object literal for the '<em><b>Bound Basic Components</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARCHITECTURE__BOUND_BASIC_COMPONENTS = eINSTANCE.getArchitecture_BoundBasicComponents();
+
+		/**
+		 * The meta object literal for the '<em><b>Bound Resources Count</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARCHITECTURE__BOUND_RESOURCES_COUNT = eINSTANCE.getArchitecture_BoundResourcesCount();
+
+		/**
+		 * The meta object literal for the '<em><b>Raw Quality Assignments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARCHITECTURE__RAW_QUALITY_ASSIGNMENTS = eINSTANCE.getArchitecture_RawQualityAssignments();
+
+		/**
+		 * The meta object literal for the '{@link de.tubs.areva.emf.model.darg.impl.QualityAssignmentImpl <em>Quality Assignment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.tubs.areva.emf.model.darg.impl.QualityAssignmentImpl
+		 * @see de.tubs.areva.emf.model.darg.impl.DargPackageImpl#getQualityAssignment()
+		 * @generated
+		 */
+		EClass QUALITY_ASSIGNMENT = eINSTANCE.getQualityAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>Attribute</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QUALITY_ASSIGNMENT__ATTRIBUTE = eINSTANCE.getQualityAssignment_Attribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QUALITY_ASSIGNMENT__VALUE = eINSTANCE.getQualityAssignment_Value();
+
+	}
+
+} //DargPackage

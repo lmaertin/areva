@@ -1,0 +1,840 @@
+package de.uka.ipd.sdq.dsexplore.analysis.areva;
+
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.ILaunchConfigurationType;
+import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.core.ILaunchDelegate;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.opt4j.core.Criterion;
+import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
+import org.palladiosimulator.analyzer.workflow.configurations.AbstractPCMWorkflowRunConfiguration;
+import org.palladiosimulator.pcm.allocation.AllocationContext;
+import org.palladiosimulator.pcm.allocation.util.AllocationResourceFactoryImpl;
+import org.palladiosimulator.pcm.core.composition.AssemblyContext;
+import org.palladiosimulator.pcm.core.composition.ComposedStructure;
+import org.palladiosimulator.pcm.core.composition.util.CompositionResourceFactoryImpl;
+import org.palladiosimulator.pcm.core.entity.util.EntityResourceFactoryImpl;
+import org.palladiosimulator.pcm.core.util.CoreResourceFactoryImpl;
+import org.palladiosimulator.pcm.parameter.util.ParameterResourceFactoryImpl;
+import org.palladiosimulator.pcm.protocol.util.ProtocolResourceFactoryImpl;
+import org.palladiosimulator.pcm.qosannotations.qos_performance.util.QosPerformanceResourceFactoryImpl;
+import org.palladiosimulator.pcm.qosannotations.qos_reliability.util.QosReliabilityResourceFactoryImpl;
+import org.palladiosimulator.pcm.qosannotations.util.QosannotationsResourceFactoryImpl;
+import org.palladiosimulator.pcm.reliability.util.ReliabilityResourceFactoryImpl;
+import org.palladiosimulator.pcm.repository.BasicComponent;
+import org.palladiosimulator.pcm.repository.InfrastructureInterface;
+import org.palladiosimulator.pcm.repository.InfrastructureRequiredRole;
+import org.palladiosimulator.pcm.repository.RepositoryComponent;
+import org.palladiosimulator.pcm.repository.RequiredRole;
+import org.palladiosimulator.pcm.repository.util.RepositoryResourceFactoryImpl;
+import org.palladiosimulator.pcm.resourceenvironment.ProcessingResourceSpecification;
+import org.palladiosimulator.pcm.resourceenvironment.ResourceContainer;
+import org.palladiosimulator.pcm.resourceenvironment.util.ResourceenvironmentResourceFactoryImpl;
+import org.palladiosimulator.pcm.resourcetype.ProcessingResourceType;
+import org.palladiosimulator.pcm.resourcetype.util.ResourcetypeResourceFactoryImpl;
+import org.palladiosimulator.pcm.seff.seff_performance.util.SeffPerformanceResourceFactoryImpl;
+import org.palladiosimulator.pcm.seff.seff_reliability.util.SeffReliabilityResourceFactoryImpl;
+import org.palladiosimulator.pcm.seff.util.SeffResourceFactoryImpl;
+import org.palladiosimulator.pcm.subsystem.util.SubsystemResourceFactoryImpl;
+import org.palladiosimulator.pcm.system.util.SystemResourceFactoryImpl;
+import org.palladiosimulator.pcm.usagemodel.util.UsagemodelResourceFactoryImpl;
+import org.palladiosimulator.pcm.util.PcmResourceFactoryImpl;
+import org.palladiosimulator.solver.models.PCMInstance;
+
+import de.tubs.areva.resourcerelations.Platform;
+import de.tubs.areva.resourcerelations.ResourceGroup;
+import de.tubs.areva.resourcerelations.impl.ResourcerelationsFactoryImpl;
+import de.uka.ipd.sdq.dsexplore.analysis.AbstractAnalysis;
+import de.uka.ipd.sdq.dsexplore.analysis.AnalysisFailedException;
+import de.uka.ipd.sdq.dsexplore.analysis.IAnalysis;
+import de.uka.ipd.sdq.dsexplore.analysis.IAnalysisResult;
+import de.uka.ipd.sdq.dsexplore.analysis.PCMPhenotype;
+import de.uka.ipd.sdq.dsexplore.helper.EMFHelper;
+import de.uka.ipd.sdq.dsexplore.launch.DSEConstantsContainer;
+import de.uka.ipd.sdq.dsexplore.launch.DSELaunch;
+import de.uka.ipd.sdq.dsexplore.launch.DSEWorkflowConfiguration;
+import de.uka.ipd.sdq.pcm.cost.ComponentCostPerInstance;
+import de.uka.ipd.sdq.pcm.cost.ComponentCostPerType;
+import de.uka.ipd.sdq.pcm.cost.Cost;
+import de.uka.ipd.sdq.pcm.cost.CostRepository;
+import de.uka.ipd.sdq.pcm.cost.FixedProcessingResourceCost;
+import de.uka.ipd.sdq.pcm.cost.ProcessingResourceCost;
+import de.uka.ipd.sdq.pcm.cost.VariableProcessingResourceCost;
+import de.uka.ipd.sdq.pcm.cost.costPackage;
+import de.uka.ipd.sdq.pcm.cost.helper.CostUtil;
+import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
+import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
+import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
+
+public class ArevaEvaluator extends AbstractAnalysis implements IAnalysis{
+
+	/**
+	 * For testing purposes
+	 */
+	final static String path = "/Users/maertin/PowerFolders/work/workspaces/workspace-areva2/de.tubs.areva.testprojects.test1/aocs/";
+	//final String path = "/Users/maertin/PowerFolders/work/workspaces/workspace-areva2/de.tubs.areva.testprojects.test1/simpletactics/";
+	final static String usaggeModel = path+"aocs.usagemodel";
+	final static String allocationModel = path+"aocs.allocation";
+	final static String resourceRelationsModel = path+"aocs.resourcerelations";
+	
+	public ArevaEvaluator() {
+		super(new ArevaSolverQualityAttributeDeclaration());
+	}
+
+	/** Logger for log4j. */
+	private static Logger logger = Logger.getLogger("de.uka.ipd.sdq.dsexplore.analysis.areva");
+	
+	private Platform resourcePlatform;
+	
+	private Map<BasicComponent,ResourceGroup> basicComp2ResourceGrp;
+	
+	private ResourceSet arevaSet;
+	
+	private Map<Long, ArevaAnalysisResult> previousArevaResults = new HashMap<Long, ArevaAnalysisResult>();
+	
+//	/** 
+//	 * Sums up the initial cost of the PCM elements present in the given PCM instance.
+//	 * TODO For now, all cost in the internal costRepository are considered. Thus, only 
+//	 * variable cost lead to a change in cost, e.g. the variable cost for 
+//	 * changing processing rates. 
+//	 * 
+//	 * Careful: This must point to the right pcm instance first. 
+//	 * @param pcmInstance the PCM instance
+//	 * @return 
+//	 */
+//	private double getInitialCost(PCMInstance pcmInstance){
+//		List<Cost> costs = costModel.getCost();
+//		double sum = 0;
+//		for (Iterator<Cost> iterator = costs.iterator(); iterator.hasNext();) {
+//			Cost cost = iterator.next();
+//			if (doesCostApply(cost,pcmInstance)){
+//				sum += cost.getInitialCost();
+//			}
+//		}
+//		
+//		return sum;
+//	}
+
+	/**
+	 * Only checks uses in system (for components) and in the allocation (for processing resources)
+	 * @param cost
+	 * @param pcmInstance
+	 * @return
+	 */
+	private boolean doesCostApply(Cost cost, PCMInstance pcmInstance) {
+		if (VariableProcessingResourceCost.class.isInstance(cost)){
+			VariableProcessingResourceCost vc = (VariableProcessingResourceCost)cost;
+			ResourceContainer rc = (ResourceContainer)vc.getProcessingresourcespecification().eContainer();
+			return checkWhetherResourceContainerIsUsed(pcmInstance, rc);
+			//No usage of resource container found, return false. 
+		} else if (cost instanceof ComponentCostPerType){
+			ComponentCostPerType cc = (ComponentCostPerType)cost;
+			RepositoryComponent rc = cc.getRepositoryComponent();
+			//List<AssemblyContext> asctx = pcmInstance.getSystem().getAssemblyContexts__ComposedStructure();
+			//TODO: also retrieve inner assembly contexts of deployed composite components. Cost currently need to be specified separately.
+			
+			List<AssemblyContext> asctx =  getAllContainedAssemblyContexts(pcmInstance.getSystem().getAssemblyContexts__ComposedStructure());
+			
+			
+			for (AssemblyContext assemblyContext : asctx) {
+				if (EMFHelper.checkIdentity(assemblyContext.getEncapsulatedComponent__AssemblyContext(), rc)){
+					return true;
+				}
+			}
+			return false;
+		} else if (cost instanceof FixedProcessingResourceCost){
+			FixedProcessingResourceCost fc = (FixedProcessingResourceCost)cost;
+			ResourceContainer rc = (ResourceContainer)fc.getProcessingresourcespecification().eContainer();
+			return checkWhetherResourceContainerIsUsed(pcmInstance, rc);
+		} else 
+			return true;
+	}
+
+	/** 
+	 * Get all contained ones recursively
+	 * @param assemblyContextsComposedStructure
+	 * @return
+	 */
+	private List<AssemblyContext> getAllContainedAssemblyContexts(
+			EList<AssemblyContext> assemblyContextsComposedStructure) {
+		List<AssemblyContext> list = new ArrayList<AssemblyContext>();
+		list.addAll(assemblyContextsComposedStructure);
+		for (AssemblyContext assemblyContext : assemblyContextsComposedStructure) {
+			if (assemblyContext.getEncapsulatedComponent__AssemblyContext() instanceof ComposedStructure){
+				ComposedStructure composite = (ComposedStructure)assemblyContext.getEncapsulatedComponent__AssemblyContext();
+				list.addAll(getAllContainedAssemblyContexts(composite.getAssemblyContexts__ComposedStructure()));
+			}
+		}
+		return list;
+	}
+
+	private boolean checkWhetherResourceContainerIsUsed(PCMInstance pcmInstance,
+			ResourceContainer rc) {
+		List<AllocationContext> alloc = pcmInstance.getAllocation().getAllocationContexts_Allocation();
+		for (AllocationContext allocationContext : alloc) {
+			if (EMFHelper.checkIdentity(allocationContext.getResourceContainer_AllocationContext(), rc)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+//	/**
+//	 * Careful: This must point to the right pcm instance first. 
+//	 * @param pcmInstance
+//	 * @return
+//	 */
+//	private double getOperatingCost(PCMInstance pcmInstance){
+//		List<Cost> costs = costModel.getCost();
+//		double sum = 0;
+//		for (Iterator<Cost> iterator = costs.iterator(); iterator.hasNext();) {
+//			Cost cost = iterator.next();
+//			if (doesCostApply(cost,pcmInstance)){
+//				sum += cost.getOperatingCost();
+//			}
+//		}
+//		
+//		return sum;
+//	}
+	
+	private void updateCostModel(PCMInstance pcmInstance) {
+
+		//List<Cost> allCosts = this.costModel.getCost();
+		List<Cost> allCosts =null; //FIXME Parser Fix
+		createCostsForReplicas(allCosts, pcmInstance);
+		
+		for (Cost cost : allCosts) {
+
+			// fix links between model elements (maybe this is not needed anymore...)
+			if (cost instanceof ComponentCostPerInstance){
+				((ComponentCostPerInstance) cost).setAllocation(pcmInstance.getAllocation());
+			} else 	if (VariableProcessingResourceCost.class.isInstance(cost)) {
+				
+				VariableProcessingResourceCost varCost = (VariableProcessingResourceCost)cost; 
+
+				ProcessingResourceSpecification old_prs = ((VariableProcessingResourceCost) cost)
+						.getProcessingresourcespecification();
+				ResourceContainer old_rc = (ResourceContainer) old_prs
+						.eContainer();
+				ProcessingResourceType ars = old_prs
+						.getActiveResourceType_ActiveResourceSpecification();
+
+				List<ResourceContainer> all_new_rcs = pcmInstance.getResourceEnvironment()
+						.getResourceContainer_ResourceEnvironment();
+				
+				for (ResourceContainer resourceContainer : all_new_rcs) {
+					
+					if (resourceContainer.getId().equals(old_rc.getId())) {
+						
+						List<ProcessingResourceSpecification> new_resources = resourceContainer
+								.getActiveResourceSpecifications_ResourceContainer();
+						
+						boolean resourceTypeFound = false;
+						
+						for (ProcessingResourceSpecification new_prs : new_resources) {
+							
+							if (new_prs
+									.getActiveResourceType_ActiveResourceSpecification()
+									.getId()
+									.equals(ars.getId())) {
+								if (!resourceTypeFound){
+									//Reset the processing rate with the first matching one found
+									varCost.setProcessingresourcespecification(new_prs);
+									resourceTypeFound = true;
+								} else {
+									throw new RuntimeException("There are two processing resources with the same resource type within one resource container, this cannot be handled by the optimisation yet. Please change your model.");
+								}
+							}
+						}
+						break;
+					}
+
+					/*
+					 * Resource resource = prs.eResource(); if (resource !=
+					 * null){ URI oldURI = resource.getURI();
+					 * resource.setURI(resEnvFileURI); } else {
+					 * System.out.println
+					 * ("Resource of ProcessingResourceSpecification "
+					 * +prs.toString()+" has a null eResource!"); }
+					 */
+				}
+			}
+		}
+
+	}
+	
+	/**
+	 * FIXME: this should be more elegantly handled by separating a resource repository with costs specification from 
+	 * the actually used resources
+	 * @param allCosts
+	 * @param pcmInstance
+	 */
+	private void createCostsForReplicas(List<Cost> allCosts,
+			PCMInstance pcmInstance) {
+		
+		List<ResourceContainer> containers = pcmInstance.getResourceEnvironment().getResourceContainer_ResourceEnvironment();
+		List<Cost> replicaCosts = new ArrayList<Cost>(); 
+		
+		// also remove old replica costs from previous candidates
+		List<Cost> oldReplicaCosts = new ArrayList<Cost>();
+		
+		for (Cost anyCost : allCosts) {
+			
+			// iterate through costs, look at all VariableProcessingResourceCost or FixedProcessingResourceCost and in particular at their resourcecontainer.
+			ResourceContainer originalContainer = null;
+			ProcessingResourceType procResourceType = null;
+			ProcessingResourceCost cost = null;
+			if (anyCost instanceof ProcessingResourceCost){
+				cost = ((ProcessingResourceCost)anyCost);
+				originalContainer = cost.getProcessingresourcespecification().getResourceContainer_ProcessingResourceSpecification();
+				procResourceType = cost.getProcessingresourcespecification().getActiveResourceType_ActiveResourceSpecification();
+			} else {
+				// look at next cost model element
+				continue;
+			}
+			
+			// check if this is a cost model element for a replica, if yes delete it if its server is no longer in the resource environment
+			if (originalContainer.getEntityName().contains("Replica")  && !containers.contains(originalContainer)){
+				oldReplicaCosts.add(cost);
+			}
+
+			// find replicated servers and their original
+			for (ResourceContainer resourceContainer : containers) {
+				if (resourceContainer.getEntityName().contains("Replica") && resourceContainer.getId().contains(originalContainer.getId())){
+					// resourceContainer is a replica of originalResourceContainer
+					
+					// check if there already is a cost model element for the replica. If not, create a new one.
+					boolean replicaAlreadyAnnotated = false;
+					for (Cost existingCost : allCosts) {
+						if (existingCost instanceof ProcessingResourceCost){
+							ProcessingResourceCost existingProcRateCost = (ProcessingResourceCost)existingCost;
+							if (existingProcRateCost.getProcessingresourcespecification().getResourceContainer_ProcessingResourceSpecification().getId()
+								.equals(resourceContainer.getId())){
+								// there already is a cost model element annotating this replica, so continue;
+								replicaAlreadyAnnotated = true;
+								break; // inner for loop 
+							}
+						}
+					}
+					if (replicaAlreadyAnnotated){
+						continue;
+					}
+					
+					// get the processing resource spec that corresponds to the annotated one
+					ProcessingResourceSpecification replicaProcSpec = null;
+					for (ProcessingResourceSpecification procRes : resourceContainer.getActiveResourceSpecifications_ResourceContainer()) {
+						if (procRes.getActiveResourceType_ActiveResourceSpecification().getId().equals(procResourceType.getId())){
+							replicaProcSpec = procRes;
+							break;
+						}
+					}
+					if (replicaProcSpec == null){
+						logger.warn("Could not find processing resource type "+procResourceType.getEntityName()+" in container "+resourceContainer.getEntityName()+", assuming that there are no costs for it in this replica");
+						return;
+					}
+
+					// replicate cost element, too.
+					ProcessingResourceCost replicaCost = (ProcessingResourceCost)EcoreUtil.copy(cost);
+					replicaCost.setProcessingresourcespecification(replicaProcSpec);
+					replicaCosts.add(replicaCost);
+				}
+			}
+		}
+		allCosts.removeAll(oldReplicaCosts);
+		allCosts.addAll(replicaCosts);
+	}
+
+	/**
+	 * returns a cost model or throws an exception. 
+	 * @param configuration.getRawConfiguration()
+	 * @return a CostRepository which is not null
+	 * @throws CoreException if the model could not be loaded.  
+	 */
+	private CostRepository getArevaModel(DSEWorkflowConfiguration configuration) throws CoreException {
+		String costModelFileName = configuration.getRawConfiguration().getAttribute(DSEConstantsContainer.AREVA_FILE, "");
+		CostRepository cr =  (CostRepository)EMFHelper.loadFromXMIFile(costModelFileName, costPackage.eINSTANCE);
+		if (cr == null){
+			throw new CoreException(new Status(Status.ERROR, "de.uka.ipd.sdq.dsexplore", 0, "Cost model "+costModelFileName+" could not be loaded.", null));
+		}
+		return cr;
+	}
+	
+	/**
+	 * Checks whether AssemblyContext ac is used in the current system model
+	 * @param pcmInstance
+	 * @param ac
+	 * @return
+	 */
+	private boolean checkWhetherAssemblyContextIsUsed(PCMInstance pcmInstance, AssemblyContext ac) {
+		List<AssemblyContext> assemblyContexts = pcmInstance.getSystem().getAssemblyContexts__ComposedStructure();
+		for (AssemblyContext assemblyContext : assemblyContexts) {
+			if (EMFHelper.checkIdentity(assemblyContext, ac)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static void main(String args[]){
+		ArevaEvaluator ae = new ArevaEvaluator();
+	
+		ae.initEmfFactories(); //Init. default resource factories;
+		
+//		Properties config = new Properties();
+//		config.setProperty("Storage_Path", path);
+//		config.setProperty("Filename_UsageModel", usaggeModel);
+//		config.setProperty("Filename_AllocationModel", allocationModel);
+//
+//		//Headless operation of Palladio is adapted from https://github.com/DECLARE-Project/palladio-headless/ (Fabian Keller)
+//		PCMResourceSetPartition resourceSetPartition = new PCMResourceSetPartition(); // Create a resource set
+//        ArrayList<String> fileList = new ArrayList<String>();
+//        fileList.add(config.getProperty("Filename_UsageModel"));
+//        fileList.add(config.getProperty("Filename_AllocationModel"));
+//        resourceSetPartition.initialiseResourceSetEPackages(AbstractPCMWorkflowRunConfiguration.PCM_EPACKAGES);
+//        for (String modelFile : fileList) {
+//            resourceSetPartition.loadModel(modelFile);
+//        }
+//        resourceSetPartition.resolveAllProxies();
+		
+		PCMResourceSetPartition resourceSetPartition = new PCMResourceSetPartition(); // Create a resource set
+		resourceSetPartition.initialiseResourceSetEPackages(AbstractPCMWorkflowRunConfiguration.PCM_EPACKAGES);
+		resourceSetPartition.loadModel(usaggeModel);
+		resourceSetPartition.loadModel(allocationModel);
+		
+		//TODO: @Nils: Das hier klappt nicht, weil das Registieren irgendwie falsch läuft...
+		resourceSetPartition.loadModel(resourceRelationsModel); //optional, could also be loaded on demand
+		resourceSetPartition.resolveAllProxies();
+		
+		
+		DSEWorkflowConfiguration conf = new DSEWorkflowConfiguration();
+		try {
+			Map<String, Object> attr = new HashMap<String, Object>();
+			attr.put(DSEConstantsContainer.AREVA_FILE, resourceRelationsModel);
+			ILaunchConfiguration rawconf = new CustomLaunchConfiguration(attr);
+			conf.setRawConfig(rawconf);
+			ae.initialise(conf);
+		} catch (CoreException e1) {
+			e1.printStackTrace();
+		}
+		
+		PCMPhenotype pheno = new PCMPhenotype(ae.loadPCMInstance(resourceSetPartition), "genotype1", 1);
+		try {
+			ae.analyse(pheno, null);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		} catch (UserCanceledException e) {
+			e.printStackTrace();
+		} catch (JobFailedException e) {
+			e.printStackTrace();
+		} catch (AnalysisFailedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private PCMInstance loadPCMInstance(PCMResourceSetPartition resourceSetPartition ){
+		return new PCMInstance(resourceSetPartition);
+	}
+	
+	/**
+     * Manually register factories for EMF.
+     * 
+     * Author Fabian Keller, https://github.com/DECLARE-Project/palladio-headless/
+     */
+    private void initEmfFactories() {
+        for (final EPackage ePackage : AbstractPCMWorkflowRunConfiguration.PCM_EPACKAGES) {
+        	org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ePackage.getNsURI(), ePackage);
+        }
+        // register factories: http://wiki.eclipse.org/EMF/FAQ#How_do_I_use_EMF_in_standalone_applications_.28such_as_an_ordinary_main.29.3F
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("pcm", new PcmResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("core", new CoreResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("entity", new EntityResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("composition", new CompositionResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("usagemodel", new UsagemodelResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("repository", new RepositoryResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("resourcetype", new ResourcetypeResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("protocol", new ProtocolResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("parameter", new ParameterResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("reliability", new ReliabilityResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("seff", new SeffResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("seffperformance", new SeffPerformanceResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("seffreliability", new SeffReliabilityResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("qosannotations", new QosannotationsResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("qosperformance", new QosPerformanceResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("qosreliability", new QosReliabilityResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("system", new SystemResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("resourceenvironment", new ResourceenvironmentResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("allocation", new AllocationResourceFactoryImpl());
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("subsystem", new SubsystemResourceFactoryImpl());
+        
+        //TODO: @Nils: Hier registiere ich die Factory. Das ist aber Typ-inkompatibel. Die Frage ist: Wie macht das EMF, wenn du die Sache als Eclipse-Plugin startest.
+        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("resourcerelations", new ResourcerelationsFactoryImpl()); //FIXME: inkomppatibel
+//        org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("lqxo", new LqnResourceFactoryImpl());
+    }
+	
+	@Override
+	public void analyse(PCMPhenotype pheno, IProgressMonitor monitor) throws CoreException, UserCanceledException, JobFailedException, AnalysisFailedException {
+		PCMInstance pcm = pheno.getPCMInstance();  
+		
+//		updateCostModel(pcm);
+		
+		System.out.println("#AREVAAREVAAREVAAREVA#");
+		//Proprocessing
+		//1. Get all Annotated Interfaces from Ressources in ResourceGroups
+		//2. Get AssemblyContext for each used Interface
+		//3. Check whether context is used in current system
+		//4. Store context as used in a list
+		
+		HashMap<ResourceGroup,Integer> annotatedResourcesWithAmount = new HashMap<ResourceGroup, Integer>();
+		for (AssemblyContext ac : pcm.getSystem().getAssemblyContexts__ComposedStructure()){
+			System.out.println(ac.getEncapsulatedComponent__AssemblyContext());
+			
+			System.out.println("Check basicCompCand " + ac.getEntityName());
+			ResourceGroup rg = basicComp2ResourceGrp.get(ac);
+			if(rg != null){
+				//Found a group -> iifCand is part of the resource platform model!
+				System.out.println("Found interface " + ac.getEntityName() + " in platform.");
+				int quantity = annotatedResourcesWithAmount.get(rg);
+				//save number of group annotations == quantity of resource uses in pcm instance
+				if(quantity == 0)
+					annotatedResourcesWithAmount.put(rg, 1); //store group as used
+				else
+					annotatedResourcesWithAmount.replace(rg, quantity+1); //update stored group
+
+
+
+				//Validity checking
+				//1. Check whether require and/or exludes in ResourceGroups hold for each ressource
+				//2. c.f. CNF encoring and checking against a FM?!?
+				//3. If not valid: set all dimensions from qml declaration to Double.Infinity
+
+				//Scroing (if valid)
+				//1. Get Specs for each Ressource
+				//2.1. Get Property-Dimensions for each Resources
+				//2.2. Compare Dimensions with dimensions of QML declaration
+				//3. Get values for dimension
+				//4. Sum up / make mean of all values per dimension
+				//5. Store Results as analysis results
+
+
+
+				//						for(Resource r : rg.getResources()){
+				//							//do somthing
+				//						}
+			}
+		}
+		//Check annotatedResourcesWithAmount for conflicts
+		//TODO: Check group annotatedResourcesWithAmount for min/Max violations
+		//TODO: Check constraints between groups (CNF)
+		for(ResourceGroup rg : annotatedResourcesWithAmount.keySet()){
+			int amount = annotatedResourcesWithAmount.get(rg);
+			System.out.println("# " + rg.getName() + ": " + amount);
+		}
+		
+		System.out.println("#AREVAAREVAAREVAAREVA#");
+		System.exit(0); //FIXME Full stop
+		
+		
+		
+//		double initialCost = getInitialCost(pcm);
+//		double operatingCost = getOperatingCost(pcm);
+//		this.previousCostResults.put(pheno.getNumericID(), new CostAnalysisResult(
+//				CostUtil.getTotalCost(initialCost, operatingCost, costModel.getInterest(), costModel.getTimePeriodYears()), initialCost, operatingCost, 
+//				pcm, this.criterionToAspect, (CostSolverQualityAttributeDeclaration)this.qualityAttribute));
+		double testTorque = 23.42; //FIXME: Add Analysis Method
+		this.previousArevaResults.put(pheno.getNumericID(), new ArevaAnalysisResult(testTorque, pcm, this.criterionToAspect, (ArevaSolverQualityAttributeDeclaration)this.qualityAttribute));
+		CostUtil.getInstance().resetCache();
+		
+		//TODO Add Analysis Method
+		//System.out.println(pcm.getSystem().getEntityName());
+	}
+	
+	@Override
+	public void initialise(DSEWorkflowConfiguration configuration) throws CoreException {		
+		//Suche im Ressource Set
+		System.out.println("Init Ressource Set for AREVA");
+		String arevaModelFileName = configuration.getRawConfiguration().getAttribute(DSEConstantsContainer.AREVA_FILE, "");
+		System.out.println("arevaModelFileName: " + arevaModelFileName);
+		arevaSet = new ResourceSetImpl();
+		if(!fileExists(arevaModelFileName)) {
+			System.err.println("Could not load areva model! Please check the path!");
+			return;
+		}
+		URI uri;
+		if (URI.createURI(arevaModelFileName).isPlatform() || arevaModelFileName.indexOf("://") >= 0) { 
+			uri = URI.createURI(arevaModelFileName);
+		} else {
+			uri = URI.createFileURI(arevaModelFileName);
+		}
+		
+		System.out.println(arevaSet.getResource(uri, true).getContents().get(0));
+		
+		resourcePlatform = (Platform)arevaSet.getResource(uri, true).getContents().get(0);		
+		
+		basicComp2ResourceGrp = new HashMap<BasicComponent, ResourceGroup>();
+		for (ResourceGroup rg : resourcePlatform.getGroups()){
+			BasicComponent CompRes = rg.getAnnotatedComponent();
+			basicComp2ResourceGrp.put(CompRes, rg);
+		}
+		
+		initialiseCriteria(configuration);
+    }
+	
+	
+	protected boolean fileExists(String path) {
+		// if this is a platform URL, first resolve it to an absolute path
+		if (path.startsWith("platform:")){
+			try {
+				URL solvedURL = FileLocator.resolve(new URL(path));
+				path =  solvedURL.getPath();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			} 
+		} 
+		File f = new File(path);
+		return f.exists();
+	}
+
+	@Override
+	public List<Criterion> getCriterions() throws CoreException {
+		List<Criterion> criterions = new ArrayList<Criterion>();
+		 
+		criterions.addAll(criteriaList);
+
+		return criterions;
+	}
+
+	@Override
+	public IAnalysisResult retrieveResultsFor(PCMPhenotype pheno, Criterion criterion)
+			throws CoreException, AnalysisFailedException {
+		//It is always the cost value, i.e. objective and constraint always have to refer to the SimpleValue (-> no statistical requirements atm)
+		//If more possible aspects are added, the criterion needs to be examined here
+		
+		return this.previousArevaResults.get(pheno.getNumericID());
+	}
+
+	@Override
+	public boolean hasObjectivePerUsageScenario() throws CoreException {
+		return false;
+	}
+
+
+	@Override
+	public void setBlackboard(MDSDBlackboard blackboard) {
+		this.blackboard = blackboard;
+	}
+	
+	private static class CustomLaunchConfiguration implements ILaunchConfiguration {
+
+		private Map<String, Object> attr = new HashMap<String, Object>();
+		private Logger log = Logger.getLogger(CustomLaunchConfiguration.class.getName());
+
+		public CustomLaunchConfiguration(Map<String, Object> attr) {
+			this.attr = attr;
+			log.info("Using ILaunchConfiguration from " + this.getClass().getName() + " with attributes:");
+			log.info(this.toString());
+		}
+
+		@Override
+		public String toString() {
+			return this.attr.entrySet().toString();
+//			return this.attr.entrySet().stream().map((e)) {
+//				return String.format("|- %s: %s", e.getKey(), e.getValue().toString());
+//			}).collect(Collectors.joining("\n"));
+		}
+
+		@Override
+		public boolean contentsEqual(ILaunchConfiguration iLaunchConfiguration) {
+			return iLaunchConfiguration.contentsEqual(this);
+		}
+
+		@Override
+		public ILaunchConfigurationWorkingCopy copy(String s) throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public void delete() throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public boolean exists() {
+			return false;
+		}
+
+		private <T> T get(String key, T defaultValue) {
+			Object val = this.attr.get(key);
+			if (null == val) {
+				return defaultValue;
+			} else {
+				return (T) val;
+			}
+		}
+
+		@Override
+		public boolean getAttribute(String s, boolean b) throws CoreException {
+			return this.get(s, b);
+		}
+
+		@Override
+		public int getAttribute(String s, int i) throws CoreException {
+			return this.get(s, i);
+		}
+
+		@Override
+		public List<String> getAttribute(String s, List<String> list) throws CoreException {
+			return this.get(s, list);
+		}
+
+		@Override
+		public Set<String> getAttribute(String s, Set<String> set) throws CoreException {
+			return this.get(s, set);
+		}
+
+		@Override
+		public Map<String, String> getAttribute(String s, Map<String, String> map) throws CoreException {
+			return this.get(s, map);
+		}
+
+		@Override
+		public String getAttribute(String s, String s1) throws CoreException {
+			return this.get(s, s1);
+		}
+
+		@Override
+		public Map<String, Object> getAttributes() throws CoreException {
+			return this.attr;
+		}
+
+		@Override
+		public String getCategory() throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public IFile getFile() {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public IPath getLocation() {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public IResource[] getMappedResources() throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public String getMemento() throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public String getName() {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public Set<String> getModes() throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public ILaunchDelegate getPreferredDelegate(Set<String> set) throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public ILaunchConfigurationType getType() throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public ILaunchConfigurationWorkingCopy getWorkingCopy() throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public boolean hasAttribute(String s) throws CoreException {
+			return this.attr.containsKey(s);
+		}
+
+		@Override
+		public boolean isLocal() {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public boolean isMigrationCandidate() throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public boolean isWorkingCopy() {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public ILaunch launch(String s, IProgressMonitor iProgressMonitor) throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public ILaunch launch(String s, IProgressMonitor iProgressMonitor, boolean b) throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public ILaunch launch(String s, IProgressMonitor iProgressMonitor, boolean b, boolean b1) throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public void migrate() throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public boolean supportsMode(String s) throws CoreException {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public boolean isReadOnly() {
+			throw new RuntimeException("NYI");
+		}
+
+		@Override
+		public Object getAdapter(Class aClass) {
+			throw new RuntimeException("NYI");
+		}
+	}
+
+}

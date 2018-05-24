@@ -518,7 +518,6 @@ public class DSEDecoder implements Decoder<DesignDecisionGenotype, PCMPhenotype>
      * @return a String that can be used to represent this choice
      */
     public static String getDecisionString(final Choice choice){
-        //		DegreeOfFreedomInstance designDecision = choice.getDegreeOfFreedomInstance();
 
         String result = choice.getValue().toString();
 

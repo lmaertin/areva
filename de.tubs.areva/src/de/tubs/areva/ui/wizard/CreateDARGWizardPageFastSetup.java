@@ -52,6 +52,14 @@ public class CreateDARGWizardPageFastSetup extends WizardPage {
 				}
 		    });
 	    
+
+	    //add default values
+	    textBox.setText("/validation/acs/pcm/aocs.system\n" +
+	    				"/validation/acs/pcm/aocs.designdecision\n" +
+	    				"/validation/acs/pcm/aocs.resourcerelations\n" +
+	    				"aocs\n" +
+	    				"C:\\Users\\maertin\\workspaces\\areva-runtime\\validation\\acs\\pcm\\AREva_results\\CandGen");
+	    
 	    setControl(container);
 	    
 	    setPageComplete(true);

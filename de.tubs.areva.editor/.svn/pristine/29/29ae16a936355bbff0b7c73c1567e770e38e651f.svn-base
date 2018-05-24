@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated all -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="de.tubs.areva.emf.model.opmode.presentation.OpmodeModelWizardID"
+            name="%_UI_OpmodeModelWizard_label"
+            class="de.tubs.areva.emf.model.opmode.presentation.OpmodeModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/OpmodeModelFile.gif">
+         <description>%_UI_OpmodeModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated all -->
+      <editor
+            id="de.tubs.areva.emf.model.opmode.presentation.OpmodeEditorID"
+            name="%_UI_OpmodeEditor_label"
+            icon="icons/full/obj16/OpmodeModelFile.gif"
+            extensions="opmode"
+            class="de.tubs.areva.emf.model.opmode.presentation.OpmodeEditor"
+            contributorClass="de.tubs.areva.emf.model.opmode.presentation.OpmodeActionBarContributor">
+      </editor>
+   </extension>
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated darg -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="de.tubs.areva.emf.model.darg.presentation.DargModelWizardID"
+            name="%_UI_DargModelWizard_label"
+            class="de.tubs.areva.emf.model.darg.presentation.DargModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/DargModelFile.gif">
+         <description>%_UI_DargModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated darg -->
+      <editor
+            id="de.tubs.areva.emf.model.darg.presentation.DargEditorID"
+            name="%_UI_DargEditor_label"
+            icon="icons/full/obj16/DargModelFile.gif"
+            extensions="darg"
+            class="de.tubs.areva.emf.model.darg.presentation.DargEditor"
+            contributorClass="de.tubs.areva.emf.model.darg.presentation.DargActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated darg -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="de.tubs.areva.emf.model.qadag.presentation.QadagModelWizardID"
+            name="%_UI_QadagModelWizard_label"
+            class="de.tubs.areva.emf.model.qadag.presentation.QadagModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/QadagModelFile.gif">
+         <description>%_UI_QadagModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated darg -->
+      <editor
+            id="de.tubs.areva.emf.model.qadag.presentation.QadagEditorID"
+            name="%_UI_QadagEditor_label"
+            icon="icons/full/obj16/QadagModelFile.gif"
+            extensions="qadag"
+            class="de.tubs.areva.emf.model.qadag.presentation.QadagEditor"
+            contributorClass="de.tubs.areva.emf.model.qadag.presentation.QadagActionBarContributor">
+      </editor>
+   </extension>
+</plugin>

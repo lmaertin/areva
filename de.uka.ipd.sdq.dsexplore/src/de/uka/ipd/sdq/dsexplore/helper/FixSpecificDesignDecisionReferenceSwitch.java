@@ -153,7 +153,6 @@ public class FixSpecificDesignDecisionReferenceSwitch extends specificSwitch<EOb
                 }
             }
         }
-        //logger.warn("Could not find "+object.getPrimaryChanged().getEntityName()+" in design decision reference switch, errors may occur.");
         throw new RuntimeException("Cannot find PassiveResource "+id+" in the specified PCM ALlocation Model. Maybe the design decision file does not match the analysed PCM instance?");
     }
 

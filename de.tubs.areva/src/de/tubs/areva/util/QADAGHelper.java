@@ -75,7 +75,6 @@ public class QADAGHelper {
 	}
 	*/
 	
-	// I should really write a generic primitive type ref/out wrapper class for these things in Java...
 	public static int getTaggedValue(BasicComponent c)
 	{
 		String stereotypeName = "BasicComponentWithAdditionalValue";

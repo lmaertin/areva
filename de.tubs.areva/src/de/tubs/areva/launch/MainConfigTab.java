@@ -76,13 +76,6 @@ public class MainConfigTab extends FileNamesInputTab {
 			MainConfigTab.this.updateLaunchConfigurationDialog();
 		}
 	};
-	
-//	private class MainConfigTabListener extends SelectionAdapter implements ModifyListener {
-//		public void modifyText(ModifyEvent e) {
-//			updateLaunchConfigurationDialog();
-//			MainConfigTab.this.setDirty(true);
-//		}
-//	}
 
 	private class ComboBoxListener extends SelectionAdapter implements SelectionListener{
 		@Override
@@ -716,7 +709,7 @@ public class MainConfigTab extends FileNamesInputTab {
 
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		// TODO Auto-generated method stub
+		
 
 	}
 	

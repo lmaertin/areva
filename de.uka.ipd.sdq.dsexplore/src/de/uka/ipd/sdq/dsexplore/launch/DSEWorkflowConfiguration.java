@@ -605,7 +605,6 @@ AbstractPCMWorkflowRunConfiguration {
 		|| getUseServerExpansion() 
 		|| getUseLinkReallocationTactic()
 		|| getUseAntipatternKnowledge();
-		//return true;
 	}
 
 	public void setEvaluators(List<IAnalysis> evaluators) {

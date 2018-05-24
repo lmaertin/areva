@@ -167,7 +167,6 @@ public class ExtensionHelper {
 		IConfigurationElement[] elements = extension.getConfigurationElements();
 		for (IConfigurationElement element : elements) {
 			if (element.getName().equals("analysis")) {
-				//return element.getAttribute("qualityAttribute");
 				try {
 					IAnalysisQualityAttributeDeclaration attribute = (IAnalysisQualityAttributeDeclaration)element.createExecutableExtension("qualityAttributeHandler");
 					return attribute.getDimensions();

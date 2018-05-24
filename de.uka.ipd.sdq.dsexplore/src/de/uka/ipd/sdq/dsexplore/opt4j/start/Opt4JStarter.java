@@ -645,7 +645,6 @@ public class Opt4JStarter {
 									try {
 										valueDifferences.add(((InsignificantSetQualityImprovementConfig) conf).new ValueDifference(o, uvd.averageImprovement, uvd.maxMinImprovement));
 									} catch (InvalidConfigException e) {
-										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
 									break;
@@ -655,7 +654,6 @@ public class Opt4JStarter {
 									try {
 										valueDifferences.add(((InsignificantSetQualityImprovementConfig) conf).new ValueDifference(o, uvd.averageImprovement, uvd.maxMinImprovement));
 									} catch (InvalidConfigException e) {
-										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
 									break;
@@ -670,7 +668,6 @@ public class Opt4JStarter {
 					try {
 						((InsignificantSetQualityImprovementConfig) conf).setValueDifferences(valueDifferences);
 					} catch (InvalidConfigException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					

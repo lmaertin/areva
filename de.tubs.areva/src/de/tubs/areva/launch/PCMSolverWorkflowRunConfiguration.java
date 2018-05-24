@@ -104,9 +104,7 @@ public class PCMSolverWorkflowRunConfiguration extends
 	}
 
 	@Override
-	public String getErrorMessage() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getErrorMessage() {return null;
 	}
 
 	public String getItLimit() {
@@ -271,8 +269,6 @@ public class PCMSolverWorkflowRunConfiguration extends
 
 	@Override
 	public void setDefaults() {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void setDistance(double distance) {

@@ -2416,7 +2416,7 @@ public class TerminationCriteriaTab extends AbstractLaunchConfigurationTab {
 
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		// TODO Auto-generated method stub
+		
 
 	}
 

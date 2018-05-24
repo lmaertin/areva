@@ -31,28 +31,22 @@ public class RuleChecker {
 		//	</Expression>
 		//</Rules>
 		for(Rule rule : resourceRelations.getRules()){
-			//				System.out.println("Rule " + rule.getName() + ":");
 			Implies implies = rule.getExpression();
 			ResourceOptions rgLeft = implies.getLeftHandSide().getResourceOptions();
 			Expression expr = implies.getRightHandSide();
 			if(individual.getAffectedResourceGroups().contains(rgLeft)){
-				//					System.out.print(rgLeft.getName() + "->");
 				result = checkExpression(expr, individual); //Check right hand side for "rgLeft -> ..."
 			}
 			else{
 				if(implies.isLeftHandSideModifier()){
 					result = true; //rule is irrelevant, this resource group is not considered
-					//						System.out.println("(not checked, " + rgLeft.getName() + " is not considered in candidate here.)");
 				}
 				else{ //false is Not
-					//						System.out.print("!" + rgLeft.getName() + "->");
 					result = checkExpression(expr, individual); //Check right hand side for "!rgLeft -> ..."
 				}
 			}
-			//				System.out.println(" ==> " + result);
 
 			if(!result){
-				//					System.out.println("stop checking; at least 1 rule failed.");
 				break; 
 			}
 		}
@@ -69,31 +63,26 @@ public class RuleChecker {
 		if(expr instanceof And){
 			And and = (And)expr;
 			boolean left = checkExpression(and.getLeftHandSide(), individual);
-			//				System.out.print(" & ");
 			boolean right = checkExpression(and.getRightHandSide(), individual);
 			return left && right;
 		}
 		else if(expr instanceof Or){
 			Or or = (Or)expr;
 			boolean left = checkExpression(or.getLeftHandSide(), individual);
-			//				System.out.print(" | ");
 			boolean right = checkExpression(or.getRightHandSide(), individual);
 			return left || right;
 		}
 		else if (expr instanceof Not){
 			Not not = (Not)expr;
-			//				System.out.print("!");
 			return !checkExpression(not.getExpression(), individual);
 		}
 		else if (expr instanceof ResourceOptionsVariable){
 			ResourceOptionsVariable rqVarExpr = (ResourceOptionsVariable)expr;
 			ResourceOptions varRq = rqVarExpr.getResourceOptions();
 			if(individual.getAffectedResourceGroups().contains(varRq)){
-				//					System.out.print(varRq.getName() + "(true)");
 				return true;
 			}
 			else{
-				//					System.out.print(varRq.getName() + "(false)");
 				return false;
 			}
 		}
@@ -111,11 +100,9 @@ public class RuleChecker {
 					}
 				}
 			}
-			//				System.out.print(varRes.getName()  + "("+ isInSet + ")");
 			return isInSet;
 		}
 		else{
-			//				System.out.print("else (false)");
 			return false;
 		}
 	}

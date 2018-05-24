@@ -66,7 +66,6 @@ public class CalculateCandidatesHandler extends AbstractHandler implements IHand
 		String usageScenarioName = wizard.usageModelPage.usageScenarioName;
 		
 		String timeStamp = new SimpleDateFormat("yyyy-MM-dd-HHmmss").format(new Date());
-//		String outputDir = wizard.outputPage.outputDirectory.replace('\\', '/') + "/" + timeStamp + "/";
 		String outputDir = wizard.outputPage.outputDirectory.replace('\\', '/') + "/";
 	    String allCandPath = outputDir + DSEConstantsContainer.ALL_CANDIDATES + "_" + timeStamp + ".csv";
 	    String allCandPathInverted = outputDir + DSEConstantsContainer.ALL_CANDIDATES + "_" + timeStamp + "_inverted.csv";
@@ -151,10 +150,7 @@ public class CalculateCandidatesHandler extends AbstractHandler implements IHand
 						
 			boolean valid = RuleChecker.checkAllRules(resourceRelations, individual); //check platform constraints
 			
-			if(valid){
-//				System.out.println("Valid");
-//				individual.check(); //TODO: Check
-				countValid++;
+			if(valid){countValid++;
 				individuals.add(individual);
 				//2.B If valid: Do scoring
 				//1. Get all specs for each Resource
@@ -164,7 +160,6 @@ public class CalculateCandidatesHandler extends AbstractHandler implements IHand
 				//4. Sum up (before: make mean) of all values per dimension
 				//5. Store Results as analysis results
 				for(ResourceOptions rg : individual.getAffectedResourceGroups()){
-//					System.out.println("Check ResourceGrp " + rg.getName());
 					Set<Resource> redundantRes = new HashSet<Resource>();
 					int numberOfElements = Integer.parseInt(rg.getMinElements()); //FIXME: Repair emf model, no min/max elements, just number of necessary elements for execution
 					int sizeOfResourceSet = rg.getResources().size();
@@ -172,18 +167,12 @@ public class CalculateCandidatesHandler extends AbstractHandler implements IHand
 						for(Specification spec : res.getSpecs()){			
 							//Respect number of resources and redundancy-relations between them, i.e., hot or cold redundancies.
 							if(numberOfElements == sizeOfResourceSet){	//1. Hot redundancy: #Elements == rg.getResources()
-//								System.out.println("hot redundancy");
 								individual.addValueToDimension(spec);
 							}
 							else{ 										//2. Cold redundancy: Leave out redundant elements, i.e., just select first resource of the redundancy options
-								if(!redundantRes.containsAll(res.getRedundant())){
-//									System.out.println("cold redundancy: new element");
-									redundantRes.add(res);
+								if(!redundantRes.containsAll(res.getRedundant())){redundantRes.add(res);
 									individual.addValueToDimension(spec);
 								}
-//								else{
-//									System.out.println("cold redundancy: redundant element (ignored)");
-//								}
 							}
 						}
 					}
@@ -191,7 +180,6 @@ public class CalculateCandidatesHandler extends AbstractHandler implements IHand
 			}
 			else{
 				countInvalid++;
-//				System.out.println("Invalid");
 			}
 		}
 		
@@ -206,14 +194,11 @@ public class CalculateCandidatesHandler extends AbstractHandler implements IHand
 			ArevaIndividual individual = individuals.get(i);
 			for (int j = i + 1; j < individuals.size(); j++){
 				ArevaIndividual opponent = individuals.get(j);
-//				System.out.println(individual.getId()+ " vs " + opponent.getId());
 				if(individual != opponent){
 					if(individual.dominates(opponent)){
-//						System.out.println(individual.getId()+ " dominates " + opponent.getId() + ", setsize: " + toBeRemoved.size());
 						toBeRemoved.add(opponent);
 					}
 					else if(opponent.dominates(individual)){
-//						System.out.println(individual.getId() + " dominated by " + opponent.getId() + ", setsize: " + toBeRemoved.size());
 						toBeRemoved.add(individual);
 					}
 				}
@@ -221,23 +206,6 @@ public class CalculateCandidatesHandler extends AbstractHandler implements IHand
 		}
 
 		individualsOptimal.removeAll(toBeRemoved);
-		
-//		System.out.println("Print " + individuals.size() +  " all: ");
-//		for(ArevaIndividual individual : individuals){
-//			System.out.println(individual);
-//		}
-		
-//		System.out.println("Print " + toBeRemoved.size() +  " toBeRemoved: ");
-//		for(ArevaIndividual individual : toBeRemoved){
-//			System.out.println(individual);
-//		}
-		
-//		System.out.println("Print " + individualsOptimal.size() +  " optimals: ");
-//		for(ArevaIndividual individual : individualsOptimal){
-//			System.out.println(individual);
-//		}
-		
-//		convertMaxToMinProblem(individuals);
 		
 		writeResults(allCandPath, individuals, usageScenarioName, false); //write all candidates 
 		writeResults(archiveCandPath, individualsOptimal, usageScenarioName, false); //write optimal candidates

@@ -240,8 +240,6 @@ public class AlternativeComponent  {
 
         final RepositoryComponent assembledComponent = assemblyContext.getEncapsulatedComponent__AssemblyContext();
 
-        //logger.debug("isAlternativeFor(..) called");
-
         // first check whether the two parameters are the same component, if
         // yes, return false.
         //if (checkIdentity(assembledComponent, alternativeComponent))
@@ -351,7 +349,7 @@ public class AlternativeComponent  {
 
         // If not all required interfaces of the alternative component are
         // required by the assembled one, return false.
-        //TODO: This should be unreachable... but maybe leave it to be sure.
+        //TODO: This should be unreachable, but maybe leave it to be sure.
         if (requiredMapping.size() != altrrl.size()) {
             /*			logger.debug("The required interfaces of "
 					+ assembledComponent.getEntityName() + " and "

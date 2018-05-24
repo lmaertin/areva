@@ -19,7 +19,6 @@ public class PCMSolverJob extends SequentialBlackboardInteractingJob<MDSDBlackbo
 	public PCMSolverJob(PCMSolverWorkflowRunConfiguration config, ILaunch launch) {
 		super(false);
 
-		// 0. NILS
 		this.addJob(new TestJob(config));
 		
 		// 1. Load PCM Models into memory

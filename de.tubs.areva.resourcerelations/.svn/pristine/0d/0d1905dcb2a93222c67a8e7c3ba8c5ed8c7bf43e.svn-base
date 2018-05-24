@@ -1,0 +1,223 @@
+/**
+ */
+package de.tubs.areva.resourcerelations;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
+
+import org.palladiosimulator.pcm.repository.BasicComponent;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Resource Group</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getResources <em>Resources</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getName <em>Name</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getMinElements <em>Min Elements</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getMaxElements <em>Max Elements</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getAnnotatedComponent <em>Annotated Component</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getExcludeGroups <em>Exclude Groups</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getIncludeGroups <em>Include Groups</em>}</li>
+ *   <li>{@link de.tubs.areva.resourcerelations.ResourceGroup#getSpecifications <em>Specifications</em>}</li>
+ * </ul>
+ *
+ * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup()
+ * @model
+ * @generated
+ */
+public interface ResourceGroup extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Resources</b></em>' reference list.
+	 * The list contents are of type {@link de.tubs.areva.resourcerelations.Resource}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resources</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Resources</em>' reference list.
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_Resources()
+	 * @model
+	 * @generated
+	 */
+	EList<Resource> getResources();
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_Name()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.resourcerelations.ResourceGroup#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Min Elements</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Min Elements</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Min Elements</em>' attribute.
+	 * @see #setMinElements(String)
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_MinElements()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 * @generated
+	 */
+	String getMinElements();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.resourcerelations.ResourceGroup#getMinElements <em>Min Elements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Min Elements</em>' attribute.
+	 * @see #getMinElements()
+	 * @generated
+	 */
+	void setMinElements(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Max Elements</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Max Elements</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Max Elements</em>' attribute.
+	 * @see #setMaxElements(String)
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_MaxElements()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 * @generated
+	 */
+	String getMaxElements();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.resourcerelations.ResourceGroup#getMaxElements <em>Max Elements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Max Elements</em>' attribute.
+	 * @see #getMaxElements()
+	 * @generated
+	 */
+	void setMaxElements(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Annotated Component</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Annotated Component</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Annotated Component</em>' reference.
+	 * @see #setAnnotatedComponent(BasicComponent)
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_AnnotatedComponent()
+	 * @model
+	 * @generated
+	 */
+	BasicComponent getAnnotatedComponent();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.resourcerelations.ResourceGroup#getAnnotatedComponent <em>Annotated Component</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Annotated Component</em>' reference.
+	 * @see #getAnnotatedComponent()
+	 * @generated
+	 */
+	void setAnnotatedComponent(BasicComponent value);
+
+	/**
+	 * Returns the value of the '<em><b>Exclude Groups</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Exclude Groups</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exclude Groups</em>' reference.
+	 * @see #setExcludeGroups(ResourceGroup)
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_ExcludeGroups()
+	 * @model
+	 * @generated
+	 */
+	ResourceGroup getExcludeGroups();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.resourcerelations.ResourceGroup#getExcludeGroups <em>Exclude Groups</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Exclude Groups</em>' reference.
+	 * @see #getExcludeGroups()
+	 * @generated
+	 */
+	void setExcludeGroups(ResourceGroup value);
+
+	/**
+	 * Returns the value of the '<em><b>Include Groups</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Include Groups</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Include Groups</em>' reference.
+	 * @see #setIncludeGroups(ResourceGroup)
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_IncludeGroups()
+	 * @model
+	 * @generated
+	 */
+	ResourceGroup getIncludeGroups();
+
+	/**
+	 * Sets the value of the '{@link de.tubs.areva.resourcerelations.ResourceGroup#getIncludeGroups <em>Include Groups</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Include Groups</em>' reference.
+	 * @see #getIncludeGroups()
+	 * @generated
+	 */
+	void setIncludeGroups(ResourceGroup value);
+
+	/**
+	 * Returns the value of the '<em><b>Specifications</b></em>' reference list.
+	 * The list contents are of type {@link de.tubs.areva.resourcerelations.Specification}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Specifications</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Specifications</em>' reference list.
+	 * @see de.tubs.areva.resourcerelations.ResourcerelationsPackage#getResourceGroup_Specifications()
+	 * @model
+	 * @generated
+	 */
+	EList<Specification> getSpecifications();
+
+} // ResourceGroup

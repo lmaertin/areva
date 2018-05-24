@@ -1,0 +1,71 @@
+package de.tubs.areva.ui.wizard;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.jface.wizard.WizardPage;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
+
+import de.tubs.areva.ui.dialog.ResourceFileSelectionDialog;
+
+public class SelectUsageScenarioNamePage extends WizardPage {
+
+	private Composite container;
+	
+	public String usageScenarioName="";
+	
+	public SelectUsageScenarioNamePage() {
+		super("Choose usage scenario name");
+		setTitle("Choose usage scenario name");
+		setDescription("Choose the Palladio usage scenario name.");
+	}
+	
+	@Override
+	public void createControl(Composite parent) {
+		container = new Composite(parent, SWT.NONE);
+		GridLayout layout = new GridLayout();
+		container.setLayout(layout);
+		layout.numColumns = 2;
+	    
+	    GridData gridData = new GridData(SWT.FILL, SWT.FILL, true,
+		        false);
+	    
+	    Text textBox = new Text(container, SWT.MULTI | SWT.BORDER | SWT.WRAP);
+	    
+	    textBox.setLayoutData(gridData);
+	    
+	    textBox.addModifyListener(new ModifyListener() {
+
+				@Override
+				public void modifyText(ModifyEvent e) {
+					
+					if(!textBox.getText().isEmpty()) {
+						
+						usageScenarioName = textBox.getText();
+						setPageComplete(true);
+					} else {
+						
+						usageScenarioName = "";
+						setPageComplete(true);
+					}
+					
+				}
+
+			
+		    });
+	    
+	    setControl(container);
+	    
+	    setPageComplete(true);
+	}
+
+}

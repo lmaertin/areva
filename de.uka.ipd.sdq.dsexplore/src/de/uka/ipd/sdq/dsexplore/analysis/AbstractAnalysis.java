@@ -49,7 +49,6 @@ public abstract class AbstractAnalysis implements IAnalysis{
 	}
 
 	public QualityAttribute getQualityAttribute() throws CoreException {
-		//return DSEConstantsContainer.MEAN_RESPONSE_TIME_QUALITY;
 		return qualityAttribute.getQualityAttribute();
 	}
 
@@ -158,7 +157,7 @@ public abstract class AbstractAnalysis implements IAnalysis{
 					throw new RuntimeException("Unsupported Requirement!");
 				}
 			} else {
-				//XXX: This should never be the case if the optimization is started with the LaunchConfig the aspect is checked there as well
+				// This should never be the case if the optimization is started with the LaunchConfig the aspect is checked there as well
 				throw new RuntimeException("Evaluation aspect not supported(" + aspectContext.getEvaluationAspect() + ")!");
 			}
 		}

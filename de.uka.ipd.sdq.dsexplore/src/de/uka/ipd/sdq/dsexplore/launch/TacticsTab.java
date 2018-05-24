@@ -672,14 +672,6 @@ public class TacticsTab extends FileNamesInputTab {
 
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-//		configuration.setAttribute(DSEConstantsContainer.THRESHOLD, "0.7");
-//		configuration.setAttribute(DSEConstantsContainer.INCR_FACTOR, "1.1");
-//		configuration.setAttribute(
-//				DSEConstantsContainer.INDIVIDUALS_PER_GENERATION, "3");
-//		configuration.setAttribute(DSEConstantsContainer.DESIGN_DECISIONS_ONLY,
-//				false);
-//		configuration.setAttribute(DSEConstantsContainer.OPTIMISATION_ONLY,
-//				false);
 		
 		configuration.setAttribute(DSEConstantsContainer.USE_REALLOCATION, USE_REALLOCATION_DEFAULT);
 		configuration.setAttribute(DSEConstantsContainer.REALLOCATION_UTILISATION_DIFFERENCE, Double.toString(REALLOCATION_UTILISATION_DIFFERENCE_DEFAULT));

@@ -8,8 +8,6 @@ public interface IStatisticAnalysisResult extends IAnalysisResult {
 
 	public double getMedianValue();
 	
-	//public double getUtilisationOfResource(PassiveResourceSpecification resource);
-
 	public double getMeanValue();
 	
 	public double getStandardDeviation();

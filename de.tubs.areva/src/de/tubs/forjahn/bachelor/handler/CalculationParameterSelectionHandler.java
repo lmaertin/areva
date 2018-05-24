@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -107,7 +108,6 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 	    try {
 			Files.createDirectories(filePath);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	    
@@ -120,7 +120,6 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 			try {
 				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 			} catch (CoreException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -134,6 +133,8 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 		
 		List<Resource> activeResources = new ArrayList<>();
 		
+		Map<String, Double> highestCentrality = new HashMap<>();
+		
 		// acquire active resources
 		for(ARG domain: domains) {
 			for(Architecture architecture: domain.getArchitectures()) {
@@ -142,7 +143,12 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 					getAllResources(option, activeResources);
 				}
 			}
+			double highestCentralityValue = Numbers.getHighestCentrality(domain, centrality);
+			
+			highestCentrality.put(domain.getName(), highestCentralityValue);
 		}
+		
+		int allResourcesCount = activeResources.size();
 		
 		Document dom;
 
@@ -154,7 +160,6 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 		try {
 			db = dbf.newDocumentBuilder();
 		} catch (ParserConfigurationException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	    // create instance of DOM
@@ -260,7 +265,7 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 				
 				for(Architecture architecture: domain.getArchitectures()) {
 					
-					appendArchitectureData(domain, architecture, architecturesEle, dom, c1, c2, c3, centrality);
+					appendArchitectureData(domain, architecture, architecturesEle, dom, c1, c2, c3, centrality, allResourcesCount, highestCentrality.get(domain.getName()));
 				}
 				
 				Element domainDifferencesEle = dom.createElement("domainDifferences");
@@ -298,14 +303,10 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 						
 						for(Architecture architecture: jumpArchitectures) {
 							
-							appendArchitectureData(comparedDomain, architecture, jumpArchitecturesEle, dom, c1, c2, c3, centrality);
+							appendArchitectureData(comparedDomain, architecture, jumpArchitecturesEle, dom, c1, c2, c3, centrality, allResourcesCount, highestCentrality.get(comparedDomain.getName()));
 							
 							
-							double stValue =  (
-									(c1 * architecture.getQuality())
-									+ (c2 * Numbers.getDegreeCentrality(architecture))
-									+ (c3 * architecture.getBoundResources().size())
-									);
+							double stValue =  IdealJumpArchitectures.getStaticArchitectureJumpValue(comparedDomain, architecture, c1, c2, c3, centrality, allResourcesCount, highestCentrality.get(comparedDomain.getName()));
 							
 							if(stValue > idealJumpArchitectureValue) {
 								idealJumpArchitectureValue = stValue;
@@ -316,7 +317,7 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 						Element idealJumpArchitecturesEle = dom.createElement("idealJumpArchitectures");
 						domainDifferenceEle.appendChild(idealJumpArchitecturesEle);
 						
-						appendArchitectureData(comparedDomain, idealJumpArchitecture, idealJumpArchitecturesEle, dom, c1, c2, c3, Centrality.DEGREE);
+						appendArchitectureData(comparedDomain, idealJumpArchitecture, idealJumpArchitecturesEle, dom, c1, c2, c3, centrality, allResourcesCount, highestCentrality.get(comparedDomain.getName()));
 						
 					}
 				}
@@ -325,9 +326,9 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 			Element opmodeOrdersEle = dom.createElement("opmodeOrders");
 			thisPathEle.appendChild(opmodeOrdersEle);
 			
-			List<ARG> idealOrder = null;
+			List<ARG> idealOrder = new ArrayList<>();
 			int idealOrderNumber = 0;
-			int idealOrderDif = Integer.MAX_VALUE;
+			double idealOrderDif = 0d;
 			
 			int j = 0;
 			
@@ -344,7 +345,9 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 				attr.setValue("" + j);
 				opmodeOrderEle.setAttributeNode(attr);
 				
-				int difference = 0;
+
+				
+				double staticJumpValueSum = 0d;
 				
 				for(int i = 0; i < permutation.size(); i++) {
 					
@@ -360,24 +363,30 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 					if(i > 0) {
 	
 						ARG target = permutation.get(i-1);
-					
-						int localDifference = IdealOpModeOrder.getDomainPairDifference(source, target);
 						
-						difference += localDifference;
+						List<Architecture> jumpArchitectures = IdealJumpArchitectures.getJumpArchitectures(source, target);
 						
-						attr = dom.createAttribute("cost");
-						attr.setValue("" + localDifference);
+						double localStaticJumpValueSum = 0d;
+						
+						for(Architecture jumpArchitecture: jumpArchitectures) {
+							localStaticJumpValueSum += IdealJumpArchitectures.getStaticArchitectureJumpValue(target, jumpArchitecture, c1, c2, c3, centrality, allResourcesCount, highestCentrality.get(target.getName()));
+						}
+						
+						staticJumpValueSum += localStaticJumpValueSum;
+						
+						attr = dom.createAttribute("staticJumpValueSum");
+						attr.setValue("" + localStaticJumpValueSum);
 						domainEle.setAttributeNode(attr);
 					}
 				}
 				
-				attr = dom.createAttribute("differences");
-				attr.setValue("" + difference);
+				attr = dom.createAttribute("totalStaticJumpValueSum");
+				attr.setValue("" + staticJumpValueSum);
 				opmodeOrderEle.setAttributeNode(attr);
 				
-				if(difference < idealOrderDif) {
+				if(staticJumpValueSum > idealOrderDif) {
 					idealOrder = permutation;
-					idealOrderDif = difference;
+					idealOrderDif = staticJumpValueSum;
 					idealOrderNumber = j;
 				}
 			}
@@ -442,7 +451,7 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
         }
 	}
 	
-	private void appendArchitectureData(ARG domain, Architecture architecture, Element architecturesEle, Document dom, double c1, double c2, double c3, Centrality centrality) {
+	private void appendArchitectureData(ARG domain, Architecture architecture, Element architecturesEle, Document dom, double c1, double c2, double c3, Centrality centrality, int allResourcesCount, double highestCentrality) {
 		Attr attr = null;
 		Element architectureEle = dom.createElement("architecture");
 		architecturesEle.appendChild(architectureEle);
@@ -461,40 +470,24 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 		architectureEle.setAttributeNode(attr);
 		
 		// centrality
-		if(centrality == Centrality.DEGREE) {
-			attr = dom.createAttribute("centrality");
-			attr.setValue("" + Numbers.getDegreeCentrality(architecture));
-			architectureEle.setAttributeNode(attr);
-			attr = dom.createAttribute("weightedCentrality");
-			attr.setValue("" + (c2 * Numbers.getDegreeCentrality(architecture)));
-			architectureEle.setAttributeNode(attr);
-			
-		} else if(centrality == Centrality.BETWEEN) {
 		
-			attr = dom.createAttribute("centrality");
-			attr.setValue("" + Numbers.getBetweenCentrality(domain, architecture));
-			architectureEle.setAttributeNode(attr);
-			attr = dom.createAttribute("weightedCentrality");
-			attr.setValue("" + (c2 * Numbers.getBetweenCentrality(domain, architecture)));
-			architectureEle.setAttributeNode(attr);
-			
-		} else {
+		double centralityValue = Numbers.getCentrality(domain, architecture, centrality) / highestCentrality;
+		attr = dom.createAttribute("centrality");
+		attr.setValue("" + centralityValue);
+		architectureEle.setAttributeNode(attr);
+		attr = dom.createAttribute("weightedCentrality");
+		attr.setValue("" + c2 * centralityValue);
+		architectureEle.setAttributeNode(attr);
 		
-			attr = dom.createAttribute("centrality");
-			attr.setValue("" + Numbers.getClosenessCentrality(domain, architecture));
-			architectureEle.setAttributeNode(attr);
-			attr = dom.createAttribute("weightedCentrality");
-			attr.setValue("" + (c2 * Numbers.getClosenessCentrality(domain, architecture)));
-			architectureEle.setAttributeNode(attr);
-		}
 		
 		// used resources
+		double architecturesValue = architecture.getBoundResources().size() / (double) allResourcesCount;
 		attr = dom.createAttribute("usedResourcesCount");
-		attr.setValue("" + architecture.getBoundResources().size());
+		attr.setValue("" + architecturesValue);
 		architectureEle.setAttributeNode(attr);
 		
 		attr = dom.createAttribute("weightedUsedResourcesCount");
-		attr.setValue("" + (c3 * architecture.getBoundResources().size()));
+		attr.setValue("" + (c3 * architecturesValue));
 		architectureEle.setAttributeNode(attr);
 		
 		Element usedResourcesEle = dom.createElement("usedResources");
@@ -510,39 +503,9 @@ public class CalculationParameterSelectionHandler extends AbstractHandler implem
 			usedResourceEle.setAttributeNode(attr);
 		}
 		
-		if(centrality == Centrality.DEGREE) {
-		
-			attr = dom.createAttribute("staticJumpValue");
-			attr.setValue("" + (
-					(c1 * architecture.getQuality())
-					+ (c2 * Numbers.getDegreeCentrality(architecture))
-					+ (c3 * architecture.getBoundResources().size())
-					));
-			architectureEle.setAttributeNode(attr);
-			
-		} else if(centrality == Centrality.BETWEEN) {
-		
-			attr = dom.createAttribute("staticJumpValue");
-			attr.setValue("" + (
-					(c1 * architecture.getQuality())
-					+ (c2 * Numbers.getBetweenCentrality(domain, architecture))
-					+ (c3 * architecture.getBoundResources().size())
-					));
-			architectureEle.setAttributeNode(attr);
-			
-		} else {
-		
-			attr = dom.createAttribute("staticJumpValue");
-			attr.setValue("" + (
-					(c1 * architecture.getQuality())
-					+ (c2 * Numbers.getClosenessCentrality(domain, architecture))
-					+ (c3 * architecture.getBoundResources().size())
-					));
-			architectureEle.setAttributeNode(attr);
-		
-		}
-		
-		
+		attr = dom.createAttribute("staticJumpValue");
+		attr.setValue("" + IdealJumpArchitectures.getStaticArchitectureJumpValue(domain, architecture, c1, c2, c3, centrality, allResourcesCount, highestCentrality));
+		architectureEle.setAttributeNode(attr);
 	}
 
 	private void getAllResources(ResourceOptions options, List<Resource> allResources) {

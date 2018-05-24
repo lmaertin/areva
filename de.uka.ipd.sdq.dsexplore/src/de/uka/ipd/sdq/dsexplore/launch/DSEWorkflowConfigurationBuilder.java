@@ -46,7 +46,6 @@ public class DSEWorkflowConfigurationBuilder extends
 			String mode, DSELaunch dseLaunch) throws CoreException {
 		super(configuration, mode);
 		this.dseLaunch = dseLaunch;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -175,7 +174,6 @@ public class DSEWorkflowConfigurationBuilder extends
 		for(QualityAttribute d : new AnalysisQualityAttributes().getAllQualityAttributes()) {
 			addEvaluatorsIfSelected(evaluators, d, config);
 		}
-		//addEvaluatorsIfSelected(evaluators, DSEConstantsContainer.SECURITY, config);
 		config.setEvaluators(evaluators);
 		
 		addTerminationCriteriaSettings(config);
@@ -248,7 +246,7 @@ public class DSEWorkflowConfigurationBuilder extends
 		// now this should be an absolute path, but it can have either slashes or backslashes
 		int indexBackslash = fileURL.lastIndexOf("\\");
 		int indexSlash = fileURL.lastIndexOf("/");
-		// the right directory separator is the one where the above results in the higher index (assuming that linux file systems do not allow backslashes in file names...)
+		// the right directory separator is the one where the above results in the higher index (assuming that linux file systems do not allow backslashes in file names)
 		int index = indexBackslash > indexSlash ? indexBackslash : indexSlash; 
 		String folderPath = fileURL.substring(0, index+1); 
 		return folderPath;
@@ -273,7 +271,6 @@ public class DSEWorkflowConfigurationBuilder extends
 					mgnc.setMaximumNumberOfIterations(this.getIntegerAttribute(DSEConstantsContainer.TC_MAX_NUM_OF_GEN_LIMIT));
 					config.getTCConfigurations().add(mgnc);
 				} catch (InvalidConfigException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -293,7 +290,6 @@ public class DSEWorkflowConfigurationBuilder extends
 						config.getTCConfigurations().add(etc);
 					}
 				} catch (InvalidConfigException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -305,7 +301,6 @@ public class DSEWorkflowConfigurationBuilder extends
 					nnpocf.setIterationsWithoutNewCandidates(this.getIntegerAttribute(DSEConstantsContainer.TC_NO_NEW_CANDIDATES_ITERATIONS_WITHOUT));
 					config.getTCConfigurations().add(nnpocf);
 				} catch (InvalidConfigException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -324,7 +319,6 @@ public class DSEWorkflowConfigurationBuilder extends
 					}
 					config.getTCConfigurations().add(poss);
 				} catch (InvalidConfigException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -349,7 +343,6 @@ public class DSEWorkflowConfigurationBuilder extends
 					mqcvc.setUnresolvedObjectiveMinimalValue(unresolvedObjectives);
 					config.getTCConfigurations().add(mqcvc);
 				} catch (InvalidConfigException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -362,7 +355,6 @@ public class DSEWorkflowConfigurationBuilder extends
 					gpfir.setPercentagesToCover(this.getIntegerAttribute(DSEConstantsContainer.TC_PARETO_FRONT_IS_REACHED_PERCENTAGES_TO_COVER)/100d);
 					config.getTCConfigurations().add(gpfir);
 				} catch (InvalidConfigException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -388,13 +380,10 @@ public class DSEWorkflowConfigurationBuilder extends
 					isqic.setUnresolvedValueDifferences(unresolvedValueDifferences);
 					config.getTCConfigurations().add(isqic);
 				} catch (InvalidConfigException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -407,7 +396,6 @@ public class DSEWorkflowConfigurationBuilder extends
 					ipfc.setMinimumAllowedDifference(this.getIntegerAttribute(DSEConstantsContainer.TC_INSIGNIFICANT_FRONT_CHANGE_IMPROVEMENT)/100d);
 					config.getTCConfigurations().add(ipfc);
 				} catch (InvalidConfigException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

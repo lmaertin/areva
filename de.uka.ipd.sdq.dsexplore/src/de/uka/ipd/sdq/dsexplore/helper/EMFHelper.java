@@ -205,24 +205,7 @@ public class EMFHelper {
             Logger.getLogger("de.uka.ipd.sdq.dsexplore").error(e.getMessage());
             return null;
         }
-
-        // logger.debug("Loaded " + uri);
-
-        // if (!fileName.endsWith(".assembly") &&
-        // !fileName.endsWith("repository")) {
-        // // Validate the contents of the loaded resource.
-        // for (Iterator j = resource.getContents().iterator(); j.hasNext();) {
-        // EObject eObject = (EObject) j.next();
-        // Diagnostic diagnostic = Diagnostician.INSTANCE
-        // .validate(eObject);
-        // if (diagnostic.getSeverity() != Diagnostic.OK) {
-        // System.out.println();
-        // System.out.println(diagnostic.getMessage());
-        // // printDiagnostic(diagnostic, "");
-        //
-        // }
-        // }
-        // }
+        
         final EObject eObject = resource.getContents().iterator().next();
         return EcoreUtil.getRootContainer(eObject);
     }

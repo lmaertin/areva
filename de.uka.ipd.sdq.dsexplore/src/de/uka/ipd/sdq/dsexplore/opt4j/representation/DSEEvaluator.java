@@ -241,7 +241,6 @@ public class DSEEvaluator implements Evaluator<PCMPhenotype>{
 
 		for (Resource resource : resourceList) {
 			if (resource.getURI().toString().contains("pathmap")){
-				//XXX: is it right that the model is not copied when a pathmap is present? hm...
 				analysisPartition.loadModel(resource.getURI());
 			} else {
 				List<EObject> contentList = resource.getContents();

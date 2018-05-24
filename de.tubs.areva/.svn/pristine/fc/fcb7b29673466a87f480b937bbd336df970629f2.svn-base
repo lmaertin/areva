@@ -1,0 +1,67 @@
+package de.tubs.areva.command;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.IHandler;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.ui.handlers.HandlerUtil;
+
+import de.tubs.areva.resourcerelations.Platform;
+import de.tubs.areva.ui.wizard.CalculateCandidatesWizard;
+import de.tubs.areva.ui.wizard.CreateDARGWizard;
+import de.uka.ipd.sdq.pcm.designdecision.DecisionSpace;
+
+public class CalculateCandidatesHandler extends AbstractHandler implements IHandler {
+
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		
+		CalculateCandidatesWizard wizard = new CalculateCandidatesWizard();
+		
+		WizardDialog wizardDialog = new WizardDialog(
+				HandlerUtil.getActiveWorkbenchWindow(event).getShell(),
+				wizard);
+		
+		System.out.println("<-------- Zeilen für QuickSetup -------->");
+		
+		if(wizardDialog.open() == Window.OK) {
+			
+			System.out.println("<-------- Ende des QuickSetup -------->");
+			
+			calculate(wizard);
+			
+		} else {
+			System.out.println("<-------- Ende des QuickSetups -------->");
+		}
+		
+		return null;
+	}
+
+	private void calculate(CalculateCandidatesWizard wizard) {
+		
+		ResourceSet resourceSet = new ResourceSetImpl();
+		
+		Platform resourceRelations = 
+				(Platform) resourceSet.getResource(wizard.resourceRelationsPage.resourceRelationsFile, true).getContents().get(0);
+		
+		org.palladiosimulator.pcm.system.System system = 
+				(org.palladiosimulator.pcm.system.System) resourceSet.getResource(wizard.systemPage.systemFile, true).getContents().get(0);
+		
+		DecisionSpace designDecisions = 
+				(DecisionSpace) resourceSet.getResource(wizard.designDescisionsPage.designdecisionsFile, true).getContents().get(0);
+		
+		String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
+		String outputDir = wizard.outputPage.outputDirectory.replace('\\', '/') + "/" + timeStamp + "/";
+		
+		// hier kannst du dich austoben!
+		
+	}
+
+}

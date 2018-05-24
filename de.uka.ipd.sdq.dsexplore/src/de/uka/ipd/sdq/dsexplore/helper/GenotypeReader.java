@@ -179,9 +179,6 @@ public class GenotypeReader {
         final ResourceSet pcmResourceSet = pcm.getAllocation().eResource().getResourceSet();
 
         final EObject eCandidates = EMFHelper.loadFromXMIFile(filename, pcmResourceSet, designdecisionPackage.eINSTANCE);
-        //EcoreUtil.resolveAll(eCandidates);
-        //FixDesignDecisionReferenceSwitch refSwitch = new FixDesignDecisionReferenceSwitch(Opt4JStarter.getProblem().getInitialInstance());
-        //refSwitch.doSwitch(eCandidates);
 
         if (!(eCandidates instanceof Candidates)){
             throw new RuntimeException("Cannot read candidate model file "+filename+". Please create a new one.", null);
@@ -198,7 +195,7 @@ public class GenotypeReader {
         return genotypeList;
     }
 
-    //FIXME: copied from readInPrettyPrintedGenotypes. Refactor to use a proper serialisation!!
+    //FIXME: copied from readInPrettyPrintedGenotypes. Refactor to use a proper serialisation!
     private static List<DSEObjectives> readInPrettyPrintedObjectives(final BufferedReader in) throws CoreException, IOException {
         final List<DSEObjectives> results = new ArrayList<DSEObjectives>();
 
@@ -537,8 +534,6 @@ public class GenotypeReader {
         int numberOfConfidenceIntervals = 0;
         for (int i = 0; i < headlineArray.length; i++) {
             if (headlineArray[i].contains(DSEConstantsContainer.LOWER_BOUND_CONFIDENCE+"(")){
-                //|| headlineArray[i].contains(DSEConstantsContainer.UPPER_BOUND_CONFIDENCE+"(")
-                //|| headlineArray[i].contains(DSEConstantsContainer.ALPHA) ){
                 numberOfConfidenceIntervals++;
             }
         }

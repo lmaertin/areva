@@ -59,8 +59,6 @@ public class ArevaIndividual {
 	public void addValueToDimension(Specification spec){
 		String propName = spec.getAssignedProp().getName().toLowerCase();
 		double newValue = Math.round(spec.getValue() * 10000.0) / 10000.0; //round value to 4 digets
-//		if(!propName.startsWith("-"))
-//			newValue = -newValue;  //invert values for max. dimensions
 		Double oldValue = dimensionToValue.get(propName);
 		if(oldValue == null) {
 			dimensionToValue.put(propName, newValue); //init. dimension
@@ -89,10 +87,8 @@ public class ArevaIndividual {
 			}
 			
 			if (value > opponentValue) { //bigger values are bad -> aim for minimalization -> return false for "non-domination"
-//				System.out.println(dim + ": " + value + " (" + id + ") > " + opponentValue + " (" + opponent.getId() + ")");
 				return false;
 			} else if (value < opponentValue) { //domination, continue with other dimensions
-//				System.out.println(dim + ": " + value + " (" + id + ") < " + opponentValue + " (" + opponent.getId() + ")");
 				equal = false;
 			}
 		}

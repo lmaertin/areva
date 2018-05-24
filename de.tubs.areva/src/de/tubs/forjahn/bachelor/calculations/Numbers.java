@@ -90,4 +90,26 @@ public class Numbers {
 		}
 		return result;
 	}
+	
+	public static double getCentrality(ARG domain, Architecture architecture, Centrality centrality) {
+		
+		if(Centrality.DEGREE == centrality) {
+			return getDegreeCentrality(architecture);
+		} else if(Centrality.BETWEEN == centrality) {
+			return getBetweenCentrality(domain, architecture);
+		} else {
+			return getClosenessCentrality(domain, architecture);
+		}
+	}
+	
+	public static double getHighestCentrality(ARG domain, Centrality centrality) {
+		
+		double highestCentrality = 0d;
+		
+		for(Architecture architecture: domain.getArchitectures()) {
+			highestCentrality = Math.max(highestCentrality, getCentrality(domain, architecture, centrality));
+		}
+		
+		return highestCentrality;
+	}
 }

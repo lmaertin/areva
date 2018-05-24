@@ -163,7 +163,6 @@ public class DSEAnalysisMethodTab extends AbstractLaunchConfigurationTab {
 					}
 			
 				} catch (CoreException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -363,13 +362,6 @@ public class DSEAnalysisMethodTab extends AbstractLaunchConfigurationTab {
 	}
 	
 	public void activate(List<IExtension> extensions){
-//		List<IExtension> extensions = ExtensionHelper.loadAnalysisExtensions(qualityAttribute);
-//		this.methodCombo.removeAll();
-//		List<String> methodNames = loadAnalysisMethodNames(extensions);
-//		Collections.sort(methodNames);
-//		String[] items = methodNames.toArray(methodCombo.getItems());
-//		methodCombo.setItems(items);
-//		this.methodCombo.select(0);
 		
 		List<String> methodNames = loadAnalysisMethodNames(extensions);
 		Collections.sort(methodNames);

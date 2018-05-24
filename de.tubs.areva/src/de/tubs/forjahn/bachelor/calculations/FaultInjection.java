@@ -38,8 +38,6 @@ public class FaultInjection {
 			
 			for(ARG domain: domains) {
 				
-				//removeInvalidArchitectures(domain);
-				
 				ARG clonedDomain = EcoreUtil.copy(domain);
 				for(Architecture architecture: clonedDomain.getArchitectures()) {
 					boolean conditionsMet = true;

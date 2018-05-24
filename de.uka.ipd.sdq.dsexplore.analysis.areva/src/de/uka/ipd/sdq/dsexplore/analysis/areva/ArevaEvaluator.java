@@ -22,13 +22,18 @@ import org.palladiosimulator.pcm.repository.BasicComponent;
 import org.palladiosimulator.pcm.repository.RepositoryComponent;
 import org.palladiosimulator.solver.models.PCMInstance;
 
+import de.tubs.areva.resourcerelations.And;
+import de.tubs.areva.resourcerelations.Expression;
+import de.tubs.areva.resourcerelations.Implies;
+import de.tubs.areva.resourcerelations.Not;
+import de.tubs.areva.resourcerelations.Or;
 import de.tubs.areva.resourcerelations.Platform;
 import de.tubs.areva.resourcerelations.Resource;
 import de.tubs.areva.resourcerelations.ResourceOptions;
+import de.tubs.areva.resourcerelations.ResourceOptionsVariable;
+import de.tubs.areva.resourcerelations.ResourceVariable;
+import de.tubs.areva.resourcerelations.Rule;
 import de.tubs.areva.resourcerelations.Specification;
-import de.tubs.areva.util.ArevaIndividual;
-import de.tubs.areva.util.DoFBasicComponent;
-import de.tubs.areva.util.RuleChecker;
 import de.uka.ipd.sdq.dsexplore.analysis.AbstractAnalysis;
 import de.uka.ipd.sdq.dsexplore.analysis.AnalysisFailedException;
 import de.uka.ipd.sdq.dsexplore.analysis.IAnalysis;
@@ -50,7 +55,7 @@ public class ArevaEvaluator extends AbstractAnalysis implements IAnalysis{
 	private Platform platformModel;
 	
 	private Map<String,Set<ResourceOptions>> basicCompID2ResourceGrp;
-//	private Set<ResourceOptions> affectedResourceGroups;
+	private Set<ResourceOptions> affectedResourceGroups;
 	
 	private ResourceSet arevaSet;
 	
@@ -58,11 +63,10 @@ public class ArevaEvaluator extends AbstractAnalysis implements IAnalysis{
 	private int invalidConfCounter;
 
 	//Map of Results for pheno.getNumericID()
-	private Map<Long, ArevaAnalysisResult> previousArevaResults;
+	private Map<Long, ArevaAnalysisResult> previousArevaResults = new HashMap<Long, ArevaAnalysisResult>();
 	
 	public ArevaEvaluator() {
 		super(new ArevaSolverQualityAttributeDeclaration());
-		previousArevaResults = new HashMap<Long, ArevaAnalysisResult>();
 	}
 	
 	protected boolean fileExists(String path) {
@@ -90,7 +94,7 @@ public class ArevaEvaluator extends AbstractAnalysis implements IAnalysis{
 
 	@Override
 	public IAnalysisResult retrieveResultsFor(PCMPhenotype pheno, Criterion criterion) throws CoreException, AnalysisFailedException {
-		return previousArevaResults.get(pheno.getNumericID());
+		return this.previousArevaResults.get(pheno.getNumericID());
 	}
 	
 	@Override
@@ -106,7 +110,10 @@ public class ArevaEvaluator extends AbstractAnalysis implements IAnalysis{
 	
 	@Override
 	public void initialise(DSEWorkflowConfiguration configuration) throws CoreException {		
+		//Suche im Ressource Set
+		//justPrint("Init Ressource Set for AREVA");
 		String arevaModelFileName = configuration.getRawConfiguration().getAttribute(DSEConstantsContainer.AREVA_FILE, "");
+		//justPrint("arevaModelFileName: " + arevaModelFileName);
 		arevaSet = new ResourceSetImpl();
 		if(!fileExists(arevaModelFileName)) {
 			System.err.println("Could not load areva model! Please check the path!");
@@ -132,6 +139,20 @@ public class ArevaEvaluator extends AbstractAnalysis implements IAnalysis{
 			}
 			rgSet.add(rg);
 		}
+		
+		//TODO Testausgabe Mapping ResGrps. to Components
+//		for(String resStr : basicCompID2ResourceGrp.keySet()){
+//
+//			for (ResourceOptions rg : platformModel.getOptions()){
+//				BasicComponent compRes = rg.getReferencedComponent();
+//				if(resStr.equals(compRes.getId())){
+//					System.out.println("Res (" + rg.getName() + "): " + compRes.getEntityName());
+//				}
+//			}
+//			for(ResourceOptions resOpt : basicCompID2ResourceGrp.get(resStr)){
+//				System.out.println("\t" + resOpt.getName());
+//			}
+//		}
 
 		initialiseCriteria(configuration);
 		
@@ -140,45 +161,53 @@ public class ArevaEvaluator extends AbstractAnalysis implements IAnalysis{
     }
 	
 	@Override
-	/**
-	 * AREva analysis
-	 */
 	public void analyse(PCMPhenotype pheno, IProgressMonitor monitor) throws CoreException, UserCanceledException, JobFailedException, AnalysisFailedException {
 		PCMInstance pcm = pheno.getPCMInstance();	
-		ArevaIndividual individual = new ArevaIndividual(pheno.getNumericID());
 		if(monitor != null)
 			monitor.beginTask("ArEva " + Long.toString(pheno.getNumericID()), IProgressMonitor.UNKNOWN);
 		
-	
 		//Collect used BasicComponents and resources, that are affected by executing these components.
 		//1. Get all Annotated BasicComponents from the resources in ResourceGroups
 		//2. Get AssemblyContext for each BasicComponent
 		//3. Check whether context is used by current system variant
-		//4. Store context as used in a list	
+		//4. Store context as used in a list		
 		Set<BasicComponent> usedBasicComponents = new HashSet<BasicComponent>(); //BasicComponents used by current system variant
+		affectedResourceGroups = new HashSet<ResourceOptions>();
 		for (AssemblyContext ac : pcm.getSystem().getAssemblyContexts__ComposedStructure()){
 			RepositoryComponent repoComp = ac.getEncapsulatedComponent__AssemblyContext();
 			if(repoComp instanceof BasicComponent){
 				BasicComponent basicComp = (BasicComponent)repoComp;
-				DoFBasicComponent dofComp = new DoFBasicComponent(null, null, basicComp);
+//				justPrint("Check BasicComponent " + basicComp.getEntityName());	
 				Set<ResourceOptions> rgSet = basicCompID2ResourceGrp.get(basicComp.getId()); //Check if basicComponent is annotated to 1 or more resource groups
 				if(rgSet != null){ 
 					//Proceed only with  relevant BasicCompents (addressed in platform model...):
+//					justPrint("Found BasicComponent " + basicComp.getEntityName() + " in platform model.");					
 					usedBasicComponents.add(basicComp);	
-					individual.addUsedBasicComponents(dofComp);
-					individual.addAffectedResourceOptions(rgSet);
+					affectedResourceGroups.addAll(rgSet);
 				}
 			}
 		}
+
+//		Test output
+		for(BasicComponent bc : usedBasicComponents){
+			System.out.println("Found BasicComponent " + bc.getEntityName() + " in instance and platform model.");		
+		}	
 		
-		//Check constraints between groups in platform model (CNF)
+		//Init. dimensionToValue Map according to the relations semantics in the qml files
+		Map<String,Double> dimensionToValue = initDimensionToValueMap();
+		
+		//2. Check constraints between groups in platform model (CNF)
 		//i.e., check whether all requires and/or excludes holds for ResourceGroups and resources
 		//Propositional logical checking of constraints based on the rules in the platform model
-		boolean isValid =  RuleChecker.checkAllRules(platformModel, individual);
+		System.out.println("Affected ResGrps:");
+		for(ResourceOptions rq : affectedResourceGroups){
+			System.out.println(rq.getName());
+		}		
+		boolean isValid = checkAllRules();		
 		
-		//collect quality values for each dimension addressed in candidate
+		//collect quality values for each dimension, addressed in candidate
 		if(isValid){
-			//System.out.println("Valid configuration " + validConfCounter);
+			//justPrintLineForce("Valid configuration " + validConfCounter);
 			validConfCounter++;
 //			System.out.println(validConfCounter + ". valid configuration (ID: " + pheno.getNumericID() + ")");
 			
@@ -187,9 +216,10 @@ public class ArevaEvaluator extends AbstractAnalysis implements IAnalysis{
 			//2.1. Get Property-Dimensions for each Resources
 			//2.2. Compare Dimensions with dimensions of QML declaration
 			//3. Get values for dimension
-			//4. Sum up (before: make mean) of all values per dimension
+			//4. Sum up / make mean of all values per dimension
 			//5. Store Results as analysis results
-			for(ResourceOptions rg : individual.getAffectedResourceGroups()){
+			for(ResourceOptions rg : affectedResourceGroups){
+//				System.out.println("Check ResourceGrp " + rg.getName());
 				Set<Resource> redundantRes = new HashSet<Resource>();
 				int numberOfElements = Integer.parseInt(rg.getMinElements()); //FIXME: Repair emf model, no min/max elements, just number of necessary elements for execution
 				int sizeOfResourceSet = rg.getResources().size();
@@ -197,18 +227,18 @@ public class ArevaEvaluator extends AbstractAnalysis implements IAnalysis{
 					for(Specification spec : res.getSpecs()){			
 						//Respect number of resources and redundancy-relations between them, i.e., hot or cold redundancies.
 						if(numberOfElements == sizeOfResourceSet){	//1. Hot redundancy: #Elements == rg.getResources()
-//							System.out.println("hot redundancy");
-							individual.addValueToDimension(spec);
+							justPrintLine("hot redundancy");
+							addValueToDimension(spec, dimensionToValue);
 						}
 						else{ 										//2. Cold redundancy: Leave out redundant elements, i.e., just select first resource of the redundancy options
 							if(!redundantRes.containsAll(res.getRedundant())){
-//								System.out.println("cold redundancy: new element");
+								justPrintLine("cold redundancy: new element");
 								redundantRes.add(res);
-								individual.addValueToDimension(spec);
+								addValueToDimension(spec, dimensionToValue);
 							}
-//							else{
-//								System.out.println("cold redundancy: redundant element (ignored)");
-//							}
+							else{
+								justPrintLine("cold redundancy: redundant element (ignored)");
+							}
 						}
 					}
 				}
@@ -216,26 +246,248 @@ public class ArevaEvaluator extends AbstractAnalysis implements IAnalysis{
 		}
 		else{
 			invalidConfCounter++;
-//			System.out.println(invalidConfCounter + ". invalid configuration (ID: " + pheno.getNumericID() + ")");
+			System.out.println(invalidConfCounter + ". invalid configuration (ID: " + pheno.getNumericID() + ")");
 
-			//2.A If invalid: set all dimensions to default value
-			for(Dimension dim : qualityAttribute.getDimensions()){
-				String dimName = dim.getEntityName().toLowerCase();
-//				if(dim.getType().getRelationSemantics().getRelSem() == EnumRelationSemantics.DECREASING)
-//					individual.getDimensionToValue().put(dimName, Double.POSITIVE_INFINITY); //dimensionToValue.put(dimName, 0.0);
-//				else
-//					individual.getDimensionToValue().put(dimName, -1.0); //dimensionToValue.put(dimName, 0.0);
-				individual.getDimensionToValue().put(dimName, initQualityValue); //init value
-			}
+			//2.A If invalid: set all dimensions from qml declaration to Double.NEGATIVE_INFINITY (max. values) or Double.POSITIVE_INFINITY (min. values)
+			//1. just leave default values
+//			for(String dim : dimensionToValue.keySet()){
+////				dimensionToValue.put(dim, Double.NEGATIVE_INFINITY);
+//				dimensionToValue.put(dim, 99999999.9);  //abwerten //todo setze irgendwas
+//			}
+			//nicht abwerten
+			
+			
+//			for(BasicComponent bc : usedBasicComponents){
+//				System.out.println("Found BasicComponent " + bc.getEntityName() + " in instance and platform model.");		
+//			}
+//			System.out.println("Affected ResGrps:");
+//			for(ResourceOptions rq : affectedResourceGroups){
+//				System.out.println(rq.getName());
+//			}
 		}
 		
 		//write results
+//		justPrintLine("Add to results:");
+//		justPrintLine("ID: " + pheno.getNumericID());
+//		for(String dim : dimensionToValue.keySet()){
+//			justPrint(dim + "=");
+//			justPrint(dimensionToValue.get(dim) + "; ");
+//		}
+//		justPrintLine("");
 		
-		//add conf. to result Map
-		previousArevaResults.put(pheno.getNumericID(), new ArevaAnalysisResult(individual.getDimensionToValue(), pcm, criterionToAspect, (ArevaSolverQualityAttributeDeclaration)qualityAttribute));	
-				
+		justPrintLine("Genotype ID : " + pheno.getGenotypeID());
+		justPrintLine("PCM instance: " + pheno.getPCMInstance());
+		
+		//only add valid confs.
+		this.previousArevaResults.put(pheno.getNumericID(), new ArevaAnalysisResult(dimensionToValue, pcm, this.criterionToAspect, (ArevaSolverQualityAttributeDeclaration)qualityAttribute));	
+		
+		//Test output
+//		justPrint("Measurement for Candidate:");
+//		for(Dimension dim : qualityAttribute.getDimensions()){
+//			String dimName = dim.getEntityName();	
+//			justPrint(dimName + ": " + dimensionToValue.get(dimName.toLowerCase()));
+//		}
 		if(monitor != null)
 			monitor.done();
+	}
+	
+	/**
+	 * Init. map dimensionToValue with the worst possible values wrt. the relation semantics from the qml declaration.
+	 */
+	private Map<String,Double> initDimensionToValueMap(){
+		Map<String,Double> dimensionToValue = new HashMap<String,Double>();
+		for(Dimension dim : qualityAttribute.getDimensions()){
+			String dimName = dim.getEntityName().toLowerCase();
+//			if(dim.getType().getRelationSemantics().getRelSem() == EnumRelationSemantics.DECREASING)
+//				dimensionToValue.put(dimName, Double.POSITIVE_INFINITY);
+////				dimensionToValue.put(dimName, 0.0);
+//			else
+//				dimensionToValue.put(dimName, Double.NEGATIVE_INFINITY);
+////				dimensionToValue.put(dimName, 0.0);
+//			dimensionToValue.put(dimName, Double.NEGATIVE_INFINITY); //todo init value //TODO bleibt so erhalten im ersten Kandidaten...
+			dimensionToValue.put(dimName, initQualityValue); //init value
+		}
+		return dimensionToValue;
+	}
+	
+	/**
+	 * Check all constraints in the rules of the platform model.
+	 * @return
+	 */
+	private boolean checkAllRules(){
+		boolean result = true;
+		//Example:
+		//<Rules Name="CSS_dummy -> ASC low OR ASC high">
+		//  <Expression LeftHandSideModifier="true">
+		//	  <LeftHandSide ResourceGroup="//@groups.7"/>
+		//    <RightHandSide xsi:type="arr:Or">
+		//	    <LeftHandSide xsi:type="arr:ResourceGroupVariable" ResourceGroup="//@groups.5"/>
+		//	    <RightHandSide xsi:type="arr:ResourceGroupVariable" ResourceGroup="//@groups.6"/>
+		//	  </RightHandSide>
+		//	</Expression>
+		//</Rules>
+		for(Rule rule : platformModel.getRules()){
+//			System.out.println("Rule " + rule.getName() + ":");
+			Implies implies = rule.getExpression();
+			ResourceOptions rgLeft = implies.getLeftHandSide().getResourceOptions();
+			Expression expr = implies.getRightHandSide();
+			if(affectedResourceGroups.contains(rgLeft)){
+//				System.out.print(rgLeft.getName() + "->");
+				result = checkExpression(expr); //Check right hand side for "rgLeft -> ..."
+			}
+			else{
+				if(implies.isLeftHandSideModifier()){
+					result = true; //rule is irrelevant, this resource group is not considered
+//					System.out.println("(not checked, " + rgLeft.getName() + " is not considered in candidate here.)");
+				}
+				else{ //false is Not
+//					System.out.print("!" + rgLeft.getName() + "->");
+					result = checkExpression(expr); //Check right hand side for "!rgLeft -> ..."
+				}
+			}
+//			System.out.println(" ==> " + result);
+
+			if(!result){
+//				System.out.println("stop checking; at least 1 rule failed.");
+				break; 
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Recursively check each constraint
+	 * @param expr
+	 * @return
+	 */
+	private boolean checkExpression(Expression expr){
+		if(expr instanceof And){
+			And and = (And)expr;
+			boolean left = checkExpression(and.getLeftHandSide());
+//			System.out.print(" & ");
+			boolean right = checkExpression(and.getRightHandSide());
+			return left && right;
+		}
+		else if(expr instanceof Or){
+			Or or = (Or)expr;
+			boolean left = checkExpression(or.getLeftHandSide());
+//			System.out.print(" | ");
+			boolean right = checkExpression(or.getRightHandSide());
+			return left || right;
+		}
+		else if (expr instanceof Not){
+			Not not = (Not)expr;
+//			System.out.print("!");
+			return !checkExpression(not.getExpression());
+		}
+		else if (expr instanceof ResourceOptionsVariable){
+			ResourceOptionsVariable rqVarExpr = (ResourceOptionsVariable)expr;
+			ResourceOptions varRq = rqVarExpr.getResourceOptions();
+			if(affectedResourceGroups.contains(varRq)){
+//				System.out.print(varRq.getName() + "(true)");
+				return true;
+			}
+			else{
+//				System.out.print(varRq.getName() + "(false)");
+				return false;
+			}
+		}
+		else if (expr instanceof ResourceVariable){
+			ResourceVariable resVarExpr = (ResourceVariable)expr;
+			Resource varRes = resVarExpr.getResource();
+			boolean isInSet = false;
+			for (ResourceOptions rq : affectedResourceGroups){
+				for(Resource res : rq.getResources()){
+					if(varRes == res){
+						isInSet = true;
+					}
+					else{
+						isInSet = false;
+					}
+				}
+			}
+//			System.out.print(varRes.getName()  + "("+ isInSet + ")");
+			return isInSet;
+		}
+		else{
+//			System.out.print("else (false)");
+			return false;
+		}
+	}
+	
+	/**
+	 * Read and update values for each dimension wrt. a matching property from the given specification.
+	 * @param spec
+	 */
+	private void addValueToDimension(Specification spec, Map<String,Double> dimensionToValue){
+		String propName = spec.getAssignedProp().getName().toLowerCase();
+		for(Dimension dim : qualityAttribute.getDimensions()){
+			String dimName = dim.getEntityName().toLowerCase();
+			if(propName.equals(dimName)){
+				double newValue = spec.getValue();
+				double oldValue = dimensionToValue.get(dimName).doubleValue();
+				if(oldValue == initQualityValue) 
+					dimensionToValue.replace(dimName, newValue);
+				else
+					dimensionToValue.replace(dimName, newValue+oldValue); //oldValue is not the init value 
+			}
+		}
+	}
+	
+//	/**
+//	 * Check Resource Constraints.
+//	 * This is only possible during runtime with faults.
+//	 * At design time all resources are expected as available.
+//	 * 
+//	 * TODO: Test here with some random faults
+//	 * @param rg
+//	 */
+//	private void checkResourceConstraintsTest(ResourceGroup rg){
+//		//Laufbeispiel:
+//		//Optionen fuer Basic Component MCS Control: MCS Control simple oder MCS Control full
+//		//Benoetigte Ressourcen werden im platform model in den jeweils korrespondierenden Gruppen
+//		//In dieser Phase wird von 100% verfuegbarkeit ausgegangen (keine Min/Max Violations bzw. cardinality constraints)
+//		//Diese Ueberpruefung erfolgt spater im ARG, wenn Fehler injektziert werden
+//		
+//		Boolean isValid = true;
+//		//For each resource group:
+//		for(Resource res : rg.getResources()){
+//			List<Resource> res_excluding = res.getExcludes();
+//			for(Resource r_exc : res_excluding){
+//				if(r_exc != null && rg.getResources().contains(r_exc)){
+//					isValid = false;
+//					justPrintLine("Invalid: Exclude constrain not holding for resource " + r_exc.getName());
+//					break;
+//				}
+//			}
+//
+//			List<Resource> res_including = res.getImplies();
+//			for(Resource r_inc : res_including){
+//				if(r_inc != null && !rg.getResources().contains(r_inc)){
+//					isValid = false;
+//					justPrintLine("Invalid: Include constrain not holding for resource " + r_inc.getName());
+//					break;
+//				}
+//			}
+//		}
+//		
+//		justPrintLine("Candidate still valid? " + isValid);
+//	}
+	
+	private void justPrint(String s){
+		//TODO turn printing on/off
+//		System.out.print(s);
+	}
+	
+	private void justPrintLine(String s){
+		//TODO turn printing line on/off
+//		System.out.println(s);
+	}
+	
+	private void justPrintLineForce(String s){
+		//TODO turn printing line on/off
+//		System.out.println(s);
 	}
 	
 }

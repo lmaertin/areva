@@ -1,0 +1,120 @@
+package de.tubs.areva.command;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.IHandler;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.ui.handlers.HandlerUtil;
+import org.palladiosimulator.pcm.core.composition.AssemblyContext;
+import org.palladiosimulator.pcm.core.composition.impl.AssemblyContextImpl;
+import org.palladiosimulator.pcm.repository.BasicComponent;
+
+import de.tubs.areva.resourcerelations.Platform;
+import de.tubs.areva.ui.wizard.CalculateCandidatesWizard;
+import de.tubs.areva.ui.wizard.CreateDARGWizard;
+import de.uka.ipd.sdq.pcm.designdecision.DecisionSpace;
+import de.uka.ipd.sdq.pcm.designdecision.DegreeOfFreedomInstance;
+import de.uka.ipd.sdq.pcm.designdecision.specific.AssembledComponentDegree;
+
+public class CalculateCandidatesHandler extends AbstractHandler implements IHandler {
+
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		
+		CalculateCandidatesWizard wizard = new CalculateCandidatesWizard();
+		
+		WizardDialog wizardDialog = new WizardDialog(
+				HandlerUtil.getActiveWorkbenchWindow(event).getShell(),
+				wizard);
+		
+		//System.out.println("<-------- Zeilen für QuickSetup -------->");
+
+		
+		if(wizardDialog.open() == Window.OK) {
+			System.out.println("Ok pressed");
+			
+			//System.out.println("<-------- Ende des QuickSetup -------->");
+			
+			calculate(wizard);
+			
+		} else {
+			System.out.println("Cancel pressed");
+		}
+		
+		return null;
+	}
+
+	private void calculate(CalculateCandidatesWizard wizard) {
+		
+		ResourceSet resourceSet = new ResourceSetImpl();
+		
+		Platform resourceRelations = 
+				(Platform) resourceSet.getResource(wizard.resourceRelationsPage.resourceRelationsFile, true).getContents().get(0);
+		
+		org.palladiosimulator.pcm.system.System system = 
+				(org.palladiosimulator.pcm.system.System) resourceSet.getResource(wizard.systemPage.systemFile, true).getContents().get(0);
+		
+		DecisionSpace designDecisions = 
+				(DecisionSpace) resourceSet.getResource(wizard.designDescisionsPage.designdecisionsFile, true).getContents().get(0);
+		
+		String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
+		String outputDir = wizard.outputPage.outputDirectory.replace('\\', '/') + "/" + timeStamp + "/";
+		
+//		Fahrplan:
+//		1. Designdecisions: Permutation über alle möglichen Belegungen der 6 Assembly-Dofs -> Werte in Map (Dof -> Option) merken
+//		2. Ressourcerelastions: Rules checken
+//		  2a. Valid: RessourceOptions auf Ressourcen abrollen, specs werte einsammeln -> Werte in Map (Dim -> Value) merken
+//		  2b. Invalid: continue (Kombination ueberspringen)
+//		3. CSV-Export aus den zwei Maps erstellen: 
+//		  3a. Alle gefunden Qualitätsdimensionen als Spalten speichern
+//		  3b. Freiheitsgradbelegungen als Spalten speichern (aDof.getClass().getSimpleName + ":" + aDof.getEntityName())
+		
+		//Map<Integer,Set<BasicComponent>> IdtoUsedBasicComponents = new HashMap<Integer, Set<BasicComponent>>(); //BasicComponents used for each ID
+		//int id=0;
+	
+		EList<DegreeOfFreedomInstance> dofs = designDecisions.getDegreesOfFreedom();
+		AssembledComponentDegree[] adofArray = new AssembledComponentDegree[dofs.size()]; //optional um nicht jede Iteration cast-en zu muessen
+		
+		//EList to array <AssembledComponentDegree>
+		int c = 0;
+		for(DegreeOfFreedomInstance dof: dofs) { 
+			if(dof instanceof AssembledComponentDegree) {
+				AssembledComponentDegree adof = (AssembledComponentDegree)dof;
+				adofArray[c] = adof;
+				c++;
+			}
+		}
+		
+		//permute options for each dof
+		for(int i=0; i<adofArray.length; i++){
+			AssembledComponentDegree aDof = adofArray[i];
+			System.out.println("DoF: " + aDof.getEntityName());
+			for(EObject option : aDof.getClassDesignOptions()){
+				BasicComponent comp = (BasicComponent)option;
+				System.out.println("1: " + comp.getEntityName()); //Option an 1. Stelle
+
+				//TODO: @Nils, hier brauche ich deine Hilfe.
+				//TODO: Gehe in alle anderen DoF und liefere jede Permutation moeglicher Optionen
+				//TODO: Rekursiver Abstieg mit Ausnahme von DoF bei Index "i"
+				//TODO: Jede moegliche Belegung von DoFs in Design Decisions ist gesucht, Constraints werden spaeter uberprueft
+				//TOOD: Zunächst reicht die Ausgabe der jeweiligen Optionen (KOmponentennamen) via System.out-printlich, Weiterverarbeitung macht Lukas
+			}
+		}
+		
+	}	
+	
+}

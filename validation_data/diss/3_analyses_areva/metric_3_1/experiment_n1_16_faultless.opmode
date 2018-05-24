@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<de.tubs.areva.emf.model.opmode:OperatingModeSelection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:de.tubs.areva.emf.model.opmode="http://com/areva/opmode/" name="Experiment N1 16">
+  <startArchitecture href="../experiment_n1/minimized_16.darg#//@architectures.30"/>
+</de.tubs.areva.emf.model.opmode:OperatingModeSelection>

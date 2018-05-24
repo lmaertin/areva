@@ -33,13 +33,9 @@ public class DSEOptionsTab extends FileNamesInputTab {
 	
 	private Image icon;
 
-	//private Text meanResponseTimeRequirement;
-
 	private Combo useHeuristics;
 	
 	private Text crossoverRate;
-
-	//private Text maxCost;
 
 	private Text textGivenInstances;
 
@@ -48,8 +44,6 @@ public class DSEOptionsTab extends FileNamesInputTab {
 	private Button optimisationOnly;
 
 	private Text textDesignDecisionFile;
-
-	//private Text textQMLDefinitionFile;
 	
 	private Text textCacheInstances;
 	private Text textAllInstances;
@@ -63,16 +57,7 @@ public class DSEOptionsTab extends FileNamesInputTab {
 	 * Option to start a number of DSE runs on the same settings, to get several samples for the 
 	 * runs and be able to draw statistically valid conclusions.   
 	 */
-	private Text numberOfDSERuns; 
-		
-	
-	//private QMLManager qmlManager;
-	//private QMLDefinitionsLoadListener qmlDefinitionsLoadListener;
-	
-//	public DSEOptionsTab(FileNamesInputTab modelsTab, QMLManager qmlManager){
-//		this.modelsTab = modelsTab;
-//		this.qmlManager = qmlManager;
-//	}
+	private Text numberOfDSERuns;
 	
 	@Override
 	public void createControl(Composite parent) {
@@ -100,19 +85,6 @@ public class DSEOptionsTab extends FileNamesInputTab {
 		this.container = new Composite(parent, SWT.NONE);
 		setControl(container);
 		container.setLayout(new GridLayout());
-		
-		
-//		/**
-//		 * Add QML input section
-//		 */
-//		this.textQMLDefinitionFile = new Text(container, SWT.SINGLE | SWT.BORDER);
-//		String[] qmlExtension = new String[1];
-//		qmlExtension[0] = DSEConstantsContainer.QML_DEFINITION_EXTENSION;
-//		this.createFileInputSection(container, modifyListener, "QML Criteria Definitions", qmlExtension, textQMLDefinitionFile);
-//		final Button buttonQML = new Button(container, SWT.NONE);
-//		buttonQML.setText("Load QML...");
-//		qmlDefinitionsLoadListener = new QMLDefinitionsLoadListener(textQMLDefinitionFile, modelsTab.getUsageModelFile(), qmlManager, modifyListener);
-//		buttonQML.addSelectionListener(qmlDefinitionsLoadListener);
 		
 		final Group maximumIterationsGroup = new Group(container, SWT.NONE);
 		final GridLayout glmaximumIterationsGroup = new GridLayout();
@@ -142,20 +114,6 @@ public class DSEOptionsTab extends FileNamesInputTab {
 		crossoverRate = new Text(maximumIterationsGroup, SWT.SINGLE	| SWT.BORDER);
 		crossoverRate.setEnabled(true);
 		crossoverRate.addModifyListener(modifyListener);
-		
-//		final Label meanRespTimeLabel = new Label(maximumIterationsGroup, SWT.NONE);
-//		meanRespTimeLabel.setText("Maximal response time:");
-
-/*		meanResponseTimeRequirement = new Text(maximumIterationsGroup, SWT.SINGLE	| SWT.BORDER);
-		meanResponseTimeRequirement.setEnabled(true);
-		meanResponseTimeRequirement.addModifyListener(modifyListener);
-*/		
-//		final Label maxCostLabel = new Label(maximumIterationsGroup, SWT.NONE);
-//		maxCostLabel.setText("Maximal cost:");
-
-//		maxCost = new Text(maximumIterationsGroup, SWT.SINGLE	| SWT.BORDER);
-//		maxCost.setEnabled(true);
-//		maxCost.addModifyListener(modifyListener);
 		
 
 		useHeuristics = new Combo(container, SWT.READ_ONLY);
@@ -193,13 +151,6 @@ public class DSEOptionsTab extends FileNamesInputTab {
 		designDecisionOptions.setText("Design decision options");
 		designDecisionOptions.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
 				true, false));
-		
-
-//		simulateFailuresButton = new Button(reliabilityGroup, SWT.CHECK);
-//		final GridData gd_simulateFailuresButton = new GridData(SWT.FILL, SWT.CENTER, true, false);
-//		simulateFailuresButton.setLayoutData(gd_simulateFailuresButton);
-//		simulateFailuresButton.setText("Simulate failures");
-//		simulateFailuresButton.addSelectionListener(selectionListener);
 		
 		designDecisionsOnly = new Button(designDecisionOptions,  SWT.CHECK);
 		designDecisionsOnly.setEnabled(true);
@@ -262,43 +213,6 @@ public class DSEOptionsTab extends FileNamesInputTab {
 		numberOfDSERuns.addModifyListener(modifyListener);
 
 	}
-
-//	protected void loadQML() {
-//		qmlManager.processQMLFile(textQMLDefinitionFile.getText(), modelsTab.getUsageModelFile().getText());
-//	}
-	
-	//klappt nicht so
-	/*private void createHelpSection() {
-		final Group helpGroup = new Group(container, SWT.NONE);
-		final GridLayout glHelpLayout = new GridLayout();
-		glHelpLayout.numColumns = 2;
-		helpGroup.setLayout(glHelpLayout);
-		helpGroup.setText("Design decision options");
-		helpGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
-				true, false));
-		this.helpButton = new Button(helpGroup, SWT.NONE);
-		this.helpButton.setText("Help");
-		this.helpButton.addSelectionListener(new SelectionListener() {
-			
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				PlatformUI.getWorkbench().getHelpSystem().displayHelp("de.uka.ipd.sdq.dsexplore.launchDSE");
-				
-			}
-			
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				PlatformUI.getWorkbench().getHelpSystem().displayHelp("de.uka.ipd.sdq.dsexplore.launchDSE");
-				
-			}
-		});
-		PlatformUI.getWorkbench().getHelpSystem().setHelp(helpButton, "de.uka.ipd.sdq.dsexplore.launchDSE");
-	}
-
-	@Override
-	public String getName() {
-		return "DSE Options";
-	}*/
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.AbstractLaunchConfigurationTab#getImage()
@@ -313,13 +227,6 @@ public class DSEOptionsTab extends FileNamesInputTab {
 
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
-		
-//		try {
-//			this.textQMLDefinitionFile.setText(configuration.getAttribute(
-//					DSEConstantsContainer.QML_DEFINITION_FILE, ""));
-//		} catch (CoreException e) {
-//			RunConfigPlugin.errorLogger(getName(),DSEConstantsContainer.QML_DEFINITION_FILE, e.getMessage());
-//		}
 		
 		try {
 			maximumIterations.setText(configuration.getAttribute(
@@ -422,7 +329,6 @@ public class DSEOptionsTab extends FileNamesInputTab {
 		} catch (CoreException e) {
 			LaunchConfigPlugin.errorLogger(getName(),"number of DSE iterations", e.getMessage());
 		}
-		//loadQML();
 	}
 
 
@@ -440,12 +346,6 @@ public class DSEOptionsTab extends FileNamesInputTab {
 		configuration.setAttribute(
 				DSEConstantsContainer.CROSSOVER_RATE,
 				this.crossoverRate.getText());
-//		configuration.setAttribute(
-//				DSEConstantsContainer.MRT_REQUIREMENTS, 
-//				this.meanResponseTimeRequirement.getText());
-//		configuration.setAttribute(
-//				DSEConstantsContainer.MAX_COST, 
-//				this.maxCost.getText());
 		configuration.setAttribute(
 				DSEConstantsContainer.SEARCH_METHOD, 
 				this.useHeuristics.getText());
@@ -500,18 +400,6 @@ public class DSEOptionsTab extends FileNamesInputTab {
 	@Override
 	public boolean isValid(ILaunchConfiguration launchConfig) {
 		setErrorMessage(null);
-
-//		if(!qmlManager.isQMLLoaded()){
-//			String errorMessage = "Select Usage Model and load QML Definition!";
-//			if(qmlManager.getDiagnosis() != null) {
-//				errorMessage += " "+qmlManager.getDiagnosis();
-//			}
-//			setErrorMessage(errorMessage);
-//			return false;
-//		} else if(qmlManager.getActivatedCriteria().size() < 1) {
-//			setErrorMessage("QML definition contains no objectives. Nothing to optimize!");
-//			return false;
-//		}
 		
 		// check this.maxIterations
 		if (this.maximumIterations.getText().length() != 0) {
@@ -539,25 +427,6 @@ public class DSEOptionsTab extends FileNamesInputTab {
 			setErrorMessage("Crossover rate must be a number.");
 			return false;
 		}
-		
-		
-//		if (this.meanResponseTimeRequirement.getText().length() != 0) {
-//			try {
-//				Double.parseDouble(this.meanResponseTimeRequirement.getText());
-//			} catch (NumberFormatException e) {
-//				setErrorMessage("Mean response time requirement must be a double value or empty.");
-//				return false;
-//			}
-//		}
-//		
-//		if (this.maxCost.getText().length() != 0) {
-//			try {
-//				Double.parseDouble(this.maxCost.getText());
-//			} catch (NumberFormatException e) {
-//				setErrorMessage("Maximal cost must be a double value or empty.");
-//				return false;
-//			}
-//		}
 		
 		if (this.designDecisionsOnly.getSelection() && this.optimisationOnly.getSelection()){
 			setErrorMessage("You cannot choose both \"design decisions only\" and \"optimisation only\", as nothing remains to be done.");

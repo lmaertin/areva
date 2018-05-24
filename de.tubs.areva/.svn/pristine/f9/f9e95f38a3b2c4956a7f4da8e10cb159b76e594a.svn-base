@@ -1,0 +1,641 @@
+/**
+ */
+package de.tubs.areva.emf.model.darg.impl;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.palladiosimulator.pcm.repository.BasicComponent;
+import de.tubs.areva.emf.model.darg.Architecture;
+import de.tubs.areva.emf.model.darg.DargPackage;
+import de.tubs.areva.emf.model.darg.QualityAssignment;
+import de.tubs.areva.emf.model.qadag.QADAG;
+import de.tubs.areva.resourcerelations.Resource;
+import de.tubs.areva.resourcerelations.ResourceOptions;
+import java.util.Collection;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Architecture</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getQuality <em>Quality</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getQadag <em>Qadag</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getBoundResourceOptions <em>Bound Resource Options</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getQualityassignments <em>Qualityassignments</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#isOptimal <em>Optimal</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#isHidden <em>Hidden</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getMarked <em>Marked</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getId <em>Id</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getRelatedArchitectures <em>Related Architectures</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getBoundResources <em>Bound Resources</em>}</li>
+ *   <li>{@link de.tubs.areva.emf.model.darg.impl.ArchitectureImpl#getBoundBasicComponents <em>Bound Basic Components</em>}</li>
+ * </ul>
+ *
+ * @generated
+ */
+public class ArchitectureImpl extends MinimalEObjectImpl.Container implements Architecture {
+	/**
+	 * The default value of the '{@link #getQuality() <em>Quality</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQuality()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double QUALITY_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getQuality() <em>Quality</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQuality()
+	 * @generated
+	 * @ordered
+	 */
+	protected double quality = QUALITY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getQadag() <em>Qadag</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQadag()
+	 * @generated
+	 * @ordered
+	 */
+	protected QADAG qadag;
+
+	/**
+	 * The cached value of the '{@link #getBoundResourceOptions() <em>Bound Resource Options</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBoundResourceOptions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ResourceOptions> boundResourceOptions;
+
+	/**
+	 * The cached value of the '{@link #getQualityassignments() <em>Qualityassignments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQualityassignments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<QualityAssignment> qualityassignments;
+
+	/**
+	 * The default value of the '{@link #isOptimal() <em>Optimal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOptimal()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OPTIMAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOptimal() <em>Optimal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOptimal()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean optimal = OPTIMAL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hidden = HIDDEN_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMarked() <em>Marked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMarked()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final float MARKED_EDEFAULT = 0.0F;
+
+	/**
+	 * The cached value of the '{@link #getMarked() <em>Marked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMarked()
+	 * @generated
+	 * @ordered
+	 */
+	protected float marked = MARKED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRelatedArchitectures() <em>Related Architectures</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRelatedArchitectures()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Architecture> relatedArchitectures;
+
+	/**
+	 * The cached value of the '{@link #getBoundResources() <em>Bound Resources</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBoundResources()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Resource> boundResources;
+
+	/**
+	 * The cached value of the '{@link #getBoundBasicComponents() <em>Bound Basic Components</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBoundBasicComponents()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BasicComponent> boundBasicComponents;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ArchitectureImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return DargPackage.Literals.ARCHITECTURE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public double getQuality() {
+		return quality;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setQuality(double newQuality) {
+		double oldQuality = quality;
+		quality = newQuality;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__QUALITY, oldQuality, quality));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public QADAG getQadag() {
+		return qadag;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetQadag(QADAG newQadag, NotificationChain msgs) {
+		QADAG oldQadag = qadag;
+		qadag = newQadag;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__QADAG, oldQadag, newQadag);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setQadag(QADAG newQadag) {
+		if (newQadag != qadag) {
+			NotificationChain msgs = null;
+			if (qadag != null)
+				msgs = ((InternalEObject)qadag).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DargPackage.ARCHITECTURE__QADAG, null, msgs);
+			if (newQadag != null)
+				msgs = ((InternalEObject)newQadag).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DargPackage.ARCHITECTURE__QADAG, null, msgs);
+			msgs = basicSetQadag(newQadag, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__QADAG, newQadag, newQadag));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ResourceOptions> getBoundResourceOptions() {
+		if (boundResourceOptions == null) {
+			boundResourceOptions = new EObjectResolvingEList<ResourceOptions>(ResourceOptions.class, this, DargPackage.ARCHITECTURE__BOUND_RESOURCE_OPTIONS);
+		}
+		return boundResourceOptions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<QualityAssignment> getQualityassignments() {
+		if (qualityassignments == null) {
+			qualityassignments = new EObjectContainmentEList<QualityAssignment>(QualityAssignment.class, this, DargPackage.ARCHITECTURE__QUALITYASSIGNMENTS);
+		}
+		return qualityassignments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isOptimal() {
+		return optimal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOptimal(boolean newOptimal) {
+		boolean oldOptimal = optimal;
+		optimal = newOptimal;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__OPTIMAL, oldOptimal, optimal));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHidden(boolean newHidden) {
+		boolean oldHidden = hidden;
+		hidden = newHidden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__HIDDEN, oldHidden, hidden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public float getMarked() {
+		return marked;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMarked(float newMarked) {
+		float oldMarked = marked;
+		marked = newMarked;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__MARKED, oldMarked, marked));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DargPackage.ARCHITECTURE__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Architecture> getRelatedArchitectures() {
+		if (relatedArchitectures == null) {
+			relatedArchitectures = new EObjectResolvingEList<Architecture>(Architecture.class, this, DargPackage.ARCHITECTURE__RELATED_ARCHITECTURES);
+		}
+		return relatedArchitectures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Resource> getBoundResources() {
+		if (boundResources == null) {
+			boundResources = new EObjectResolvingEList<Resource>(Resource.class, this, DargPackage.ARCHITECTURE__BOUND_RESOURCES);
+		}
+		return boundResources;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<BasicComponent> getBoundBasicComponents() {
+		if (boundBasicComponents == null) {
+			boundBasicComponents = new EObjectResolvingEList<BasicComponent>(BasicComponent.class, this, DargPackage.ARCHITECTURE__BOUND_BASIC_COMPONENTS);
+		}
+		return boundBasicComponents;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__QADAG:
+				return basicSetQadag(null, msgs);
+			case DargPackage.ARCHITECTURE__QUALITYASSIGNMENTS:
+				return ((InternalEList<?>)getQualityassignments()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__QUALITY:
+				return getQuality();
+			case DargPackage.ARCHITECTURE__QADAG:
+				return getQadag();
+			case DargPackage.ARCHITECTURE__BOUND_RESOURCE_OPTIONS:
+				return getBoundResourceOptions();
+			case DargPackage.ARCHITECTURE__QUALITYASSIGNMENTS:
+				return getQualityassignments();
+			case DargPackage.ARCHITECTURE__OPTIMAL:
+				return isOptimal();
+			case DargPackage.ARCHITECTURE__HIDDEN:
+				return isHidden();
+			case DargPackage.ARCHITECTURE__MARKED:
+				return getMarked();
+			case DargPackage.ARCHITECTURE__ID:
+				return getId();
+			case DargPackage.ARCHITECTURE__RELATED_ARCHITECTURES:
+				return getRelatedArchitectures();
+			case DargPackage.ARCHITECTURE__BOUND_RESOURCES:
+				return getBoundResources();
+			case DargPackage.ARCHITECTURE__BOUND_BASIC_COMPONENTS:
+				return getBoundBasicComponents();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__QUALITY:
+				setQuality((Double)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__QADAG:
+				setQadag((QADAG)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__BOUND_RESOURCE_OPTIONS:
+				getBoundResourceOptions().clear();
+				getBoundResourceOptions().addAll((Collection<? extends ResourceOptions>)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__QUALITYASSIGNMENTS:
+				getQualityassignments().clear();
+				getQualityassignments().addAll((Collection<? extends QualityAssignment>)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__OPTIMAL:
+				setOptimal((Boolean)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__HIDDEN:
+				setHidden((Boolean)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__MARKED:
+				setMarked((Float)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__ID:
+				setId((String)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__RELATED_ARCHITECTURES:
+				getRelatedArchitectures().clear();
+				getRelatedArchitectures().addAll((Collection<? extends Architecture>)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__BOUND_RESOURCES:
+				getBoundResources().clear();
+				getBoundResources().addAll((Collection<? extends Resource>)newValue);
+				return;
+			case DargPackage.ARCHITECTURE__BOUND_BASIC_COMPONENTS:
+				getBoundBasicComponents().clear();
+				getBoundBasicComponents().addAll((Collection<? extends BasicComponent>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__QUALITY:
+				setQuality(QUALITY_EDEFAULT);
+				return;
+			case DargPackage.ARCHITECTURE__QADAG:
+				setQadag((QADAG)null);
+				return;
+			case DargPackage.ARCHITECTURE__BOUND_RESOURCE_OPTIONS:
+				getBoundResourceOptions().clear();
+				return;
+			case DargPackage.ARCHITECTURE__QUALITYASSIGNMENTS:
+				getQualityassignments().clear();
+				return;
+			case DargPackage.ARCHITECTURE__OPTIMAL:
+				setOptimal(OPTIMAL_EDEFAULT);
+				return;
+			case DargPackage.ARCHITECTURE__HIDDEN:
+				setHidden(HIDDEN_EDEFAULT);
+				return;
+			case DargPackage.ARCHITECTURE__MARKED:
+				setMarked(MARKED_EDEFAULT);
+				return;
+			case DargPackage.ARCHITECTURE__ID:
+				setId(ID_EDEFAULT);
+				return;
+			case DargPackage.ARCHITECTURE__RELATED_ARCHITECTURES:
+				getRelatedArchitectures().clear();
+				return;
+			case DargPackage.ARCHITECTURE__BOUND_RESOURCES:
+				getBoundResources().clear();
+				return;
+			case DargPackage.ARCHITECTURE__BOUND_BASIC_COMPONENTS:
+				getBoundBasicComponents().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case DargPackage.ARCHITECTURE__QUALITY:
+				return quality != QUALITY_EDEFAULT;
+			case DargPackage.ARCHITECTURE__QADAG:
+				return qadag != null;
+			case DargPackage.ARCHITECTURE__BOUND_RESOURCE_OPTIONS:
+				return boundResourceOptions != null && !boundResourceOptions.isEmpty();
+			case DargPackage.ARCHITECTURE__QUALITYASSIGNMENTS:
+				return qualityassignments != null && !qualityassignments.isEmpty();
+			case DargPackage.ARCHITECTURE__OPTIMAL:
+				return optimal != OPTIMAL_EDEFAULT;
+			case DargPackage.ARCHITECTURE__HIDDEN:
+				return hidden != HIDDEN_EDEFAULT;
+			case DargPackage.ARCHITECTURE__MARKED:
+				return marked != MARKED_EDEFAULT;
+			case DargPackage.ARCHITECTURE__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case DargPackage.ARCHITECTURE__RELATED_ARCHITECTURES:
+				return relatedArchitectures != null && !relatedArchitectures.isEmpty();
+			case DargPackage.ARCHITECTURE__BOUND_RESOURCES:
+				return boundResources != null && !boundResources.isEmpty();
+			case DargPackage.ARCHITECTURE__BOUND_BASIC_COMPONENTS:
+				return boundBasicComponents != null && !boundBasicComponents.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (quality: ");
+		result.append(quality);
+		result.append(", optimal: ");
+		result.append(optimal);
+		result.append(", hidden: ");
+		result.append(hidden);
+		result.append(", marked: ");
+		result.append(marked);
+		result.append(", id: ");
+		result.append(id);
+		result.append(')');
+		return result.toString();
+	}
+
+} //ArchitectureImpl

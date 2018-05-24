@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<results costCohesion="18.065827432467874" diameter="6" domainsize="124" interconnections="1546" qualityCohesion="0.03907809037888016" radius="6">
+    <path>
+        <segments index="1" opMode="Experiment N1 8" sequenceTag=""/>
+    </path>
+    <mode name="Experiment N1">
+        <qa min="0.2" weigth="0.2">noise</qa>
+        <qa min="0.45" weigth="0.175">lifetime</qa>
+        <qa min="0.0" weigth="0.125">pointingtime</qa>
+        <qa min="0.0" weigth="0.125">accuracy</qa>
+        <qa min="0.0" weigth="0.175">torque</qa>
+        <qa min="0.1" weigth="0.2">powerconsumption</qa>
+    </mode>
+    <allResources count="32">
+        <resource>GPS Receiver1</resource>
+        <resource>GPS Receiver2</resource>
+        <resource>GPS LNA1+Antenna1</resource>
+        <resource>GPS LNA2+Antenna2</resource>
+        <resource>MFS Fluxgate1</resource>
+        <resource>MFS Fluxgate2</resource>
+        <resource>ASC CHU1</resource>
+        <resource>ASC CHU2</resource>
+        <resource>ASC DPU1 High Res.</resource>
+        <resource>ASC DPU2 High Res.</resource>
+        <resource>CSS FrontHead1</resource>
+        <resource>CSS FrontHead2</resource>
+        <resource>CSS RearHead1</resource>
+        <resource>CSS RearHead2</resource>
+        <resource>CSS Chipset1 Low Res.</resource>
+        <resource>CSS Chipset2 Low Res.</resource>
+        <resource>IMU1</resource>
+        <resource>IMU2</resource>
+        <resource>MC1x</resource>
+        <resource>MC2x</resource>
+        <resource>MC1y</resource>
+        <resource>MC2y</resource>
+        <resource>MC1z</resource>
+        <resource>MC2z</resource>
+        <resource>RW1</resource>
+        <resource>RW2</resource>
+        <resource>RW3</resource>
+        <resource>RW4</resource>
+        <resource>ASC DPU1 Low Res.</resource>
+        <resource>ASC DPU2 Low Res.</resource>
+        <resource>CSS Chipset1 High Res.</resource>
+        <resource>CSS Chipset2 High Res.</resource>
+    </allResources>
+</results>

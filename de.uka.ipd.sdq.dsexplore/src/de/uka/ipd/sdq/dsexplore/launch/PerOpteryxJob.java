@@ -26,22 +26,13 @@ ICompositeJob {
         // 2. Validate PCM Models
         this.addJob(new ValidatePCMModelsJob(config));
 
-        //TODO remove step 3 and 5, there should be no need
-        //anymore to save the models under a different name.
-        //Do I ever need the initial model?
-        // 3. Create model files for candidate models
-        //this.candidateConfig = createCandidateSetup(config);
-
-        // 4. Copy initial instance to separate blackboard partition
+        // 3. Copy initial instance to separate blackboard partition
         this.add(new MoveInitialPCMModelPartitionJob());
 
-        // create the PCM partition anew but empty
+        // 4 Create the PCM partition anew but empty
         this.add(new PreparePCMBlackboardPartitionJob());
 
-        // 5. Load the candidate models again from updated files
-        //this.addJob(new LoadPCMModelsIntoBlackboardJob(candidateConfig));
-
-        // 6. Run Optimisation on Loaded Models
+        // 5. Run Optimisation on Loaded Models
         this.add(new OptimisationJob(config, launch));
 
     }
@@ -49,11 +40,6 @@ ICompositeJob {
     @Override
     public void cleanup(final IProgressMonitor monitor) throws CleanupFailedException {
         super.cleanup(monitor);
-        /*try {
-			this.candidateConfig.getRawConfiguration().delete();
-		} catch (CoreException e) {
-			throw new RollbackFailedException("Could not delete launch configuration "+this.candidateConfig.getRawConfiguration().getName(),e);
-		}*/
         monitor.worked(1);
     }
 

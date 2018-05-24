@@ -1,0 +1,441 @@
+package de.tubs.areva.command;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gef4.graph.Edge;
+import org.eclipse.gef4.graph.Graph;
+import org.eclipse.gef4.layout.algorithms.SpringLayoutAlgorithm;
+import org.eclipse.gef4.zest.fx.ZestProperties;
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.ui.handlers.HandlerUtil;
+import org.palladiosimulator.pcm.core.composition.AssemblyContext;
+import org.palladiosimulator.pcm.repository.BasicComponent;
+
+import de.tubs.areva.emf.model.darg.Architecture;
+import de.tubs.areva.emf.model.darg.ArchitectureComposite;
+import de.tubs.areva.emf.model.darg.ArchitectureQuality;
+import de.tubs.areva.emf.model.darg.DARGNode;
+import de.tubs.areva.emf.model.qadag.Node;
+import de.tubs.areva.emf.model.qadag.QadagFactory;
+import de.tubs.areva.resourcerelations.Platform;
+import de.tubs.areva.resourcerelations.ResourceGroup;
+import de.tubs.areva.ui.module.DARGZestNode;
+import de.tubs.areva.ui.module.QADAGZestNode;
+import de.tubs.areva.ui.wizard.CreateDARGWizard;
+import de.tubs.areva.util.CSVReader;
+import de.tubs.areva.util.emf.ResourceManager;
+import de.uka.ipd.sdq.pcm.designdecision.DecisionSpace;
+import de.uka.ipd.sdq.pcm.designdecision.DegreeOfFreedomInstance;
+import de.uka.ipd.sdq.pcm.designdecision.specific.AssembledComponentDegree;
+
+public class OpenARGWizardHandler extends AbstractHandler implements IHandler {
+
+	private static int i;
+	private int id = 0;
+	protected static final String ID = ZestProperties.CSS_ID__NE;
+	protected static final String LABEL = ZestProperties.LABEL__NE;
+	
+	
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		
+		CreateDARGWizard wizard = new CreateDARGWizard();
+		
+		
+		WizardDialog wizardDialog = new WizardDialog(
+				HandlerUtil.getActiveWorkbenchWindow(event).getShell(),
+				wizard);
+		
+		if(wizardDialog.open() == Window.OK) {
+			System.out.println("Ok pressed");
+			
+			setupExampleDARGZest(wizard);
+			
+		} else {
+			System.out.println("Cancel pressed");
+		}
+		
+		return null;
+	}
+	
+	private HashMap<String, HashMap<String, String>> getCSVAllocation(String[][] candidatesFile) {
+		
+		HashMap<String, HashMap<String, String>> archs = new HashMap<>();
+		
+		for(int j = 1; j < candidatesFile.length; j++) {
+			
+			HashMap<String, String> changedComponents = new HashMap<>();
+			
+			for(int i = 0; i < (candidatesFile[0].length-1); i++) {
+				
+				if(candidatesFile[0][i].split(":")[0].equals("AssembledComponentDegreeImpl")) {
+					
+					String key = candidatesFile[0][i].split(":")[1];
+					String value = candidatesFile[j][i].split("\\(")[0].trim();
+					
+					changedComponents.put(key, value);
+				}
+				
+			}
+
+			int keyIndex = candidatesFile[0].length-1;
+			String key = candidatesFile[j][keyIndex];
+			
+			archs.put(key, changedComponents);
+		}
+		
+		for(Map.Entry<String, HashMap<String, String>> qualityToArchs: archs.entrySet()) {
+			System.out.println("Architecture: " + qualityToArchs.getKey());
+			for(Map.Entry<String, String> archQuality: qualityToArchs.getValue().entrySet()) {
+				System.out.println("" + archQuality.getKey() + ": " + archQuality.getValue());
+			}
+		}
+		
+		return archs;
+		
+	}
+	
+	private HashMap<String, HashMap<String, String>> getCSVQualities(String[][] candidatesFile) {
+		
+		HashMap<String, HashMap<String, String>> archs = new HashMap<>();
+		
+		for(int i = 0; i < (candidatesFile[0].length-1); i++) {
+			
+			if(!candidatesFile[0][i].split(":")[0].equals("AssembledComponentDegreeImpl")) {
+				
+				String qualityName = candidatesFile[0][i].split(":")[0];
+				
+				HashMap<String, String> archQuality = new HashMap<>();
+				
+				for(int j = 1; j < candidatesFile.length; j++) {
+					int keyIndex = candidatesFile[0].length-1;
+					String key = candidatesFile[j][keyIndex];
+					String value = candidatesFile[j][i];
+					archQuality.put(key, value);
+				}
+				
+				archs.put(qualityName, archQuality);
+			}
+			
+		}
+		
+		for(Map.Entry<String, HashMap<String, String>> qualityToArchs: archs.entrySet()) {
+			System.out.println("Quality: " + qualityToArchs.getKey());
+			for(Map.Entry<String, String> archQuality: qualityToArchs.getValue().entrySet()) {
+				System.out.println("" + archQuality.getKey() + ": " + archQuality.getValue());
+			}
+		}
+		
+		return archs;
+	}
+	
+	private void setupExampleDARGZest(CreateDARGWizard wizard) {
+		
+		String outputDir = wizard.pageThree.outputDirectory.replace('\\', '/') + "/";
+		
+		// setup candidates file
+		String csvFile = wizard.pageTwo.candidatesFile.toPlatformString(false);
+		String csvPath = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + csvFile;
+		CSVReader csvReader = new CSVReader(csvPath, ";");
+		String[][] candidatesFile = csvReader.getTable();
+		
+		HashMap<String, HashMap<String, String>> csvQualities = getCSVQualities(candidatesFile);
+		
+		//TODO: Parse a .csv file instead of fake data
+		HashMap<String, HashMap<String, String>> csvAllocation = getCSVAllocation(candidatesFile);
+		
+		// Find ALL BasicComponents that a specific architecture candidate uses
+		HashMap<String, List<BasicComponent>> architectures = new HashMap<>();
+		
+		ResourceSet pcmSystemRS = new ResourceSetImpl();
+		org.palladiosimulator.pcm.system.System pcmSystem = 
+				(org.palladiosimulator.pcm.system.System) pcmSystemRS.getResource(wizard.pageOneThree.systemFile, true).getContents().get(0);
+		
+		ResourceSet dseDesignDecisionsRS = new ResourceSetImpl();
+		DecisionSpace dseDesignDecisions = 
+				(DecisionSpace) dseDesignDecisionsRS.getResource(wizard.pageOneTwo.designdecisionsFile, true).getContents().get(0);
+		
+		for(Map.Entry<String, HashMap<String, String>> architecture: csvAllocation.entrySet()) {
+			
+			List<BasicComponent> selectedComponents = new ArrayList<>();
+			
+			for(AssemblyContext assemblyContext: pcmSystem.getAssemblyContexts__ComposedStructure()) {
+				
+				String contextName = assemblyContext.getEntityName();
+				
+				if(!architecture.getValue().containsKey(contextName)) {
+					
+					selectedComponents.add((BasicComponent) assemblyContext.getEncapsulatedComponent__AssemblyContext());
+				
+				} else {
+					
+					for(DegreeOfFreedomInstance dof: dseDesignDecisions.getDegreesOfFreedom()) {
+						
+						if(dof instanceof AssembledComponentDegree) {
+							
+							AssembledComponentDegree componentDegree = (AssembledComponentDegree) dof;
+							
+							String degreeId = ((AssemblyContext)componentDegree.getPrimaryChanged()).getId();
+							String contextId = assemblyContext.getId();
+							
+							if(degreeId.equals(contextId)) {
+								
+								for(EObject component: componentDegree.getClassDesignOptions()) {
+									
+									BasicComponent basicComponent = (BasicComponent) component;
+									
+									String degreeName = architecture.getValue().get(((AssemblyContext)componentDegree.getPrimaryChanged()).getEntityName());
+									
+									String componentName = basicComponent.getEntityName();
+									
+									if(componentName.equals(degreeName)) {
+										
+										selectedComponents.add(basicComponent);
+									}
+								}
+							}
+						}
+					}
+					
+				}
+			}
+			
+			architectures.put(architecture.getKey(), selectedComponents);
+		}
+		
+		// Extract used resources for each architecture candidate
+		HashMap<String, List<de.tubs.areva.resourcerelations.Resource>> architectureResources = new HashMap<>();
+		HashMap<String, List<de.tubs.areva.resourcerelations.ResourceGroup>> architectureResourceGroups = new HashMap<>();
+		
+		for(Map.Entry<String, List<BasicComponent>> architecture: architectures.entrySet()) {
+			
+			List<de.tubs.areva.resourcerelations.Resource> usedResources = new ArrayList<>();
+			List<de.tubs.areva.resourcerelations.ResourceGroup> usedResourceGroups = new ArrayList<>();
+			
+			ResourceSet arevaResourceRelationsRS = new ResourceSetImpl();
+			Platform arevaResourceRelations = 
+					(Platform) arevaResourceRelationsRS.getResource(wizard.pageOneOne.resourceRelationsFile, true).getContents().get(0);
+			
+			for(BasicComponent basicComponent: architecture.getValue()) {
+				
+				for(ResourceGroup group: arevaResourceRelations.getGroups()) {
+					
+					String groupComponentId = group.getAnnotatedComponent().getId();
+					String basicComponentId = basicComponent.getId();
+					
+					if(groupComponentId.contentEquals(basicComponentId)) {
+						usedResources.addAll(group.getResources());
+						usedResourceGroups.add(group);
+					}
+				}
+			}
+			
+			architectureResources.put(architecture.getKey(), usedResources);
+			architectureResourceGroups.put(architecture.getKey(), usedResourceGroups);
+		}
+		
+		// Load metaqadag
+		
+		if(wizard.pageFour.generateQadag) {
+			
+			de.tubs.areva.emf.model.qadag.File metaQadag = QadagFactory.eINSTANCE.createFile();	
+			metaQadag.setName("Meta-QADAG");
+			metaQadag.setRoot(QadagFactory.eINSTANCE.createNode());
+			metaQadag.getRoot().setName("Meta-QADAG");
+		
+			for(Map.Entry<String, HashMap<String,String>> quality: csvQualities.entrySet()) {
+				
+				Node node = QadagFactory.eINSTANCE.createNode();
+				/*
+				node.setName(candidatesFile[0][i].split(":")[0]);
+				node.setWeight(0.333f);
+				*/
+				
+			
+				node.setName("" + quality.getKey());
+				node.setWeight(1.0f/csvQualities.size());
+				
+				metaQadag.getRoot().getNodes().add(node);
+			}
+			
+			// Save meta-qadag
+			ResourceSet qadagRS = new ResourceSetImpl();
+			Resource metaqadagResource = ResourceManager.createAndAddResource(
+				outputDir + "default.qadag", 
+				new String[] {"qadag"}, 
+				qadagRS);
+			metaqadagResource.getContents().add(metaQadag);
+			ResourceManager.saveResource(metaqadagResource);
+		}
+		
+		// Generate DARG from Architecture->UsedResources HashMap
+		de.tubs.areva.emf.model.darg.File dargFile = de.tubs.areva.emf.model.darg.DargFactory.eINSTANCE.createFile();
+		//dargFile.setQadag(metaQadag);
+		generateDARGFromResourceHashMap(architectureResources, architectureResourceGroups, dargFile, csvQualities);
+		
+		// save darg
+		ResourceSet dargRS = new ResourceSetImpl();
+		Resource architectureResource = ResourceManager.createAndAddResource(
+				outputDir + "architectures.darg",
+				new String[] {".darg"}, 
+				dargRS);
+		
+		architectureResource.getContents().add(dargFile);
+		ResourceManager.saveResource(architectureResource);
+		
+		for(IProject project: ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
+			try {
+				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+			} catch (CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public void generateDARGFromResourceHashMap(
+			HashMap<String, List<de.tubs.areva.resourcerelations.Resource>> architectureMap,
+			HashMap<String, List<de.tubs.areva.resourcerelations.ResourceGroup>> architectureResourceGroupMap,
+			de.tubs.areva.emf.model.darg.File dargFile, 
+			HashMap<String, HashMap<String, String>> csvQualities
+			) {
+		
+		ArchitectureComposite root = de.tubs.areva.emf.model.darg.DargFactory.eINSTANCE.createArchitectureComposite();
+		dargFile.setRoot(root);
+		
+		for(Map.Entry<String, List<de.tubs.areva.resourcerelations.Resource>> architectureKV: architectureMap.entrySet()) {
+			
+			de.tubs.areva.emf.model.darg.Architecture architecture = de.tubs.areva.emf.model.darg.DargFactory.eINSTANCE.createArchitecture();
+			
+			architecture.setName(architectureKV.getKey());
+			
+			for(Map.Entry<String, HashMap<String,String>> quality: csvQualities.entrySet()) {
+				
+				for(Map.Entry<String, String> architectureQuality: quality.getValue().entrySet()) {
+					
+					if(architecture.getName().equals(architectureQuality.getKey())) {
+						
+						ArchitectureQuality architectureQualityEntry = de.tubs.areva.emf.model.darg.DargFactory.eINSTANCE.createArchitectureQuality();
+						architectureQualityEntry.setName(quality.getKey());
+						architectureQualityEntry.setValue(Float.parseFloat(architectureQuality.getValue()));
+						
+						architecture.getQualities().add(architectureQualityEntry);
+					}
+				}	
+			}
+			
+			architecture.getUsedResources().addAll(architectureKV.getValue());
+			architecture.getUsedResourceGroups().addAll(architectureResourceGroupMap.get(architectureKV.getKey()));
+			
+			root.getNodes().add(architecture);
+			
+		}
+		
+		for(DARGNode dargNode: root.getNodes()) {
+			
+			Architecture architecture = (Architecture) dargNode;
+			
+			for(DARGNode dargNode2: root.getNodes()) {
+				
+				Architecture architecture2 = (Architecture) dargNode2;
+				
+				if(architecture != architecture2) {
+					
+					boolean connection = true;
+					
+					for(de.tubs.areva.resourcerelations.Resource resource2: architecture2.getUsedResources()) {
+						
+						boolean inside = false;
+						
+						for(de.tubs.areva.resourcerelations.Resource resource: architecture.getUsedResources()) {
+							
+							if(EcoreUtil.equals(resource2, resource)) {
+								
+								inside = true;
+							}
+						}
+						
+						if(!inside) {
+							
+							connection = false;
+							break;
+						}
+					}
+					
+					if(connection) {
+						
+						architecture.getOutgoingArchitectures().add(architecture2);
+					}
+				}
+			}
+		}
+	}
+	
+	protected static org.eclipse.gef4.graph.Node n(Architecture architecture, Object... attr) {
+		
+		Map<String, Object> attrs = new HashMap<>();
+		
+		String id = genId();
+		attrs.put(ID, id);
+		attrs.put(LABEL, id);
+		for (int i = 0; i < attr.length; i += 2) {
+			attrs.put(attr[i].toString(), attr[i + 1]);
+		}
+		DARGZestNode zestNode = new DARGZestNode(attrs);
+		zestNode.setArchitecture(architecture);
+		
+		return zestNode;
+	}
+	
+protected static org.eclipse.gef4.graph.Node nQ(Node node, Object... attr) {
+		
+		Map<String, Object> attrs = new HashMap<>();
+		
+		String id = genId();
+		attrs.put(ID, id);
+		attrs.put(LABEL, id);
+		for (int i = 0; i < attr.length; i += 2) {
+			attrs.put(attr[i].toString(), attr[i + 1]);
+		}
+		QADAGZestNode zestNode = new QADAGZestNode(attrs);
+		zestNode.setQadagNode(node);
+		
+		return zestNode;
+	}
+	
+	protected static Edge e(org.eclipse.gef4.graph.Node n,
+			org.eclipse.gef4.graph.Node m, String label, Object... attr) {
+		
+		org.eclipse.gef4.graph.Edge.Builder builder = new Edge.Builder(n, m).attr(LABEL, label).attr(ID,
+				genId());
+		
+		
+		for (int i = 0; i < attr.length; i += 2) {
+			builder.attr(attr[i].toString(), attr[i + 1]);
+		}
+		return builder.buildEdge();
+	}
+	
+	private static String genId() {
+		i++;
+		return "" + i;
+	}
+}

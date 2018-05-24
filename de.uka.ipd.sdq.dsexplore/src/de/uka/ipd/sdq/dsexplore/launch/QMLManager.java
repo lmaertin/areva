@@ -367,13 +367,11 @@ public class QMLManager {
 					IConfigurationElement[] elements = availExts[i].getConfigurationElements();
 					for (IConfigurationElement element : elements) {
 						if (element.getName().equals("analysis")) {
-							//return element.getAttribute("qualityAttribute");
 							if (element.getAttribute("qualityAttribute").equals("de.uka.ipd.sdq.dsexplore.nqr"))
 								exts.add(availExts[i]);
 						}
 					}
 				}
-				//exts.add(exti);
 				} catch (Exception e){
 					logger.warn("NQR dimension file could not be loaded. Ignoring it.");
 					e.printStackTrace();

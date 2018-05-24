@@ -90,7 +90,6 @@ public class ProcessResourceFailureDetailed extends AbstractHandler implements I
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		//java.util.logging.Logger.getGlobal().setLevel(java.util.logging.Level.OFF);
 		ResourceSet operatingModeRS = new ResourceSetImpl();
 		
 		org.eclipse.emf.ecore.resource.Resource selectedOpMode = null;
@@ -141,7 +140,6 @@ public class ProcessResourceFailureDetailed extends AbstractHandler implements I
         	}
         	
         } catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
@@ -158,7 +156,6 @@ public class ProcessResourceFailureDetailed extends AbstractHandler implements I
     			}
     		}
         } catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
@@ -175,7 +172,6 @@ public class ProcessResourceFailureDetailed extends AbstractHandler implements I
 	        			+ " (" + segment.getAttributes().getNamedItem("faultyResource").getNodeValue() + ")" );
 	        }
         } catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
@@ -215,7 +211,6 @@ public class ProcessResourceFailureDetailed extends AbstractHandler implements I
 				view.changeTitle(fileName + " (full)");
 			
 		} catch (PartInitException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -228,7 +223,6 @@ public class ProcessResourceFailureDetailed extends AbstractHandler implements I
 			try {
 				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 			} catch (CoreException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -387,10 +381,6 @@ public class ProcessResourceFailureDetailed extends AbstractHandler implements I
 										ZestProperties.LABEL_CSS_STYLE__NE, "-fx-font-color: red;"
 										);
 								nodeList.add(graphicalNode);
-								
-								//ZestProperties.setShapeCssStyle(graphicalNode, "-fx-fill: grey;");
-								
-								//ZestProperties.setLabelCssStyle(graphicalNode, "-fx-font-color: grey;");
 							}
 							
 							if(optimal) {
@@ -804,98 +794,6 @@ public class ProcessResourceFailureDetailed extends AbstractHandler implements I
 		
 		return new Graph(attrs, nodeList, edgeList); 
 	}
-
-	/*
-	private Graph generateTreeFromModel(ARG archNodes, List<Triplet<Architecture, Architecture, String>> processedPath) {
-		List<org.eclipse.gef4.graph.Node> nodes = new ArrayList<>();
-		List<org.eclipse.gef4.graph.Edge> edges = new ArrayList<>();
-		HashMap<Architecture, org.eclipse.gef4.graph.Node> archToNode = new HashMap<>();
-		
-		// draw nodes
-		for(Architecture architecture: archNodes.getArchitectures()) {
-			
-			if(!architecture.isHidden()) {
-				
-				org.eclipse.gef4.graph.Node newNode = null;
-				
-				if(architecture.getMarked() >= 0f) {
-					if(architecture.isOptimal()) {
-						newNode = n(architecture, ZestProperties.LABEL__NE, "Optimal Architecture " + architecture.getId() + ": " + architecture.getQuality(), ZestProperties.TOOLTIP__N, "Architecture " + architecture.getId(), ZestProperties.SHAPE_CSS_STYLE__N, "-fx-border-color: green; -fx-border-width: 200;", ZestProperties.LABEL_CSS_STYLE__NE, "-fx-font-color: green;");
-						ZestProperties.setShapeCssStyle(newNode, "-fx-background-color: green; -fx-border-width: 200; -fx-fill: green;");
-						ZestProperties.setLabelCssStyle(newNode, "-fx-font-color: green;");
-					} else {
-						newNode = n(architecture, ZestProperties.LABEL__NE, "Architecture " + architecture.getId() + ": " + architecture.getQuality(), ZestProperties.TOOLTIP__N, "Architecture " + architecture.getId());
-					}
-				} else {
-					newNode = n(architecture, ZestProperties.LABEL__NE, "Failed Architecture " + architecture.getId() + ": " + architecture.getQuality(), ZestProperties.TOOLTIP__N, "Architecture " + architecture.getId(), ZestProperties.SHAPE_CSS_STYLE__N, "-fx-border-color: red; -fx-border-width: 200;", ZestProperties.LABEL_CSS_STYLE__NE, "-fx-font-color: red;");
-					ZestProperties.setShapeCssStyle(newNode, "-fx-background-color: red; -fx-border-width: 200; -fx-fill: red;");
-					ZestProperties.setLabelCssStyle(newNode, "-fx-font-color: red;");
-				}
-				
-				Graph qadag = createSimpleQadagGraphFromModel(architecture.getQadag());
-				newNode.setNestedGraph(qadag);
-				
-				nodes.add(newNode);
-				
-				archToNode.put(architecture, newNode);
-			}
-		}
-		
-		//draw edges
-		for(Architecture architecture: archNodes.getArchitectures()) {
-			
-			if(!architecture.isHidden()) {
-				
-				for(Architecture hiddenArchitecture: architecture.getRelatedArchitectures()) {
-					
-					if(hiddenArchitecture.isHidden()) {
-						
-						org.eclipse.gef4.graph.Node hiddenNode = null;
-						
-						if(!archToNode.containsKey(hiddenArchitecture)) {
-							
-							Graph hiddenQadag = createSimpleQadagGraphFromModel(hiddenArchitecture.getQadag());
-							
-							if(hiddenArchitecture.isOptimal()) {
-								hiddenNode = n(hiddenArchitecture, ZestProperties.LABEL__NE, "Optimal Architecture " + hiddenArchitecture.getId() + ": " + hiddenArchitecture.getQuality(), ZestProperties.TOOLTIP__N, "Architecture " + hiddenArchitecture.getId(), ZestProperties.SHAPE_CSS_STYLE__N, "-fx-border-color: green; -fx-border-width: 200;", ZestProperties.LABEL_CSS_STYLE__NE, "-fx-font-color: green;");
-								ZestProperties.setShapeCssStyle(hiddenNode, "-fx-background-color: green; -fx-border-width: 200; -fx-fill: green;");
-								ZestProperties.setLabelCssStyle(hiddenNode, "-fx-font-color: green;");
-							} else {
-								hiddenNode = n(hiddenArchitecture, ZestProperties.LABEL__NE, "Architecture " + hiddenArchitecture.getId() + ": " + hiddenArchitecture.getQuality(), ZestProperties.TOOLTIP__N, "Architecture " + hiddenArchitecture.getId());
-							}
-							
-							hiddenNode.setNestedGraph(hiddenQadag);
-							
-							archToNode.put(hiddenArchitecture, hiddenNode);
-							
-							//nodes.add(hiddenNode);
-							
-							ZestProperties.setInvisible(hiddenNode, true);
-						
-						}
-					}
-				}
-			}
-		}
-		String output = "Path: \n";
-		for(org.javatuples.Triplet<Architecture, Architecture, String> step: processedPath) {
-			Edge edge = e(archToNode.get(step.getValue0()), archToNode.get(step.getValue1()), "" + step.getValue2(), ZestProperties.LABEL__NE, "" + step.getValue2(), ZestProperties.TARGET_DECORATION__E, new javafx.scene.shape.Polygon(0, 0, 10, 3, 10, -3),
-					ZestProperties.TARGET_DECORATION_CSS_STYLE__E, "-fx-fill: green;");
-			
-			output += step.getValue0().getId() + " ->(-" + step.getValue2() + ") " + step.getValue1().getId() + "\n";
-			edges.add(edge);
-		}
-		
-		System.out.println(output);
-		
-		//JOptionPane.showConfirmDialog(null, output, "alert", JOptionPane.OK_CANCEL_OPTION);
-		
-		HashMap<String, Object> attrs = new HashMap<>();
-		attrs.put(ZestProperties.LAYOUT_ALGORITHM__G, new SpringLayoutAlgorithm());
-		
-		return new Graph(attrs, nodes, edges);
-	}
-	*/
 	
 	protected static org.eclipse.gef4.graph.Node n(String name, double quality, List<String> boundResources, Object... attr) {
 		
