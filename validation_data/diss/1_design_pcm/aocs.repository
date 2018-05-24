@@ -32,12 +32,12 @@
     <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_FqfgIEybEeSbR8VXyv2mGQ" entityName="Provided__Mode Processor" providedInterface__OperationProvidedRole="_DAA24EybEeSbR8VXyv2mGQ"/>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_ime9cAYSEeSQWoRYn1rqHg" entityName="Estimator">
-    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_norkoAYVEeSQWoRYn1rqHg" entityName="Provided__Estimator" providedInterface__OperationProvidedRole="_foSmoAYVEeSQWoRYn1rqHg"/>
     <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_P3BGQAYVEeSQWoRYn1rqHg" entityName="Required__Estimator" requiredInterface__OperationRequiredRole="_JxJ7QAYVEeSQWoRYn1rqHg"/>
     <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_mnaU4AYVEeSQWoRYn1rqHg" entityName="Required__Estimator" requiredInterface__OperationRequiredRole="_e1yLoAYVEeSQWoRYn1rqHg"/>
     <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_nGHDEAYVEeSQWoRYn1rqHg" entityName="Required__Estimator" requiredInterface__OperationRequiredRole="_fRDLUAYVEeSQWoRYn1rqHg"/>
     <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_oK9LQAYVEeSQWoRYn1rqHg" entityName="Required__Estimator" requiredInterface__OperationRequiredRole="_gChrkAYVEeSQWoRYn1rqHg"/>
     <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_osfLAAYVEeSQWoRYn1rqHg" entityName="Required__Estimator" requiredInterface__OperationRequiredRole="_gZxG4AYVEeSQWoRYn1rqHg"/>
+    <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_wpVJ0DJ7Eei-idLHLw6YvQ" entityName="Required_IF_ASC2Estimator_Estimator" requiredInterface__OperationRequiredRole="_foSmoAYVEeSQWoRYn1rqHg"/>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_j3_BkAYSEeSQWoRYn1rqHg" entityName="Predictor">
     <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_PQn0oAYVEeSQWoRYn1rqHg" entityName="Required__Predictor" requiredInterface__OperationRequiredRole="_KTbh4AYVEeSQWoRYn1rqHg"/>
@@ -61,13 +61,13 @@
     <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_iqcJAAYVEeSQWoRYn1rqHg1" entityName="Provided__MFS container" providedInterface__OperationProvidedRole="_fRDLUAYVEeSQWoRYn1rqHg"/>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_yG_d8AYSEeSQWoRYn1rqHg" entityName="ASC Dummy">
-    <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_jRVJ4AYVEeSQWoRYn1rqHg" entityName="Required__ASC container" requiredInterface__OperationRequiredRole="_foSmoAYVEeSQWoRYn1rqHg"/>
+    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_ZsIOQDJ7Eei_29zUSuO1qw" entityName="Provided_IF_ASC2Estimator_ASC Dummy" providedInterface__OperationProvidedRole="_foSmoAYVEeSQWoRYn1rqHg"/>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_sxWToNd1Eean3t21khwmKw" entityName="ASC High Res.">
-    <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_jRVJ4AYVEeSQWoRYn1rqHg5" entityName="Required__ASC container" requiredInterface__OperationRequiredRole="_foSmoAYVEeSQWoRYn1rqHg"/>
+    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_aUo_wDJ7Eei_29zUSuO1qw" entityName="Provided_IF_ASC2Estimator_ASC High Res." providedInterface__OperationProvidedRole="_foSmoAYVEeSQWoRYn1rqHg"/>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_7jC7edd3EeaSyox7SHd1jg" entityName="ASC Low Res.">
-    <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_jRVJ4AYVEeSQWoRYn1rqHg6" entityName="Required__ASC container" requiredInterface__OperationRequiredRole="_foSmoAYVEeSQWoRYn1rqHg"/>
+    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_bLpgQDJ7Eei_29zUSuO1qw" entityName="Provided_IF_ASC2Estimator_ASC Low Res." providedInterface__OperationProvidedRole="_foSmoAYVEeSQWoRYn1rqHg"/>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_zQakIAYSEeSQWoRYn1rqHg" entityName="IMU">
     <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_kdxu4AYVEeSQWoRYn1rqHg" entityName="Provided__IMU" providedInterface__OperationProvidedRole="_gZxG4AYVEeSQWoRYn1rqHg"/>

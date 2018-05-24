@@ -15,7 +15,7 @@
   <options resources="//@resources.16 //@resources.17" name="ONS Receivers" minElements="1" maxElements="1">
     <referencedComponent href="aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
   </options>
-  <options resources="//@resources.18 //@resources.19" name="ONS Antennas+LNAs" minElements="1" maxElements="2">
+  <options resources="//@resources.18 //@resources.19" name="ONS Antennas+LNAs" minElements="1" maxElements="1">
     <referencedComponent href="aocs.repository#_pOkEsAYSEeSQWoRYn1rqHg"/>
   </options>
   <options name="ASC Dummy" minElements="0" maxElements="0">
@@ -48,10 +48,10 @@
   <options resources="//@resources.12 //@resources.13" name="CSS RearHeads High Res." minElements="1" maxElements="1">
     <referencedComponent href="aocs.repository#_lirGedd1Eean3t21khwmKw"/>
   </options>
-  <options resources="//@resources.6 //@resources.7" name="CSS Chipsets Low Res." minElements="3" maxElements="3">
+  <options resources="//@resources.6 //@resources.7" name="CSS Chipsets Low Res." minElements="1" maxElements="1">
     <referencedComponent href="aocs.repository#_s3cW0ApeEeiV0qvbuVqEeQ"/>
   </options>
-  <options resources="//@resources.12 //@resources.13" name="CSS Chipsets High Res." minElements="3" maxElements="3">
+  <options resources="//@resources.8 //@resources.9" name="CSS Chipsets High Res." minElements="1" maxElements="1">
     <referencedComponent href="aocs.repository#_lirGedd1Eean3t21khwmKw"/>
   </options>
   <options name="MCS Dummy" minElements="0" maxElements="0">

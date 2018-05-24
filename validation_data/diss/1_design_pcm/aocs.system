@@ -15,7 +15,7 @@
   <assemblyContexts__ComposedStructure id="_xmt7EAYVEeSQWoRYn1rqHg" entityName="Mode Processor">
     <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
   </assemblyContexts__ComposedStructure>
-  <assemblyContexts__ComposedStructure id="_dHJDEAYWEeSQWoRYn1rqHg" entityName="Assembly_CommandInterpreter &lt;CommandInterpreter>">
+  <assemblyContexts__ComposedStructure id="_dHJDEAYWEeSQWoRYn1rqHg" entityName="Command Interpreter">
     <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
   </assemblyContexts__ComposedStructure>
   <assemblyContexts__ComposedStructure id="_qug3sAYWEeSQWoRYn1rqHg" entityName="House Keeper">
@@ -51,8 +51,9 @@
   <assemblyContexts__ComposedStructure id="_04wT4NdaEeaqquGj6YfQKw" entityName="RW">
     <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="aocs.repository#_2MxAgAYSEeSQWoRYn1rqHg"/>
   </assemblyContexts__ComposedStructure>
-  <connectors__ComposedStructure xsi:type="composition:ProvidedDelegationConnector" id="_QtGxQP8_EeakgvmVKJAkIA" entityName="ProvDelegation Provided_IF_Telecommand -> Provided_aName_AOCS" outerProvidedRole_ProvidedDelegationConnector="_2yFZsP8-EeakgvmVKJAkIA" assemblyContext_ProvidedDelegationConnector="_4C14sAYPEeSQWoRYn1rqHg">
-    <innerProvidedRole_ProvidedDelegationConnector href="aocs.repository#_bYZJoAYTEeSQWoRYn1rqHg"/>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_29AHUDJ7Eei-idLHLw6YvQ" entityName="Connector Estimator -> ASC" requiringAssemblyContext_AssemblyConnector="_HHVHYAYXEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_ngNdwAYYEeSQWoRYn1rqHg">
+    <providedRole_AssemblyConnector href="aocs.repository#_ZsIOQDJ7Eei_29zUSuO1qw"/>
+    <requiredRole_AssemblyConnector href="aocs.repository#_wpVJ0DJ7Eei-idLHLw6YvQ"/>
   </connectors__ComposedStructure>
   <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_n_4mIP89EeakgvmVKJAkIA" entityName="Connector Controller -> EPC" requiringAssemblyContext_AssemblyConnector="_N8fBUAYXEeSQWoRYn1rqHg" providingAssemblyContext_AssemblyConnector="_ws8acAYVEeSQWoRYn1rqHg">
     <providedRole_AssemblyConnector href="aocs.repository#_OP5XcAYVEeSQWoRYn1rqHg"/>
@@ -118,7 +119,4 @@
     <providedRole_AssemblyConnector href="aocs.repository#_iCf_QAYVEeSQWoRYn1rqHg3"/>
     <requiredRole_AssemblyConnector href="aocs.repository#_mnaU4AYVEeSQWoRYn1rqHg"/>
   </connectors__ComposedStructure>
-  <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_2yFZsP8-EeakgvmVKJAkIA" entityName="Provided_IF_Telecommand">
-    <providedInterface__OperationProvidedRole href="aocs.repository#_ZGNroAYTEeSQWoRYn1rqHg"/>
-  </providedRoles_InterfaceProvidingEntity>
 </system:System>
