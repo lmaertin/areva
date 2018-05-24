@@ -71,7 +71,7 @@ The first step of Areva is creating an ARG instance. ARG stands for "**A**rchite
 * Power Consumption
 
 ### Minimize ARG and Create DARG
-The next step **Minimize** is weighting these quality criteria for each architecture with QADAG instances and minimize their interconnectivity, resulting in a DARG. QADAG is a concept of B. Florentz<span id="a1">[[1]](#f1)</span> and stands for "**Q**uality **A**ttribute **D**eterminisation **A**rchitecture **G**raph" and each of them represents an operating mode of the system, which has been derived from a given mission or experiment description. So, for each mission the system is going to switch to in its lifetime, one QADAG representing it has to be created, as seen in the figure below.
+The next step **Minimize** is weighting these quality criteria for each architecture with QADAG instances and minimize their interconnectivity, resulting in a DARG. QADAG is a concept of B. Florentz<sup id="a1">[1](#f1)</sup> and stands for "**Q**uality **A**ttribute **D**eterminisation **A**rchitecture **G**raph" and each of them represents an operating mode of the system, which has been derived from a given mission or experiment description. So, for each mission the system is going to switch to in its lifetime, one QADAG representing it has to be created, as seen in the figure below.
 
 ![From Missions to Selected Operating Modes](img/mission_to_opmode.png)
 
@@ -240,4 +240,4 @@ If all requirements are installed, import all projects in this repository into a
 Footnotes
 =========
 
-1. <span id="f1"></span> B. Florentz, M. Huhn. Embedded Systems Architecture: Evaluation and Analysis. Proceedings of the International Conference on the Quality of Software Architectures (QoSA 2006). Editors: C. Hoffmeister, I. Crnkovic, R. Reussner. Springer Berlin Heidelberg. Pages 145-162. ISBN 978-3-540-48820-0. [$\hookleftarrow$](#a1)
+<b id="f1">1</b>B. Florentz, M. Huhn. Embedded Systems Architecture: Evaluation and Analysis. Proceedings of the International Conference on the Quality of Software Architectures (QoSA 2006). Editors: C. Hoffmeister, I. Crnkovic, R. Reussner. Springer Berlin Heidelberg. Pages 145-162. ISBN 978-3-540-48820-0. [↩](#a1)
