@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ASCII"?>
+<de.tubs.areva.emf.model.darg:ARG xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:de.tubs.areva.emf.model.darg="http://com/areva/darg/" xmlns:de.tubs.areva.emf.model.qadag="http://com/areva/qadag/" name="Experiment N7" threshold="8">
+  <architectures quality="0.41423361061823993" marked="-1.0" id="4362" boundResourcesCount="18">
+    <qadag name="4362">
+      <root xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="4362" value="0.41423361061823993">
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="noise" value="0.4" lowerLimit="0.2" unit="precent" weight="0.175"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="lifetime" value="0.5760869565217391" unit="years" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="pointingtime" value="0.08965991068361391" lowerLimit="0.05" unit="s" weight="0.225"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="accuracy" value="0.5806451612903226" lowerLimit="0.4" unit="percent" weight="0.225"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="torque" value="0.6724137931034484" lowerLimit="0.3" unit="nM" weight="0.125"/>
+        <nodes xsi:type="de.tubs.areva.emf.model.qadag:CompositeNode" name="powerconsumption" value="0.29881900576764614" lowerLimit="0.05" unit="W" weight="0.125"/>
+      </root>
+    </qadag>
+    <boundResourceOptions href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@options.3"/>
+    <boundResourceOptions href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@options.2"/>
+    <boundResourceOptions href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@options.8"/>
+    <boundResourceOptions href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@options.10"/>
+    <boundResourceOptions href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@options.11"/>
+    <boundResourceOptions href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@options.0"/>
+    <boundResourceOptions href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@options.19"/>
+    <boundResourceOptions href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@options.20"/>
+    <boundResourceOptions href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@options.21"/>
+    <boundResourceOptions href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@options.26"/>
+    <qualityassignments attribute="noise" value="0.4"/>
+    <qualityassignments attribute="lifetime" value="0.5760869565217391"/>
+    <qualityassignments attribute="pointingtime" value="0.08965991068361391"/>
+    <qualityassignments attribute="accuracy" value="0.5806451612903226"/>
+    <qualityassignments attribute="torque" value="0.6724137931034484"/>
+    <qualityassignments attribute="powerconsumption" value="0.29881900576764614"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.20"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.21"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.0"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.1"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.4"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.5"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.14"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.15"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.22"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.25"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.23"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.26"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.24"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.27"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.28"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.29"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.30"/>
+    <boundResources href="platform:/resource/validation/acs/pcm/aocs.resourcerelations#//@resources.31"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_-vgacAYOEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_CYprYAYPEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_eptl4AYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_gV668AYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_hFUFoAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_gGuBUAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_gmUHYAYQEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_ime9cAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_j3_BkAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_lN_LMAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_woFeeQqAEeiqjqwQpE3cSA"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_c_BDWdd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_sxWToNd1Eean3t21khwmKw"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_C5P6MAYTEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_zQakIAYSEeSQWoRYn1rqHg"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_AAar4AYTEeSQWoRYn1rqHgf"/>
+    <boundBasicComponents href="platform:/resource/validation/acs/pcm/aocs.repository#_GP8qadd1Eean3t21khwmKw"/>
+    <rawQualityAssignments attribute="noise" value="90.0"/>
+    <rawQualityAssignments attribute="lifetime" value="106.0"/>
+    <rawQualityAssignments attribute="pointingtime" value="0.53"/>
+    <rawQualityAssignments attribute="accuracy" value="180.0"/>
+    <rawQualityAssignments attribute="torque" value="0.0585"/>
+    <rawQualityAssignments attribute="powerconsumption" value="25.53"/>
+  </architectures>
+  <qadag href="platform:/resource/validation/acs/pcm/experiment_n7.qadag#/"/>
+</de.tubs.areva.emf.model.darg:ARG>

@@ -60,7 +60,7 @@ Areva consists of an internal, multistep toolchain, as seen in the figure below.
 ![Areva internal process](img/multimode_en.png)
 
 
-###Creating an ARG Instance
+### Creating an ARG Instance
 The first step of Areva is creating an ARG instance. ARG stands for "**A**rchitecture **R**elations **G**raph" and is a model representation of all architecture candidate variations that have been produced by PerOpteryx. Each one consists of all its used resources and its associated quality value for each defined quality criteria. These are
   
 * Lifetime
@@ -82,10 +82,10 @@ The end result of this step is a set of DARGs, each of them representing all val
 ### Analysis and Fault Injection
 The last step is a combination of two substeps in a loop. 
 
-On the one hand is the **Analysis**. Areva is looking for  two main metrics when analyzing a system: **Jump Configurations** and **Optimal Orders**. The system is switching to the next mission at runtime and it is possible that the current system configuration is not present for the next mission, because it has been filtered by a minimum quality value. So the system has to switch to a configuration that is also available for the next mission first. These configurations are called Jump Configurations. To determine which Jump Configuration is the most favorable to switch to, a value has to be calculated for it that factors in not only its quality but also its position within the architecture network by calculating its centrality and the general amount of resource usage. This value is called the Jump Value. For each mission pair all Jump Configurations and their Jump Values are calculated in each jump direction, with the Ideal Jump Configuration having the highest value.  
-Areva then uses these Jump Configurations to answer the question what the ideal order of missions with the overall highest quality and probable success rate would be. For that all possible mission sequences are generated and the sum of all Jump Values for each transition of the sequence is calculated. The sequence with the highest sum is the ideal order. So the amount of Jump Configurations for each transition as well as the average Transition Values are taken into consideration to determine the ideal mission order.  
+On the one hand is the **Analysis**. Areva is looking for two main metrics when analyzing a system: **Transition Configurations** (called Jump Configurations in the image) and **Optimal Orders**. The system is switching to the next mission at runtime and it is possible that the current system configuration is not present for the next mission, because it has been filtered by a minimum quality value. So the system has to switch to a configuration that is also available for the next mission first. These configurations are called Transition Configurations. To determine which Transition Configuration is the most favorable to switch to, a value has to be calculated for it that factors in not only its quality but also its position within the architecture network by calculating its centrality and the general amount of resource usage. This value is called the Jump Value. For each mission pair all Transition Configurations and their Jump Values are calculated in each jump direction, with the Ideal Transition Configuration having the highest value.  
+Areva then uses these Transition Configurations to answer the question what the ideal order of missions with the overall highest quality and probable success rate would be. For that all possible mission sequences are generated and the sum of all Jump Values for each transition of the sequence is calculated. The sequence with the highest sum is the ideal order. So the amount of Transition Configurations for each transition as well as the average Transition Values are taken into consideration to determine the ideal mission order.  
 
-On the other hand is the **Fault Injection**. Not only is the system being analyzed in its faultless state, the above analysis is also repeated after each injected fault. For that a fault carrying data structure is create that defines a fault sequence the system is likely to experience. An injected fault acts like a filter on the available configurations for a mission and removes unoperable configurations from the pool of available ones. This can change the centrality of configurations and change their Jump Value. Because of that the now faulty system will be analysed for Jump Configurations and Ideal Orders after each fault.
+On the other hand is the **Fault Injection**. Not only is the system being analyzed in its faultless state, the above analysis is also repeated after each injected fault. For that a fault carrying data structure is create that defines a fault sequence the system is likely to experience. An injected fault acts like a filter on the available configurations for a mission and removes unoperable configurations from the pool of available ones. This can change the centrality of configurations and change their Jump Value. Because of that the now faulty system will be analysed for Transition Configurations and Ideal Orders after each fault.
 
 So while it is possible to declare the ideal mission order of the faultless system state as the final one, the fault injection allows to consider its overall stability when facing the anticipated faults. So if, for example, the ideal order changes after the first fault has been injected but stays the same after all following fault injections, the seconds ideal order might be considered more favorable because it is the most stable and therefore probably best one overall. That is only the case though if the anticipated faults happen at all and in that defined order.  
 This is why the results are more of a recommendation then a definive answer. This tool is not designed to replace experience and knowledge, but to support system architects to make descisions based on metrics and analysis.
@@ -132,7 +132,7 @@ On the next page you can set the resource difference threshold until which archi
 
 Lastly, set the output directy and click on "Finish" to finish the wizard. This will generate two new DARGs for each selected QADAG in your output directory.
 
-### Finding Optimal Jump Configurations and Mission Orders
+### Finding Optimal Transition Configurations and Mission Orders
 
 For this step you have to create a new .cps file first.  After that you will use this file to analyze the system. 
 
@@ -173,7 +173,7 @@ To finally start the analysis, rightclick the now set up .cps file and click on 
 
 ![From Missions to Selected Operating Modes](img/create_optimal_order_6.png)
 
-This will start the optimal order and jump configurations analysis, create a new sub directory with the current timestamp as name and write all results as .xml files into it, together with the faulty domains in the shape of DARGs.
+This will start the optimal order and Transition Configuration analysis, create a new sub directory with the current timestamp as name and write all results as .xml files into it, together with the faulty domains in the shape of DARGs.
 
 ### Analyzing Reconfiguration Path
 

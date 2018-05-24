@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<de.tubs.areva.emf.model.darg:ARG xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:de.tubs.areva.emf.model.darg="http://com/areva/darg/" name="Experiment N15" threshold="8">
-  <qadag href="../../../../experiment_n15.qadag#/"/>
-</de.tubs.areva.emf.model.darg:ARG>
