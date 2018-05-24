@@ -60,7 +60,7 @@ Areva consists of an internal, multistep toolchain, as seen in the figure below.
 
 
 ### Creating an ARG Instance
-The first step of Areva is creating an ARG instance. ARG is a concept of L. Märtin<sup id="a2">[2(#f2)</sup><sup>,</sup><sup id="a3">3](#f3)</sup> stands for "**A**rchitecture **R**elations **G**raph" and is a model representation of all architecture candidate variations that have been produced by PerOpteryx. Each one consists of all its used resources and its associated quality value for each defined quality criteria. These are
+The first step of Areva is creating an ARG instance. ARG is a concept of L. Märtin<sup id="a2">[2](#f2)</sup><sup>,</sup><sup id="a3">[3](#f3)</sup> stands for "**A**rchitecture **R**elations **G**raph" and is a model representation of all architecture candidate variations that have been produced by PerOpteryx. Each one consists of all its used resources and its associated quality value for each defined quality criteria. These are
   
 * Lifetime
 * Noise
