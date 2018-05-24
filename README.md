@@ -70,7 +70,7 @@ The first step of Areva is creating an ARG instance. ARG stands for "**A**rchite
 * Pointing Time
 * Power Consumption
 
-###Minimize ARG and Create DARG
+### Minimize ARG and Create DARG
 The next step **Minimize** is weighting these quality criteria for each architecture with QADAG instances and minimize their interconnectivity, resulting in a DARG. QADAG stands for "**Q**uality **A**ttribute **D**eterminisation **A**rchitecture **G**raph" and each of them represents an operating mode of the system, which has been derived from a given mission or experiment description. So, for each mission the system is going to switch to in its lifetime, one QADAG representing it has to be created, as seen in the figure below.
 
 ![From Missions to Selected Operating Modes](img/mission_to_opmode.png)
