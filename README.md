@@ -7,7 +7,6 @@ AREva is a software toolset to analyse variable systems for multi-purpose settin
 It is implemented as a collection of eclipse plugins that also include modified versions of the [Palladio Bench](http://www.palladio-simulator.com/) modeling tool for modeling the system, and its plugin [PerOpteryx](https://sdqweb.ipd.kit.edu/wiki/PerOpteryx) that generates possible system configurations using different redundant hardware.
 
 
-
 ## Background
 Modern dependable systems like Satellites rely on redundant hardware platforms to execute predefined missions in hostile environments. Different missions have different requirements on the system, which can be described as quality criteria. Finding optimal system configurations that fullfil these criteria as best as possible, keep the recofiguration cost low, are as fault tolerant as possible while also finding optimal mission orders that guarantee the best possible outcome is challenging. AREva has been developed to support system architects to find these answers based on metrics, quality and fault analysis on the system.
 
@@ -50,7 +49,7 @@ The current version of the AReva toolset supports:
 
 ## Toolchain
 In [Palladio Bench](http://www.palladio-simulator.com/) the system is being modeled into Design and Analysis models.
-Variation is achieved by setting up Degrees of Freedom in [PerOpteryx](https://sdqweb.ipd.kit.edu/wiki/PerOpteryx) that connects additional system components to selected ones to be replaced in candidates.
+Variation is achieved by setting up Degrees of Freedom<sup id="a1">[1](#f1)</sup> in [PerOpteryx](https://sdqweb.ipd.kit.edu/wiki/PerOpteryx) that connects additional system components to selected ones to be replaced in candidates.
 Those generated candidates are then analysed by Areva.  
 ![Areva Toolchain](img/areva_toolchain.png)
 
@@ -61,7 +60,7 @@ Areva consists of an internal, multistep toolchain, as seen in the figure below.
 
 
 ### Creating an ARG Instance
-The first step of Areva is creating an ARG instance. ARG stands for "**A**rchitecture **R**elations **G**raph" and is a model representation of all architecture candidate variations that have been produced by PerOpteryx. Each one consists of all its used resources and its associated quality value for each defined quality criteria. These are
+The first step of Areva is creating an ARG instance. ARG is a concept of L. Märtin<sup id="a2">[2(#f2)</sup><sup>,</sup><sup id="a3">3](#f3)</sup> stands for "**A**rchitecture **R**elations **G**raph" and is a model representation of all architecture candidate variations that have been produced by PerOpteryx. Each one consists of all its used resources and its associated quality value for each defined quality criteria. These are
   
 * Lifetime
 * Noise
@@ -71,7 +70,7 @@ The first step of Areva is creating an ARG instance. ARG stands for "**A**rchite
 * Power Consumption
 
 ### Minimize ARG and Create DARG
-The next step **Minimize** is weighting these quality criteria for each architecture with QADAG instances and minimize their interconnectivity, resulting in a DARG. QADAG is a concept of B. Florentz<sup id="a1">[1](#f1)</sup> and stands for "**Q**uality **A**ttribute **D**eterminisation **A**rchitecture **G**raph" and each of them represents an operating mode of the system, which has been derived from a given mission or experiment description. So, for each mission the system is going to switch to in its lifetime, one QADAG representing it has to be created, as seen in the figure below.
+The next step **Minimize** is weighting these quality criteria for each architecture with QADAG instances and minimize their interconnectivity, resulting in a DARG. QADAG is a concept of B. Florentz<sup id="a4">[4](#f4)</sup> and stands for "**Q**uality **A**ttribute **D**eterminisation **A**rchitecture **G**raph" and each of them represents an operating mode of the system, which has been derived from a given mission or experiment description. So, for each mission the system is going to switch to in its lifetime, one QADAG representing it has to be created, as seen in the figure below.
 
 ![From Missions to Selected Operating Modes](img/mission_to_opmode.png)
 
@@ -237,7 +236,12 @@ If all requirements are installed, import all projects in this repository into a
 - Contents: All validation data for the single and multi mode analyses 
 - Includes a short How-To for re-doing the validation
 
-Footnotes
-=========
+## References
+<b id="f1">1</b> Peropteryx: automated application of tactics in multi-objective software architecture optimization (Anne Koziolek, Heiko Koziolek, Ralf Reussner), In Proceedings of the 	Joint proceedings of the Seventh International ACM SIGSOFT Conference on the Quality of Software Architectures and the 2nd ACM SIGSOFT International Symposium on Architecting Critical Systems, 2011 [↩](#a1)
 
-<b id="f1">1</b>B. Florentz, M. Huhn. Embedded Systems Architecture: Evaluation and Analysis. Proceedings of the International Conference on the Quality of Software Architectures (QoSA 2006). Editors: C. Hoffmeister, I. Crnkovic, R. Reussner. Springer Berlin Heidelberg. Pages 145-162. ISBN 978-3-540-48820-0. [↩](#a1)
+<b id="f2">2</b> Towards Self-Reconfiguration of Space Systems on Architectural Level based on Qualitative Ratings (Lukas Märtin, Anja Nicolai), In 35th IEEE International Aerospace Conference, 2014.  [↩](#a2)
+
+<b id="f3">3</b> Quality-oriented Decision Support for maintaining Architectures of fault-tolerant Space Systems (Lukas Märtin, Anne Koziolek, Ralf H. Reussner), In Proceedings of the 2015 European Conference on Software Architecture Workshops, 2015. [↩](#a3)
+
+<b id="f4">4</b> Embedded Systems Architecture: Evaluation and Analysis (Bastian Florentz, Michaela Huhn), In Proceedings of the International Conference on the Quality of Software Architectures, 2006. [↩](#a4)
+
